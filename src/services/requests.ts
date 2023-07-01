@@ -1,3 +1,4 @@
+import { IUserData } from "../providers/UserContext"
 import { api } from "./api"
 
 export type TmovieGenre = "ficção" | "comédia" | "drama"
@@ -18,3 +19,21 @@ export const getMovieList = async () => {
         return false
     }
 }
+
+export interface IatemptLoginProp{
+    email: string
+    password: string
+}
+
+export const atemptLogin = async ({email, password}:IatemptLoginProp) => {
+    try {
+        const { data } = await api.post<IUserData>("/sessions", {
+            email: email,
+            password: password,
+        })
+        return data
+    } catch (error) {
+        return false       
+    }
+}
+
