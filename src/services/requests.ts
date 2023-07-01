@@ -37,13 +37,13 @@ export const atemptLogin = async ({email, password}:IAtemptLoginProp) => {
     }
 }
 
-interface IatemptRegisterProp{
+interface IAtemptRegisterProp{
     email: string
     password: string
     name: string
 }
 
-export const atemptRegister = async ({email, password, name}:IatemptRegisterProp ) => {
+export const atemptRegister = async ({email, password, name}:IAtemptRegisterProp ) => {
     try {
         const { data } = await api.post<IUserData>("/users", {
             email: email,
@@ -51,6 +51,20 @@ export const atemptRegister = async ({email, password, name}:IatemptRegisterProp
             name: name,
         })
 
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+interface IGetUserRatingsByMovieIDProps{
+    userId: number
+    movieId: number
+}
+
+export const getUserRatingsByMovieID = async ({userId, movieId}: IGetUserRatingsByMovieIDProps) => {
+    try {
+        const { data } = await api.get(`/movies/${movieId}/reviews?userId=${userId}`)
         return data
     } catch (error) {
         return false
