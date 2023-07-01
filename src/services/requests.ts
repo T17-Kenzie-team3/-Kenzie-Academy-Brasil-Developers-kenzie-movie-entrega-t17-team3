@@ -1,4 +1,4 @@
-import { IMovie } from "../providers/MovieContext/@types"
+import { IMovie, IRating, ISelectedMovie } from "../providers/MovieContext/@types"
 import { IUserData, IUserRating } from "../providers/UserContext/@types"
 import { api } from "./api"
 
@@ -57,6 +57,70 @@ export const getMovieList = async () => {
     try {
         const { data } = await api.get<IMovie[]>("/movies")
         return data
+    } catch (error) {
+        return false
+    }
+}
+
+export const getSelectedMovie = async (movieId:number) => {
+    try {
+        const { data } = await api.get<ISelectedMovie>(`/movies/${movieId}?_embed=reviews`)
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+interface IAtemptAddRatingProps{
+    token: string
+    ratingData: IRating
+}
+
+export const atemptAddRating = async ({token, ratingData}:IAtemptAddRatingProps) =>{
+    try {
+        const { data } = await api.post("/reviews", ratingData,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+interface IAtemptEditRatingProps{
+    token: string
+    ratingData: IRating
+    ratingId: number
+}
+
+export const atemptEditRating = async ({token, ratingData, ratingId}:IAtemptEditRatingProps) => {
+    try {
+        const { data } = await api.put(`/reviews/${ratingId}`, ratingData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+interface IAtemptDeleteRatingProps{
+    token: string
+    ratingId: number
+}
+
+export const atemptDeleteRating = async ({token, ratingId}:IAtemptDeleteRatingProps) =>{
+    try {
+        await api.delete(`/reviews/${ratingId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return true
     } catch (error) {
         return false
     }
