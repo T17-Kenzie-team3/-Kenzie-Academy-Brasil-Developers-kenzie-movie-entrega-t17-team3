@@ -20,12 +20,12 @@ export const getMovieList = async () => {
     }
 }
 
-export interface IatemptLoginProp{
+interface IAtemptLoginProp{
     email: string
     password: string
 }
 
-export const atemptLogin = async ({email, password}:IatemptLoginProp) => {
+export const atemptLogin = async ({email, password}:IAtemptLoginProp) => {
     try {
         const { data } = await api.post<IUserData>("/sessions", {
             email: email,
@@ -37,3 +37,22 @@ export const atemptLogin = async ({email, password}:IatemptLoginProp) => {
     }
 }
 
+interface IatemptRegisterProp{
+    email: string
+    password: string
+    name: string
+}
+
+export const atemptRegister = async ({email, password, name}:IatemptRegisterProp ) => {
+    try {
+        const { data } = await api.post<IUserData>("/users", {
+            email: email,
+            password: password,
+            name: name,
+        })
+
+        return data
+    } catch (error) {
+        return false
+    }
+}
