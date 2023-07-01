@@ -1,24 +1,6 @@
-import { IUserData } from "../providers/UserContext"
+import { IMovie } from "../providers/MovieContext/@types"
+import { IUserData, IUserRating } from "../providers/UserContext/@types"
 import { api } from "./api"
-
-export type TmovieGenre = "ficção" | "comédia" | "drama"
-
-export interface IMovie {
-    id: number
-    name: string
-    type: TmovieGenre
-    duration: number
-    synopsis: string
-}
-
-export const getMovieList = async () => {
-    try {
-        const { data } = await api.get<IMovie[]>("/movies")
-        return data
-    } catch (error) {
-        return false
-    }
-}
 
 interface IAtemptLoginProp{
     email: string
@@ -64,7 +46,16 @@ interface IGetUserRatingsByMovieIDProps{
 
 export const getUserRatingsByMovieID = async ({userId, movieId}: IGetUserRatingsByMovieIDProps) => {
     try {
-        const { data } = await api.get(`/movies/${movieId}/reviews?userId=${userId}`)
+        const { data } = await api.get<IUserRating[]>(`/movies/${movieId}/reviews?userId=${userId}`)
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+export const getMovieList = async () => {
+    try {
+        const { data } = await api.get<IMovie[]>("/movies")
         return data
     } catch (error) {
         return false
