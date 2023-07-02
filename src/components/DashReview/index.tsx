@@ -1,10 +1,10 @@
 import { StarRating } from "../../fragments/StarRating"
 
-export const DashRating = () => {
+export const DashReview = () => {
     return(
         <section>
             <h1>Avaliações</h1>
-            <label htmlFor="user-rating">Sua Avaliação</label>
+            <label htmlFor="user-review">Sua Avaliação</label>
             <div>
                 <p>
                 "At vero eos et accusamus et iusto odio dignissimos ducimus qui

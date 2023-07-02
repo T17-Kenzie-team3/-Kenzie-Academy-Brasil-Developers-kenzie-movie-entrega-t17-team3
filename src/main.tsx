@@ -7,12 +7,12 @@ import { MovieProvider } from './providers/MovieContext/index.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <UserProvider>
-      <MovieProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
+        <MovieProvider>
           <App />
-        </BrowserRouter>
-      </MovieProvider>
-    </UserProvider>
+        </MovieProvider>
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 )

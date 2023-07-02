@@ -19,10 +19,10 @@ export interface ISelectedMovie {
     type: TmovieGenre
     duration: number
     synopsis: string
-    reviews: IRating[]
+    reviews: IReview[]
 }
 
-export interface IRating {
+export interface IReview {
     movieId: number
     userId: number
     score: TMovieScore

@@ -1,3 +1,4 @@
+import { NavigateFunction } from "react-router-dom"
 import { TMovieScore } from "../MovieContext/@types"
 
 export interface IUserProviderProps {
@@ -15,7 +16,7 @@ export interface IUser {
     id: number
 }
 
-export interface IUserRating {
+export interface IUserReview {
     id: number
     movieId: number
     userId: number
@@ -26,6 +27,8 @@ export interface IUserRating {
 export interface IUserContext {
     user: IUserData | null
     setUser: React.Dispatch<React.SetStateAction<IUserData | null>>
-    userRating: IUserRating | null
-    setUserRating: React.Dispatch<React.SetStateAction<IUserRating | null>>
+    userReview: IUserReview | null
+    setUserReview: React.Dispatch<React.SetStateAction<IUserReview | null>>
+    navigate: NavigateFunction
+    currentPath: string
 }

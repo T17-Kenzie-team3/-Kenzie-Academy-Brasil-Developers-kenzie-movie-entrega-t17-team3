@@ -1,5 +1,5 @@
-import { IMovie, IRating, ISelectedMovie } from "../providers/MovieContext/@types"
-import { IUserData, IUserRating } from "../providers/UserContext/@types"
+import { IMovie, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
+import { IUserData, IUserReview } from "../providers/UserContext/@types"
 import { api } from "./api"
 
 interface IAtemptLoginProp{
@@ -39,14 +39,14 @@ export const atemptRegister = async ({email, password, name}:IAtemptRegisterProp
     }
 }
 
-interface IGetUserRatingsByMovieIDProps{
+interface IGetUserReviewsByMovieIDProps{
     userId: number
     movieId: number
 }
 
-export const getUserRatingsByMovieID = async ({userId, movieId}: IGetUserRatingsByMovieIDProps) => {
+export const getUserReviewsByMovieID = async ({userId, movieId}: IGetUserReviewsByMovieIDProps) => {
     try {
-        const { data } = await api.get<IUserRating[]>(`/movies/${movieId}/reviews?userId=${userId}`)
+        const { data } = await api.get<IUserReview[]>(`/movies/${movieId}/reviews?userId=${userId}`)
         return data
     } catch (error) {
         return false
@@ -71,14 +71,14 @@ export const getSelectedMovie = async (movieId:number) => {
     }
 }
 
-interface IAtemptAddRatingProps{
+interface IAtemptAddReviewProps{
     token: string
-    ratingData: IRating
+    reviewData: IReview
 }
 
-export const atemptAddRating = async ({token, ratingData}:IAtemptAddRatingProps) =>{
+export const atemptAddReview = async ({token, reviewData}:IAtemptAddReviewProps) =>{
     try {
-        const { data } = await api.post("/reviews", ratingData,{
+        const { data } = await api.post("/reviews", reviewData,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -89,15 +89,15 @@ export const atemptAddRating = async ({token, ratingData}:IAtemptAddRatingProps)
     }
 }
 
-interface IAtemptEditRatingProps{
+interface IAtemptEditReviewProps{
     token: string
-    ratingData: IRating
-    ratingId: number
+    reviewData: IReview
+    reviewId: number
 }
 
-export const atemptEditRating = async ({token, ratingData, ratingId}:IAtemptEditRatingProps) => {
+export const atemptEditReview = async ({token, reviewData, reviewId}:IAtemptEditReviewProps) => {
     try {
-        const { data } = await api.put(`/reviews/${ratingId}`, ratingData, {
+        const { data } = await api.put(`/reviews/${reviewId}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -108,14 +108,14 @@ export const atemptEditRating = async ({token, ratingData, ratingId}:IAtemptEdit
     }
 }
 
-interface IAtemptDeleteRatingProps{
+interface IAtemptDeleteReviewProps{
     token: string
-    ratingId: number
+    reviewId: number
 }
 
-export const atemptDeleteRating = async ({token, ratingId}:IAtemptDeleteRatingProps) =>{
+export const atemptDeleteReview = async ({token, reviewId}:IAtemptDeleteReviewProps) =>{
     try {
-        await api.delete(`/reviews/${ratingId}`, {
+        await api.delete(`/reviews/${reviewId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

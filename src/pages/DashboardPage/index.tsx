@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { DashBanner } from "../../components/DashBanner"
-import { DashRating } from "../../components/DashRating"
-import { DashRatingList } from "../../components/DashRatingList"
+import { DashReview } from "../../components/DashReview"
+import { DashReviewList } from "../../components/DashReviewList"
 
 export const DashboardPage = () => {
     return(
@@ -15,9 +15,9 @@ export const DashboardPage = () => {
             <Header />
             <main>
                 <DashBanner />
-                {/* <DashRating /> ou DashRatingEmpty */}
-                <DashRating />
-                <DashRatingList />
+                {/* <DashReview /> ou DashReviewEmpty */}
+                <DashReview />
+                <DashReviewList />
             </main>
             <Footer />
         </>

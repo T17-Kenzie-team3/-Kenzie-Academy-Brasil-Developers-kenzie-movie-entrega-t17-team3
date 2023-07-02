@@ -1,4 +1,4 @@
-export const DashRatingEmpty = () => {
+export const DashReviewEmpty = () => {
     return(
         <section>
             <h1>Avaliações</h1>
