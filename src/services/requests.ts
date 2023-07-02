@@ -125,3 +125,12 @@ export const atemptDeleteReview = async ({token, reviewId}:IAtemptDeleteReviewPr
         return false
     }
 }
+
+export const removeSpaces = (string:string) => {
+    const stringWithoutSpaces = string.replace(/\s+/g, "").toLowerCase()
+    return stringWithoutSpaces
+}
+
+export const isObjEmpty = (object:{}) => {
+    return Object.keys(object).length === 0
+}

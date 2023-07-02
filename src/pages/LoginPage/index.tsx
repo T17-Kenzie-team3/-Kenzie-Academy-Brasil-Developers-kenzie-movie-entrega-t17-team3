@@ -8,7 +8,7 @@ export const LoginPage = () => {
         <>
         <h1>Login Page</h1>
             <Link to="/">Home</Link>
-            <Link to="/Dashboard">Dashboard</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <Link to="/register">Register</Link>
             <Header />
             <main>

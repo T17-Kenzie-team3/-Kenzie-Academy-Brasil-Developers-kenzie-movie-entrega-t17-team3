@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { IMovieContext, IMovieProviderProps, IMovie, ISelectedMovie } from "./@types"
-import { getMovieList, getSelectedMovie } from "../../services/requests"
+import { getMovieList, getSelectedMovie, getUserReviewsByMovieID, removeSpaces } from "../../services/requests"
 import { UserContext } from "../UserContext"
 
 export const MovieContext = createContext({} as IMovieContext)
@@ -10,33 +10,35 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     const [movieList, setMovieList] = useState<IMovie[]>([])
     const [selectedMovie, setSelectedMovie] = useState<ISelectedMovie | null>(null)
     
-    const { navigate, currentPath } = useContext(UserContext)
+    const { navigate, currentPath, user, setUserReview } = useContext(UserContext)
 
     
     const selectMovieByPathName = () => {
         movieList.map(movie => {
-            const movieName = `/${movie.name.replace(/\s+/g, "").toLowerCase()}`
+            const movieName = `/${removeSpaces(movie.name)}`
             if(currentPath === movieName){
-                localStorage.setItem("@selectedMovieId", JSON.stringify(`${movie.id}`))
+                localStorage.setItem("@KM: selectedMovieId", JSON.stringify(`${movie.id}`))
             }
         })
     }
     selectMovieByPathName()
 
     useEffect(() => {
+
+        const movieId = localStorage.getItem("@KM: selectedMovieId")
+        
         const setupMovieList = async () =>{
             //setIsPageLoading(true)
             const newList = await getMovieList()
+            //setIsPageLoading(false)
             if (newList) {
                 setMovieList(newList)
-                //setIsPageLoading(false)
             }
         }
         
         const setupSelectedMovie = async () => {
-
-            const movieId = localStorage.getItem("@selectedMovieId")
-
+            
+            
             if (movieId){
                 //setIsPageLoading(true)
                 const newMovie = await getSelectedMovie(JSON.parse(movieId))
@@ -44,10 +46,28 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                 if (newMovie) {
                     setSelectedMovie(newMovie)
                     if (currentPath === "/dashboard"){
-                        const endPoint = newMovie.name.replace(/\s+/g, "").toLowerCase()
-                        window.location.pathname = `/${endPoint}`
+                        const endPoint = removeSpaces(newMovie.name)
+                        navigate(`/${endPoint}`)
+                    } else{
+                        navigate(currentPath)
                     }
-                    navigate(currentPath)
+                }
+            }
+        }
+
+        const setupUserReviews = async () => {
+            if(movieId){
+                if(user){
+                    const data = {
+                        userId: user.user.id,
+                        movieId: Number(movieId)
+                    }
+                    //setIsPageLoading(true)
+                    const newUserReviews = await getUserReviewsByMovieID(data)
+                    //setIsPageLoading(false)
+                    if(newUserReviews){
+                        setUserReview(newUserReviews[0])
+                    }
                 }
             }
         }
@@ -55,6 +75,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         const loadLists = async () => {
             await setupMovieList()
             await setupSelectedMovie()
+            await setupUserReviews()
         }
 
         loadLists()
