@@ -1,7 +1,7 @@
 import { DashReviewCard } from "../DashReviewCard"
 
 export const DashReviewList = () => {
-    return(
+    return (
         <ul>
             <DashReviewCard />
             <DashReviewCard />

@@ -1,5 +1,5 @@
 export const LoginForm = () => {
-    return(
+    return (
         <form>
             <h1>Login</h1>
             <input type="email" />

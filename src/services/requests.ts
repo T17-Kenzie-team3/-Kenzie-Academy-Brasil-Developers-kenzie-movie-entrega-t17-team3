@@ -2,12 +2,12 @@ import { IMovie, IReview, ISelectedMovie } from "../providers/MovieContext/@type
 import { IUserData, IUserReview } from "../providers/UserContext/@types"
 import { api } from "./api"
 
-interface IAtemptLoginProp{
+interface IAtemptLoginProp {
     email: string
     password: string
 }
 
-export const atemptLogin = async ({email, password}:IAtemptLoginProp) => {
+export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
     try {
         const { data } = await api.post<IUserData>("/sessions", {
             email: email,
@@ -15,17 +15,17 @@ export const atemptLogin = async ({email, password}:IAtemptLoginProp) => {
         })
         return data
     } catch (error) {
-        return false       
+        return false
     }
 }
 
-interface IAtemptRegisterProp{
+interface IAtemptRegisterProp {
     email: string
     password: string
     name: string
 }
 
-export const atemptRegister = async ({email, password, name}:IAtemptRegisterProp ) => {
+export const atemptRegister = async ({ email, password, name }: IAtemptRegisterProp) => {
     try {
         const { data } = await api.post<IUserData>("/users", {
             email: email,
@@ -39,12 +39,12 @@ export const atemptRegister = async ({email, password, name}:IAtemptRegisterProp
     }
 }
 
-interface IGetUserReviewsByMovieIDProps{
+interface IGetUserReviewsByMovieIDProps {
     userId: number
     movieId: number
 }
 
-export const getUserReviewsByMovieID = async ({userId, movieId}: IGetUserReviewsByMovieIDProps) => {
+export const getUserReviewsByMovieID = async ({ userId, movieId }: IGetUserReviewsByMovieIDProps) => {
     try {
         const { data } = await api.get<IUserReview[]>(`/movies/${movieId}/reviews?userId=${userId}`)
         return data
@@ -62,7 +62,7 @@ export const getMovieList = async () => {
     }
 }
 
-export const getSelectedMovie = async (movieId:number) => {
+export const getSelectedMovie = async (movieId: number) => {
     try {
         const { data } = await api.get<ISelectedMovie>(`/movies/${movieId}?_embed=reviews`)
         return data
@@ -71,14 +71,14 @@ export const getSelectedMovie = async (movieId:number) => {
     }
 }
 
-interface IAtemptAddReviewProps{
+interface IAtemptAddReviewProps {
     token: string
     reviewData: IReview
 }
 
-export const atemptAddReview = async ({token, reviewData}:IAtemptAddReviewProps) =>{
+export const atemptAddReview = async ({ token, reviewData }: IAtemptAddReviewProps) => {
     try {
-        const { data } = await api.post("/reviews", reviewData,{
+        const { data } = await api.post("/reviews", reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -89,13 +89,13 @@ export const atemptAddReview = async ({token, reviewData}:IAtemptAddReviewProps)
     }
 }
 
-interface IAtemptEditReviewProps{
+interface IAtemptEditReviewProps {
     token: string
     reviewData: IReview
     reviewId: number
 }
 
-export const atemptEditReview = async ({token, reviewData, reviewId}:IAtemptEditReviewProps) => {
+export const atemptEditReview = async ({ token, reviewData, reviewId }: IAtemptEditReviewProps) => {
     try {
         const { data } = await api.put(`/reviews/${reviewId}`, reviewData, {
             headers: {
@@ -108,12 +108,12 @@ export const atemptEditReview = async ({token, reviewData, reviewId}:IAtemptEdit
     }
 }
 
-interface IAtemptDeleteReviewProps{
+interface IAtemptDeleteReviewProps {
     token: string
     reviewId: number
 }
 
-export const atemptDeleteReview = async ({token, reviewId}:IAtemptDeleteReviewProps) =>{
+export const atemptDeleteReview = async ({ token, reviewId }: IAtemptDeleteReviewProps) => {
     try {
         await api.delete(`/reviews/${reviewId}`, {
             headers: {
@@ -126,11 +126,11 @@ export const atemptDeleteReview = async ({token, reviewId}:IAtemptDeleteReviewPr
     }
 }
 
-export const removeSpaces = (string:string) => {
+export const removeSpaces = (string: string) => {
     const stringWithoutSpaces = string.replace(/\s+/g, "").toLowerCase()
     return stringWithoutSpaces
 }
 
-export const isObjEmpty = (object:{}) => {
+export const isObjEmpty = (object: {}) => {
     return Object.keys(object).length === 0
 }

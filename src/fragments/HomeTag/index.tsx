@@ -1,5 +1,5 @@
 export const HomeMovieTag = () => {
-    return(
+    return (
         <div>
             <button>action</button>
             <span>90m</span>

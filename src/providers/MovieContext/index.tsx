@@ -9,14 +9,14 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     const [movieList, setMovieList] = useState<IMovie[]>([])
     const [selectedMovie, setSelectedMovie] = useState<ISelectedMovie | null>(null)
-    
+
     const { navigate, currentPath, user, setUserReview, setLoadingPage } = useContext(UserContext)
 
-    
+
     const selectMovieByPathName = () => {
         movieList.map(movie => {
             const movieName = `/${removeSpaces(movie.name)}`
-            if(currentPath === movieName){
+            if (currentPath === movieName) {
                 localStorage.setItem("@KM: selectedMovieId", JSON.stringify(`${movie.id}`))
             }
         })
@@ -26,8 +26,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     useEffect(() => {
 
         const movieId = localStorage.getItem("@KM: selectedMovieId")
-        
-        const setupMovieList = async () =>{
+
+        const setupMovieList = async () => {
             setLoadingPage(true)
             const newList = await getMovieList()
             setLoadingPage(false)
@@ -35,20 +35,20 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                 setMovieList(newList)
             }
         }
-        
+
         const setupSelectedMovie = async () => {
-            
-            
-            if (movieId){
+
+
+            if (movieId) {
                 setLoadingPage(true)
                 const newMovie = await getSelectedMovie(JSON.parse(movieId))
                 setLoadingPage(false)
                 if (newMovie) {
                     setSelectedMovie(newMovie)
-                    if (currentPath === "/dashboard"){
+                    if (currentPath === "/dashboard") {
                         const endPoint = removeSpaces(newMovie.name)
                         navigate(`/${endPoint}`)
-                    } else{
+                    } else {
                         navigate(currentPath)
                     }
                 }
@@ -56,8 +56,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         }
 
         const setupUserReviews = async () => {
-            if(movieId){
-                if(user){
+            if (movieId) {
+                if (user) {
                     const data = {
                         userId: user.user.id,
                         movieId: Number(movieId)
@@ -65,7 +65,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                     setLoadingPage(true)
                     const newUserReviews = await getUserReviewsByMovieID(data)
                     setLoadingPage(false)
-                    if(newUserReviews){
+                    if (newUserReviews) {
                         setUserReview(newUserReviews[0])
                     }
                 }
@@ -79,9 +79,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         }
 
         loadLists()
-    },[])
+    }, [])
 
-    return(
+    return (
         <MovieContext.Provider value={{
             movieList, setMovieList, selectedMovie, setSelectedMovie
         }}>

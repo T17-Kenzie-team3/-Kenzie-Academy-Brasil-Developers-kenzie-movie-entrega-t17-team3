@@ -8,18 +8,18 @@ export const UserContext = createContext({} as IUserContext)
 export const UserProvider = ({ children }: IUserProviderProps) => {
 
     const [user, setUser] = useState<IUserData | null>(null)
-    const [userReview, setUserReview] = useState<IUserReview | null >(null)
+    const [userReview, setUserReview] = useState<IUserReview | null>(null)
     const [loadingPage, setLoadingPage] = useState(false)
 
     const navigate = useNavigate()
     const currentPath = window.location.pathname
 
-    useEffect(()=>{
+    useEffect(() => {
 
         const storedUser = localStorage.getItem("@KM: User")
 
         const loadUser = () => {
-            if(storedUser === null) {
+            if (storedUser === null) {
                 return null
             } else {
                 const userData = JSON.parse(storedUser)
@@ -28,11 +28,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             }
         }
         loadUser()
-    },[])
+    }, [])
 
-    return(
-        <UserContext.Provider value={{user, setUser, userReview, setUserReview,
-        navigate, currentPath, loadingPage, setLoadingPage }}>
+    return (
+        <UserContext.Provider value={{
+            user, setUser, userReview, setUserReview,
+            navigate, currentPath, loadingPage, setLoadingPage
+        }}>
             {children}
         </UserContext.Provider>
     )

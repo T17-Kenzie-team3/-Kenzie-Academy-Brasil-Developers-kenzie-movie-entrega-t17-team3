@@ -1,7 +1,7 @@
 import { HomeMovieCard } from "../HomeMovieCard"
 
 export const HomeMovieList = () => {
-    return(
+    return (
         <ul>
             <HomeMovieCard />
             <HomeMovieCard />
