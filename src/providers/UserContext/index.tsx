@@ -10,23 +10,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const [user, setUser] = useState<IUserData | null>(null)
     const [userReview, setUserReview] = useState<IUserReview | null >(null)
 
-    localStorage.setItem("@KM: User", JSON.stringify(user))
-
     const navigate = useNavigate()
     const currentPath = window.location.pathname
 
     useEffect(()=>{
 
-        const fakeUser = {
-            accessToken: "token number 1",
-            user: {
-                email: "a@a.com",
-                name: "samuel",
-                id: 99
-            }
-        }
-
-        const storedUser = JSON.stringify(fakeUser)//localStorage.getItem("@KM: User")
+        const storedUser = localStorage.getItem("@KM: User")
 
         const loadUser = () => {
             if(storedUser === null) {
