@@ -31,4 +31,6 @@ export interface IUserContext {
     setUserReview: React.Dispatch<React.SetStateAction<IUserReview | null>>
     navigate: NavigateFunction
     currentPath: string
+    loadingPage: boolean
+    setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
 }

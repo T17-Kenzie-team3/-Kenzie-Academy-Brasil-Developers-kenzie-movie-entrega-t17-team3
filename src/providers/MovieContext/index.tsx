@@ -10,7 +10,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     const [movieList, setMovieList] = useState<IMovie[]>([])
     const [selectedMovie, setSelectedMovie] = useState<ISelectedMovie | null>(null)
     
-    const { navigate, currentPath, user, setUserReview } = useContext(UserContext)
+    const { navigate, currentPath, user, setUserReview, setLoadingPage } = useContext(UserContext)
 
     
     const selectMovieByPathName = () => {
@@ -28,9 +28,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         const movieId = localStorage.getItem("@KM: selectedMovieId")
         
         const setupMovieList = async () =>{
-            //setIsPageLoading(true)
+            setLoadingPage(true)
             const newList = await getMovieList()
-            //setIsPageLoading(false)
+            setLoadingPage(false)
             if (newList) {
                 setMovieList(newList)
             }
@@ -40,9 +40,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             
             
             if (movieId){
-                //setIsPageLoading(true)
+                setLoadingPage(true)
                 const newMovie = await getSelectedMovie(JSON.parse(movieId))
-                //setIsPageLoading(false)
+                setLoadingPage(false)
                 if (newMovie) {
                     setSelectedMovie(newMovie)
                     if (currentPath === "/dashboard"){
@@ -62,9 +62,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                         userId: user.user.id,
                         movieId: Number(movieId)
                     }
-                    //setIsPageLoading(true)
+                    setLoadingPage(true)
                     const newUserReviews = await getUserReviewsByMovieID(data)
-                    //setIsPageLoading(false)
+                    setLoadingPage(false)
                     if(newUserReviews){
                         setUserReview(newUserReviews[0])
                     }

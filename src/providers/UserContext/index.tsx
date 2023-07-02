@@ -9,6 +9,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     const [user, setUser] = useState<IUserData | null>(null)
     const [userReview, setUserReview] = useState<IUserReview | null >(null)
+    const [loadingPage, setLoadingPage] = useState(false)
 
     const navigate = useNavigate()
     const currentPath = window.location.pathname
@@ -31,7 +32,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     return(
         <UserContext.Provider value={{user, setUser, userReview, setUserReview,
-        navigate, currentPath }}>
+        navigate, currentPath, loadingPage, setLoadingPage }}>
             {children}
         </UserContext.Provider>
     )
