@@ -9,7 +9,7 @@ interface IAtemptLoginProp {
 
 export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
     try {
-        const { data } = await api.post<IUserData>("/sessions", {
+        const { data } = await api.post<IUserData>("/login", {
             email: email,
             password: password,
         })
@@ -127,6 +127,10 @@ export const atemptDeleteReview = async ({ token, reviewId }: IAtemptDeleteRevie
 }
 
 export const removeSpaces = (string: string) => {
+    console.log(string)
+    if(string === undefined){
+        return "";
+    }
     const stringWithoutSpaces = string.replace(/\s+/g, "").toLowerCase()
     return stringWithoutSpaces
 }
