@@ -9,9 +9,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     const [movieList, setMovieList] = useState<IMovie[]>([])
     const [selectedMovie, setSelectedMovie] = useState<ISelectedMovie | null>(null)
+//Selected movie contem a lista de todos os reviews do filme selecionado .review;
 
     const { navigate, currentPath, user, setUserReview, setLoadingPage } = useContext(UserContext)
-
 
     const selectMovieByPathName = () => {
         movieList.map(movie => {
@@ -21,6 +21,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             }
         })
     }
+
     selectMovieByPathName()
 
     useEffect(() => {
@@ -37,7 +38,6 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         }
 
         const setupSelectedMovie = async () => {
-
 
             if (movieId) {
                 setLoadingPage(true)
