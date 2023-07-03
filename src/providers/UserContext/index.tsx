@@ -56,7 +56,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
                 localStorage.setItem("@KM: User", userInfo.accessToken);
                 localStorage.setItem("@KM: UserId", JSON.stringify(userInfo.user.id));
                 setUser(userInfo.user);
-                navigate("/dashboard");
+                navigate("/");
                 return userInfo;
             }); 
 
