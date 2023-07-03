@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
-const InputDefaultStyles = css`
+interface InputDefaultStyles{
+    error: { }
+};
+
+const InputDefaultStyles = css<InputDefaultStyles>`
  display: flex;
  flex-direction: row;
  justify-content: space-between;
@@ -23,7 +27,7 @@ const InputDefaultStyles = css`
         }
     }}
 `
-export const StyledInput= styled.input`
+export const StyledInput= styled.input<InputDefaultStyles>`
  ${InputDefaultStyles};
  border: 1px solid var(--grey1);
 
