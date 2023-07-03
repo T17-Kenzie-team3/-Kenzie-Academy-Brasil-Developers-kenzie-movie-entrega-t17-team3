@@ -8,6 +8,7 @@ import { LoadingPage } from "../../fragments/LoadingPage"
 export const LoginPage = () => {
 
     const { loadingPage } = useContext(UserContext)
+
     return (
         <>
             <Header />
