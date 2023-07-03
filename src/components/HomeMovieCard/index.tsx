@@ -2,7 +2,7 @@ import { HomeMovieName } from "../../fragments/HomeMovieName"
 import { HomeMovieTag } from "../../fragments/HomeTag"
 
 export const HomeMovieCard = () => {
-    return(
+    return (
         <li>
             <img src="" alt="Imagem do filme" />
             <HomeMovieTag />

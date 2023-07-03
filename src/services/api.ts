@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: "https://fruit-fake-api.onrender.com/",
+    baseURL: "https://kenzie-movie-api.onrender.com/",
     timeout: 8000,
 })

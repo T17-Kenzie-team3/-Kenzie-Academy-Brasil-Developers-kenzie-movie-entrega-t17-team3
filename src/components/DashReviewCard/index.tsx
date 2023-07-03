@@ -1,6 +1,6 @@
 import { StarRating } from "../../fragments/StarRating"
 
-export const DashRatingCard = () => {
+export const DashReviewCard = () => {
     return (
         <li>
             <img src="" alt="Foto do perfil" />

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 export const RegisterForm = () => {
-    return(
+    return (
         <form>
             <div>
                 <h1>Cadastro</h1>
@@ -12,7 +12,7 @@ export const RegisterForm = () => {
             </div>
             <p>Preencha os campos para cadastrar-se</p>
             <div>
-                <input type="text" placeholder="Nome"/>
+                <input type="text" placeholder="Nome" />
                 <input type="email" placeholder="E-mail" />
             </div>
             <div>
