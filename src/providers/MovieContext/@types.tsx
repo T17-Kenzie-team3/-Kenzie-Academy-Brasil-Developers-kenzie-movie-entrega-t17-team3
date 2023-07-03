@@ -11,6 +11,7 @@ export interface IMovie {
     type: TmovieGenre
     duration: number
     synopsis: string
+    image: string
 }
 
 export interface ISelectedMovie {
@@ -19,6 +20,7 @@ export interface ISelectedMovie {
     type: TmovieGenre
     duration: number
     synopsis: string
+    image: string
     reviews: IReview[]
 }
 
