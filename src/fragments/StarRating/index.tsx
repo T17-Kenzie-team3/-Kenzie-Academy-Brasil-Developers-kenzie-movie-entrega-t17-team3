@@ -1,8 +1,9 @@
+import { AiOutlineStar } from 'react-icons/ai';
 export const StarRating = () => {
-    return (
-        <div>
-            <img src="" alt="ícone de estrela" />
-            <span>5.0</span>
-        </div>
-    )
+  return (
+    <div>
+      <AiOutlineStar />
+      <span>50</span>
+    </div>
+  )
 }
