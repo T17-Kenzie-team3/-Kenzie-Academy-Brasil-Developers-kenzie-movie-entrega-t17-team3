@@ -25,7 +25,7 @@ export const StyledBtnRatingUpdate = styled.button`
 `
 export const StyledBtnLogin = styled.button`
  ${Button};
-  height: 4.1875rem;
+  height: 3.375rem;
   width: 100%;
 `
 export const StyledBtnRegister = styled.button`

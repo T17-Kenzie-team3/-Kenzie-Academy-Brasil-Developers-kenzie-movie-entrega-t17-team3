@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { IMovieContext, IMovieProviderProps, IMovie, ISelectedMovie } from "./@types"
-import { getMovieList, getSelectedMovie, getUserReviewsByMovieID, removeSpaces } from "../../services/requests"
+import { IMovieContext, IMovieProviderProps, IMovie, ISelectedMovie, IAverageScore } from "./@types"
+import { getMovieList, getMovieListWithReviews, getSelectedMovie, getUserReviewsByMovieID, removeSpaces } from "../../services/requests"
 import { UserContext } from "../UserContext"
 
 export const MovieContext = createContext({} as IMovieContext)
@@ -8,8 +8,9 @@ export const MovieContext = createContext({} as IMovieContext)
 export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     const [movieList, setMovieList] = useState<IMovie[]>([])
+    const [averageScores, setAverageScores] = useState<IAverageScore[]>([])
     const [selectedMovie, setSelectedMovie] = useState<ISelectedMovie | null>(null)
-//Selected movie contem a lista de todos os reviews do filme selecionado .review;
+    //Selected movie contem a lista de todos os reviews do filme selecionado .review;
 
     const { navigate, currentPath, user, setUserReview, setLoadingPage } = useContext(UserContext)
 
@@ -72,10 +73,40 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             }
         }
 
+        const setupAverageScores = async () => {
+            const moviesData = await getMovieListWithReviews()
+            if (moviesData) {
+                let averageScoreList:IAverageScore[] =[]
+                moviesData.map(movie => {
+                    let scoreList:number[] = []
+
+                    movie.reviews.map(review => {
+                        scoreList.push(review.score)
+                    })
+                    if (scoreList.length > 0) {
+                        const average = scoreList.reduce((a, b) => a + b, 0) / scoreList.length
+                        const newAverageScore:IAverageScore = {
+                            movieId: movie.id,
+                            score: average
+                        }
+                        averageScoreList.push(newAverageScore)
+                    } else {
+                        const newAverageScore:IAverageScore = {
+                            movieId: movie.id,
+                            score: 0
+                        }
+                        averageScoreList.push(newAverageScore)
+                    }
+                })
+                setAverageScores(averageScoreList)
+            }
+        }
+
         const loadLists = async () => {
             await setupMovieList()
             await setupSelectedMovie()
             await setupUserReviews()
+            await setupAverageScores()
         }
 
         loadLists()
@@ -83,7 +114,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     return (
         <MovieContext.Provider value={{
-            movieList, setMovieList, selectedMovie, setSelectedMovie
+            movieList, setMovieList, selectedMovie, setSelectedMovie,
+            averageScores, setAverageScores
         }}>
             {children}
         </MovieContext.Provider>

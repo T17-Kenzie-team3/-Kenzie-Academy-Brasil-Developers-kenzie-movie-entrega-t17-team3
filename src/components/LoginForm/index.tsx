@@ -13,15 +13,13 @@ import { ContainerFormLogin, ContainerFormRegisterButton, StyledFromLoginPage } 
 
 export const LoginForm = () => {
 
-
-
       const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm<TLoginValues>({
         resolver: zodResolver(LoginFormSchema),
-      });
+      })
 
       const { setUser } = useContext(UserContext)
     
@@ -31,23 +29,22 @@ export const LoginForm = () => {
           setUser(newUser)
           localStorage.setItem("@KM: User", JSON.stringify(newUser))
         }
-
       }
 
     return (
         <StyledFromLoginPage onSubmit={handleSubmit(submit)} noValidate>
             <StyledTitleOne>Login</StyledTitleOne>
         <ContainerFormLogin>
-            <StyledInput type="email" {...register("email")} />
+            <StyledInput type="email" {...register("email")} placeholder="E-mail"/>
             {errors.email ? <p>{errors.email.message}</p> : null}
-            <StyledInput type="text" {...register("password")}  />
+            <StyledInput type="text" {...register("password")} placeholder="Senha"/>
             {errors.password ? <p>{errors.password.message}</p> : null}
-          <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
-          <ContainerFormRegisterButton>
-      
-            <StyledParagrOne>ou</StyledParagrOne>
-            <Link to="/register"><StyledBtnLogin type="button">Cadastre-se</StyledBtnLogin></Link>
-           </ContainerFormRegisterButton>
+            <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
+            <ContainerFormRegisterButton>
+        
+              <StyledParagrOne>ou</StyledParagrOne>
+              <Link to="/register">Cadastre-se</Link>
+            </ContainerFormRegisterButton>
           </ContainerFormLogin>
         </StyledFromLoginPage>
     )
