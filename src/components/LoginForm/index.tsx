@@ -38,16 +38,16 @@ export const LoginForm = () => {
         <StyledFromLoginPage onSubmit={handleSubmit(submit)} noValidate>
             <StyledTitleOne>Login</StyledTitleOne>
         <ContainerFormLogin>
-            <StyledInput type="email" {...register("email")} />
+            <StyledInput type="email" {...register("email")} placeholder="E-mail"/>
             {errors.email ? <p>{errors.email.message}</p> : null}
-            <StyledInput type="text" {...register("password")}  />
+            <StyledInput type="text" {...register("password")} placeholder="Senha"/>
             {errors.password ? <p>{errors.password.message}</p> : null}
-          <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
-          <ContainerFormRegisterButton>
-      
-            <StyledParagrOne>ou</StyledParagrOne>
-            <Link to="/register"><StyledBtnLogin type="button">Cadastre-se</StyledBtnLogin></Link>
-           </ContainerFormRegisterButton>
+            <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
+            <ContainerFormRegisterButton>
+        
+              <StyledParagrOne>ou</StyledParagrOne>
+              <Link to="/register">Cadastre-se</Link>
+            </ContainerFormRegisterButton>
           </ContainerFormLogin>
         </StyledFromLoginPage>
     )

@@ -1,8 +1,6 @@
 import { styled } from "styled-components";
 
 export const StyledFromLoginPage = styled.form`
-    /* width: 30%;
-    height: 60%; */
     width: 470px;
     height: 500px;
     background-color: var(--grey2);
