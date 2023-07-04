@@ -28,8 +28,8 @@ export const Header = () => {
             <nav>
             {!user ? (
                 <div>
-                    <StyledLinkRegister to="/register"><button>Cadastrar-se</button></StyledLinkRegister>
-                    <StyledLinkLogin to="/login"><button>Entrar</button></StyledLinkLogin>
+                    <Link to="/register"><StyledLinkRegister >Cadastrar-se</StyledLinkRegister ></Link>
+                    <Link  to="/login"><StyledLinkLogin>Entrar</StyledLinkLogin></Link>
                 </div>
                 ) : (
                     <div>
@@ -39,7 +39,7 @@ export const Header = () => {
                           <StyledTitleFour className="firstLetter">{user.user.name.charAt(0)}</StyledTitleFour>
                         </StyledEllipseSmall>
                         <StyledTitleFive className="name" >{user.user.name}</StyledTitleFive>
-                        <StyledBtnLogout className="logout" onClick={() => Logout()}>Sair</button>
+                        <StyledBtnLogout className="logout" onClick={() => Logout()}>Sair</StyledBtnLogout >
                     </div>
                 )
             } 
