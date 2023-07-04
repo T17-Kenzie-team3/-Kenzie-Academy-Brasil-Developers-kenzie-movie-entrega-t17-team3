@@ -3,6 +3,8 @@ import { LoginFormSchema, TLoginValues } from "./Schema/LoginFormSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { atemptLogin } from "../../services/requests";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const LoginForm = () => {
 
@@ -15,10 +17,16 @@ export const LoginForm = () => {
       } = useForm<TLoginValues>({
         resolver: zodResolver(LoginFormSchema),
       });
+
+      const { setUser } = useContext(UserContext)
     
-      const submit: SubmitHandler<TLoginValues> = (formData) => {
-        atemptLogin(formData)
-        console.log(formData)
+      const submit: SubmitHandler<TLoginValues> = async (formData) => {
+        const newUser = await atemptLogin(formData)
+        if (newUser) {
+          setUser(newUser)
+          localStorage.setItem("@KM: User", JSON.stringify(newUser))
+        }
+
       }
 
     return (
