@@ -4,7 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { atemptLogin } from "../../services/requests";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from "../../providers/UserContext"
+import { StyledBtnLogin } from "../../styles/buttons/button"
+import { StyledInput } from "../../styles/inputs/input"
+import { StyledParagrOne, StyledTitleOne } from "../../styles/typography/typography"
+import { ContainerFormLogin, ContainerFormRegisterButton, StyledFromLoginPage } from "./style"
+
 
 export const LoginForm = () => {
 
@@ -27,15 +32,20 @@ export const LoginForm = () => {
       }
 
     return (
-        <form onSubmit={handleSubmit(submit)} noValidate>
-            <h1>Login</h1>
-            <input type="email" {...register("email")} />
+        <StyledFromLoginPage onSubmit={handleSubmit(submit)} noValidate>
+            <StyledTitleOne>Login</StyledTitleOne>
+        <ContainerFormLogin>
+            <StyledInput type="email" {...register("email")} />
             {errors.email ? <p>{errors.email.message}</p> : null}
-            <input type="text" {...register("password")}  />
+            <StyledInput type="text" {...register("password")}  />
             {errors.password ? <p>{errors.password.message}</p> : null}
-            <button type="submit">Entrar</button>
-            <span>ou</span>
-            <Link to="/register"><button type="button">Cadastre-se</button></Link>
-        </form>
+          <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
+          <ContainerFormRegisterButton>
+      
+            <StyledParagrOne>ou</StyledParagrOne>
+            <Link to="/register"><StyledBtnLogin type="button">Cadastre-se</StyledBtnLogin></Link>
+           </ContainerFormRegisterButton>
+          </ContainerFormLogin>
+        </StyledFromLoginPage>
     )
 }
