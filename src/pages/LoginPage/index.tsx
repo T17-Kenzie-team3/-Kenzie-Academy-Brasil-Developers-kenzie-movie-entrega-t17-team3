@@ -4,19 +4,20 @@ import { Footer } from "../../components/Footer"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { LoadingPage } from "../../fragments/LoadingPage"
+import { StyledBodyLoginPage, StyledMainLoginPage } from "./style"
 
 export const LoginPage = () => {
 
     const { loadingPage } = useContext(UserContext)
     return (
-        <>
+        <StyledBodyLoginPage>
             <Header />
             {loadingPage ? <LoadingPage /> :
-                <main>
+                <StyledMainLoginPage>
                     <LoginForm />
-                </main>
+                </StyledMainLoginPage>
             }
             <Footer />
-        </>
+        </StyledBodyLoginPage>
     )
 }
