@@ -24,6 +24,16 @@ export interface ISelectedMovie {
     reviews: IReview[]
 }
 
+export interface IMovieWithReviews {
+    id: number
+    name: string
+    type: TmovieGenre
+    duration: number
+    synopsis: string
+    image: string
+    reviews: IReview[]
+}
+
 export interface IReview {
     movieId: number
     userId: number
@@ -31,9 +41,16 @@ export interface IReview {
     description: string
 }
 
+export interface IAverageScore {
+    movieId: number
+    score: number
+}
+
 export interface IMovieContext {
     movieList: IMovie[]
     setMovieList: React.Dispatch<React.SetStateAction<IMovie[]>>
     selectedMovie: ISelectedMovie | null
     setSelectedMovie: React.Dispatch<React.SetStateAction<ISelectedMovie | null>>
+    averageScores: IAverageScore[]
+    setAverageScores: React.Dispatch<React.SetStateAction<IAverageScore[]>>
 }
