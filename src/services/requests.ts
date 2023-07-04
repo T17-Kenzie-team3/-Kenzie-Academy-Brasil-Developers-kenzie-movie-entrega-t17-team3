@@ -13,7 +13,6 @@ export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
             email: email,
             password: password,
         })
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -34,7 +33,6 @@ export const atemptRegister = async ({ email, password, name }: IAtemptRegisterP
             password: password,
             name: name,
         })
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
