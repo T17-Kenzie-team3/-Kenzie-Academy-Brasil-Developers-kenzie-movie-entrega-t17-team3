@@ -1,7 +1,5 @@
 import { NavigateFunction } from "react-router-dom"
 import { TMovieScore } from "../MovieContext/@types"
-import { TRegisterValues } from "../../components/RegisterForm/Schema/RegisterFormSchema"
-import { TLoginValues } from "../../components/LoginForm/Schema/LoginFormSchema"
 
 export interface IUserProviderProps {
     children: React.ReactNode
@@ -27,16 +25,12 @@ export interface IUserReview {
 }
 
 export interface IUserContext {
-    user: IUser | null
-    setUser: React.Dispatch<React.SetStateAction<IUser | null>>
+    user: IUserData | null
+    setUser: React.Dispatch<React.SetStateAction<IUserData | null>>
     userReview: IUserReview | null
     setUserReview: React.Dispatch<React.SetStateAction<IUserReview | null>>
     navigate: NavigateFunction
     currentPath: string
     loadingPage: boolean
     setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
-    userRegister: (formData: TRegisterValues) => Promise<void>
-    userLogin: (formData: TLoginValues) => Promise<void>
-    userLogout: () => void
-
 }

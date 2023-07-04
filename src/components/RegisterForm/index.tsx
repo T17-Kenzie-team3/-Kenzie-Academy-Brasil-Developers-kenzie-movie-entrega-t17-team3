@@ -1,29 +1,26 @@
-import { HTMLAttributes, useContext } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
-import { RegisterFormSchema, TRegisterValues } from "./Schema/RegisterFormSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { UserContext } from './../../providers/UserContext/index';
-
-
-interface IInputRegister extends HTMLAttributes<HTMLInputElement> {
-    label: string
-    errors: any
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useNavigate } from "react-router-dom"
+import { RegisterFormSchema, TRegisterValues } from "./Schema/RegisterFormSchema";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { atemptRegister } from "../../services/requests";
 
 export const RegisterForm = () => {
 
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<TRegisterValues>({
+      } = useForm<TRegisterValues>({
         resolver: zodResolver(RegisterFormSchema),
-    });
-    const { userRegister } = useContext(UserContext);  
+    })
 
-    const submit: SubmitHandler<TRegisterValues> = (formData) => userRegister(formData);
-    
+    const submit: SubmitHandler<TRegisterValues> = (formData) => {
+        console.log(formData)
+        atemptRegister(formData)
+        navigate("/login")
+    }
+
     return (
         <form onSubmit={handleSubmit(submit)}>
             <div>
@@ -35,9 +32,8 @@ export const RegisterForm = () => {
             </div>
             <p>Preencha os campos para cadastrar-se</p>
             <div>
-                <input type="text" placeholder="Nome" {...register("name")}/>
+                <input type="text" placeholder="Nome" {...register("name")} />
                 {errors.name ? <p>{errors.name.message}</p> : null}
-                
                 <input type="email" placeholder="E-mail" {...register("email")} />
                 {errors.email ? <p>{errors.email.message}</p> : null}
             </div>
@@ -47,7 +43,7 @@ export const RegisterForm = () => {
                 <input type="text" placeholder="Confirmar senha" {...register("confirm")} />
                 {errors.confirm ? <p>{errors.confirm.message}</p> : null}
             </div>
-            <button type="submit">Cadastrar-se</button>
+            <button>Cadastrar-se</button>
         </form>
     )
 }
