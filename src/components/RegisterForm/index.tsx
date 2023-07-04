@@ -6,14 +6,14 @@ import { atemptRegister } from "../../services/requests";
 
 export const RegisterForm = () => {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm<TRegisterValues>({
         resolver: zodResolver(RegisterFormSchema),
-      });
+    })
 
     const submit: SubmitHandler<TRegisterValues> = (formData) => {
         console.log(formData)

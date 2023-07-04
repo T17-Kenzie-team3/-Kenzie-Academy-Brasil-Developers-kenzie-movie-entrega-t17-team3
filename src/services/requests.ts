@@ -130,9 +130,8 @@ export const atemptDeleteReview = async ({ token, reviewId }: IAtemptDeleteRevie
 }
 
 export const removeSpaces = (string: string) => {
-
     if(string === undefined){
-        return "";
+        return ""
     }
     const stringWithoutSpaces = string.replace(/\s+/g, "").toLowerCase()
     return stringWithoutSpaces
