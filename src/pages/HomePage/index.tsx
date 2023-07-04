@@ -9,6 +9,7 @@ import { LoadingPage } from "../../fragments/LoadingPage"
 export const HomePage = () => {
 
     const { loadingPage } = useContext(UserContext)
+    
     return (
         <>
             <Header />

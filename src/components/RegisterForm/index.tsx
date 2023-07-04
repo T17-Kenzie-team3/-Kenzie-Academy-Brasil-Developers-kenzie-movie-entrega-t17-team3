@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { RegisterFormSchema, TRegisterValues } from "./Schema/RegisterFormSchema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { atemptRegister } from "../../services/requests";
+import { toast } from "react-toastify";
 
 export const RegisterForm = () => {
 
@@ -18,7 +19,12 @@ export const RegisterForm = () => {
     const submit: SubmitHandler<TRegisterValues> = async (formData) => {
         const newRegister = await atemptRegister(formData)
         if (newRegister) {
-            navigate("/login")
+            setTimeout(()=> {
+                navigate("/login")
+            }, 2000)
+            toast.success("Cadastro efetuado com sucesso!")
+        } else {
+            toast.error("Não foi possivel efetuar o cadastro!")
         }
     }
  
