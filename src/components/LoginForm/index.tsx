@@ -13,15 +13,13 @@ import { ContainerFormLogin, ContainerFormRegisterButton, StyledFromLoginPage } 
 
 export const LoginForm = () => {
 
-
-
       const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm<TLoginValues>({
         resolver: zodResolver(LoginFormSchema),
-      });
+      })
 
       const { setUser } = useContext(UserContext)
     
@@ -31,7 +29,6 @@ export const LoginForm = () => {
           setUser(newUser)
           localStorage.setItem("@KM: User", JSON.stringify(newUser))
         }
-
       }
 
     return (
