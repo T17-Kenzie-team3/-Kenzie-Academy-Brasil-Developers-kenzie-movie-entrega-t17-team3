@@ -28,6 +28,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             }
         }
         loadUser()
+
     }, [])
 
     return (
