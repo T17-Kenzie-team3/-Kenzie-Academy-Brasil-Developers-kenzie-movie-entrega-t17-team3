@@ -2,16 +2,19 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginFormSchema, TLoginValues } from "./Schema/LoginFormSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { atemptLogin } from "../../services/requests";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext"
 import { StyledBtnLogin } from "../../styles/buttons/button"
 import { StyledInput } from "../../styles/inputs/input"
 import { StyledParagrOne, StyledTitleOne } from "../../styles/typography/typography"
 import { ContainerFormLogin, ContainerFormRegisterButton, StyledFromLoginPage } from "./style"
+import { toast } from 'react-toastify';
 
 
 export const LoginForm = () => {
+
+      const navigate = useNavigate()
 
       const {
         register,
@@ -26,9 +29,16 @@ export const LoginForm = () => {
       const submit: SubmitHandler<TLoginValues> = async (formData) => {
         const newUser = await atemptLogin(formData)
         if (newUser) {
-          setUser(newUser)
-          localStorage.setItem("@KM: User", JSON.stringify(newUser))
-        }
+          setTimeout(()=> {
+            setUser(newUser)
+            localStorage.setItem("@KM: User", JSON.stringify(newUser))
+            navigate("/register");
+          }, 2500);
+          
+          toast.success("Login efetuado com sucesso!");
+        } else {
+          toast.error("Não foi possivel efetuar o login!");
+      }
       }
 
     return (
