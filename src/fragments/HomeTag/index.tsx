@@ -1,10 +1,11 @@
 import { IMovie } from "../../providers/MovieContext/@types"
 
-interface HomeMovieTagProps {
+interface IHomeMovieTagProps {
   movieList: IMovie[]
 }
 
-export const HomeMovieTag = ({ movieList }: HomeMovieTagProps) => {
+export const HomeMovieTag = ({ movieList }: IHomeMovieTagProps) => {
+  
   return (
     <>
       {movieList && (

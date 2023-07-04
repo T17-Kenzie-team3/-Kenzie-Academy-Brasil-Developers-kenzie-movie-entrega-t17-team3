@@ -1,11 +1,12 @@
 import { IMovie } from "../../providers/MovieContext/@types"
 import { StarRating } from "../StarRating"
 
-interface HomeMovieNameProps {
+interface IHomeMovieNameProps {
   movieList: IMovie[]
 }
 
-export const HomeMovieName = ({ movieList }: HomeMovieNameProps) => {
+export const HomeMovieName = ({ movieList }: IHomeMovieNameProps) => {
+  
   return (
     <>
       {movieList && (

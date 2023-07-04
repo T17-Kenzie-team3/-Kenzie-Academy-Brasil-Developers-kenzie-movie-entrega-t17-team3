@@ -1,9 +1,18 @@
-import { AiOutlineStar } from 'react-icons/ai';
+import { useContext } from "react"
+import { AiOutlineStar } from "react-icons/ai"
+import { MovieContext } from "../../providers/MovieContext"
+
 export const StarRating = () => {
+  
+  const { movieList, averageScores } = useContext(MovieContext)
+  const averageScore = averageScores.find(
+    (score) => score.movieId === movieList[0].id
+  )
+
   return (
     <div>
       <AiOutlineStar />
-      <span>50</span>
+      {averageScore && <p>{averageScore.score}</p>}
     </div>
   )
 }
