@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header"
-import { HomeBanner } from "../../components/HomeBanner/HomeBanner"
 import { HomeMovieList } from "../../components/HomeMovieList"
+import { HomeBanner } from "../../components/HomeBanner/HomeBanner"
 import { Footer } from "../../components/Footer"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
