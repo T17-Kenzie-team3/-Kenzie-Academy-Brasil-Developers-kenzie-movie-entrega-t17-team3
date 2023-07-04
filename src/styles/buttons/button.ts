@@ -33,3 +33,11 @@ export const StyledBtnRegister = styled.button`
   height: 4.1875rem;
   width: 100%; //12.125rem
 `
+export const StyledBtnLogout= styled.button`
+  font-family: var(--FPoppins);
+  font-size: var(--P17);
+  font-weight: var(--w7);
+  background-color: transparent;
+  border: none;
+  color:var(--white) ;
+`
