@@ -37,7 +37,7 @@ export const LoginForm = () => {
           
           toast.success("Login efetuado com sucesso!");
         } else {
-          toast.error("Não foi possivel efetuar o login!");
+          toast.error("Erro! Verifique seu email e/ou senha");
       }
       }
 
