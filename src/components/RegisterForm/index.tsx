@@ -21,7 +21,7 @@ export const RegisterForm = () => {
             navigate("/login")
         }
     }
-
+ 
     return (
         <form onSubmit={handleSubmit(submit)}>
             <div>
