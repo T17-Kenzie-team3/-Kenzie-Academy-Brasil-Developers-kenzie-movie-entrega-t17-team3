@@ -16,6 +16,7 @@ export const Button = css`
   background: hsl(39, 100%, 50%);  //63% original
   color:var(--black) ;
  }
+ border: none;
 `
 export const StyledBtnRatingUpdate = styled.button`
  ${Button};
