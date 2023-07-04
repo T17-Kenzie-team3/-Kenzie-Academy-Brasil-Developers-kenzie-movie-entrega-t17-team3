@@ -15,12 +15,13 @@ export const RegisterForm = () => {
         resolver: zodResolver(RegisterFormSchema),
     })
 
-    const submit: SubmitHandler<TRegisterValues> = (formData) => {
-        console.log(formData)
-        atemptRegister(formData)
-        navigate("/login")
+    const submit: SubmitHandler<TRegisterValues> = async (formData) => {
+        const newRegister = await atemptRegister(formData)
+        if (newRegister) {
+            navigate("/login")
+        }
     }
-
+ 
     return (
         <form onSubmit={handleSubmit(submit)}>
             <div>
