@@ -13,8 +13,10 @@ export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
             email: email,
             password: password,
         })
+        console.log(data)
         return data
     } catch (error) {
+        console.log(error)
         return false
     }
 }
@@ -32,9 +34,10 @@ export const atemptRegister = async ({ email, password, name }: IAtemptRegisterP
             password: password,
             name: name,
         })
-
+        console.log(data)
         return data
     } catch (error) {
+        console.log(error)
         return false
     }
 }
@@ -127,7 +130,7 @@ export const atemptDeleteReview = async ({ token, reviewId }: IAtemptDeleteRevie
 }
 
 export const removeSpaces = (string: string) => {
-    console.log(string)
+
     if(string === undefined){
         return "";
     }
