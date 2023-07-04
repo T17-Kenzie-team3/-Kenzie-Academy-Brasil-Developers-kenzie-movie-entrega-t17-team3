@@ -3,6 +3,7 @@ import { HomeMovieCard } from "../HomeMovieCard"
 import { MovieContext } from "../../providers/MovieContext"
 
 export const HomeMovieList = () => {
+  
   const { movieList } = useContext(MovieContext)
 
   const moviesToRender = movieList.slice(1)
