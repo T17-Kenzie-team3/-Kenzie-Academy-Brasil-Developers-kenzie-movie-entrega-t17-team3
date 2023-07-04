@@ -15,6 +15,7 @@ export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
         })
         return data
     } catch (error) {
+        console.log(error)
         return false
     }
 }
@@ -32,9 +33,9 @@ export const atemptRegister = async ({ email, password, name }: IAtemptRegisterP
             password: password,
             name: name,
         })
-
         return data
     } catch (error) {
+        console.log(error)
         return false
     }
 }
