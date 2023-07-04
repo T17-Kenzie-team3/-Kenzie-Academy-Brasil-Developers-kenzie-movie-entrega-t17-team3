@@ -1,4 +1,4 @@
-import { IMovie, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
+import { IMovie, IMovieWithReviews, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
 import { IUserData, IUserReview } from "../providers/UserContext/@types"
 import { api } from "./api"
 
@@ -57,6 +57,15 @@ export const getUserReviewsByMovieID = async ({ userId, movieId }: IGetUserRevie
 export const getMovieList = async () => {
     try {
         const { data } = await api.get<IMovie[]>("/movies")
+        return data
+    } catch (error) {
+        return false
+    }
+}
+
+export const getMovieListWithReviews = async () => {
+    try {
+        const { data } = await api.get<IMovieWithReviews[]>("/movies?_embed=reviews")
         return data
     } catch (error) {
         return false
