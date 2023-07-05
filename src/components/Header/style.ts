@@ -59,3 +59,9 @@ nav{
 }
 }
  `
+
+export const StyledNavHeader = styled.div`
+     display: flex;
+     align-items: center;
+     gap: 50px;
+`
