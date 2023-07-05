@@ -1,11 +1,10 @@
-import { IMovie } from "../../providers/MovieContext/@types"
+import { useContext } from "react"
+import { MovieContext } from "../../providers/MovieContext"
 
-interface IHomeMovieTagProps {
-  movieList: IMovie[]
-}
-
-export const HomeMovieTag = ({ movieList }: IHomeMovieTagProps) => {
+export const HomeMovieTag = () => {
   
+  const { movieList } = useContext(MovieContext)
+
   return (
     <>
       {movieList && (

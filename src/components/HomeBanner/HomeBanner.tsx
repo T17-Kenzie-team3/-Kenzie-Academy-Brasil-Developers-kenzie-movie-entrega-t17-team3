@@ -34,8 +34,8 @@ export const HomeBanner = () => {
             alt="Display principal com a foto de um filme"
           />
           <div>
-            <HomeMovieTag movieList={movieList} />
-            <HomeMovieName movieList={movieList} />
+            <HomeMovieTag />
+            <HomeMovieName />
           </div>
         </section>
       )}
