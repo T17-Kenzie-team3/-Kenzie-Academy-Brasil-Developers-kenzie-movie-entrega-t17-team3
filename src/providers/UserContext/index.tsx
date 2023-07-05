@@ -14,7 +14,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const [userNameList, setUserNameList] = useState<IUserName[]>([])
     const navigate = useNavigate()
     const currentPath = window.location.pathname
-
+    
 
     useEffect(() => {
 
@@ -45,6 +45,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
                     currentUserList.push(userTextData)
                 })
             }
+            setUserNameList(currentUserList)
         }
         userList()
     }, [])
