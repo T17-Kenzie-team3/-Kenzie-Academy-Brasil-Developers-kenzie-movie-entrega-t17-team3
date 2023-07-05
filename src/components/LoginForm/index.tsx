@@ -8,7 +8,7 @@ import { UserContext } from "../../providers/UserContext"
 import { StyledBtnLogin } from "../../styles/buttons/button"
 import { StyledInput } from "../../styles/inputs/input"
 import { StyledErrorZod, StyledParagrOne, StyledTitleOne } from "../../styles/typography/typography"
-import { ContainerFormLogin, ContainerFormRegisterButton, StyledFromLoginPage } from "./style"
+import { ContainerFormLogin, ContainerFormRegisterButton, ContainerInputUnite, StyledFromLoginPage } from "./style"
 import { toast } from 'react-toastify';
 import { StyledContainerInputUnite } from "../RegisterForm/style";
 import { StyledLinkYellow } from "../../styles/buttons/link";
@@ -47,10 +47,14 @@ export const LoginForm = () => {
     <StyledFromLoginPage onSubmit={handleSubmit(submit)} noValidate>
       <StyledTitleOne>Login</StyledTitleOne>
       <ContainerFormLogin>
-        <StyledInput type="email" {...register("email")} placeholder="E-mail" />
-        {errors.email ? <StyledErrorZod>{errors.email.message}</StyledErrorZod> : null}
-        <StyledInput type="text" {...register("password")} placeholder="Senha" />
-        {errors.password ? <StyledErrorZod>{errors.password.message}</StyledErrorZod> : null}
+        <ContainerInputUnite>
+          <StyledInput type="email" {...register("email")} placeholder="E-mail" />
+          {errors.email ? <StyledErrorZod>{errors.email.message}</StyledErrorZod> : null}
+        </ContainerInputUnite>
+        <ContainerInputUnite>
+          <StyledInput type="text" {...register("password")} placeholder="Senha" />
+          {errors.password ? <StyledErrorZod>{errors.password.message}</StyledErrorZod> : null}
+        </ContainerInputUnite>
         <StyledBtnLogin type="submit">Entrar</StyledBtnLogin>
         <ContainerFormRegisterButton>
           <StyledParagrOne>ou</StyledParagrOne>

@@ -24,6 +24,12 @@ export const ContainerFormRegisterButton = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20px;
     gap: 20px;
+`
+
+export const ContainerInputUnite = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 `
