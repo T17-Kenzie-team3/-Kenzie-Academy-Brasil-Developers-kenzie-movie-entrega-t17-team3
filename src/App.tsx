@@ -8,7 +8,6 @@ export const App = () => {
     <div className="App">
       <GlobalStyle />
       <RoutesMain />
-      <GlobalStyle />
       <ToastContainer
         position="bottom-right"
         autoClose={1500}
