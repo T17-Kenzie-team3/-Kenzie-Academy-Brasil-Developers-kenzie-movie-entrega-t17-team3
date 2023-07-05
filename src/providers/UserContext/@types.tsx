@@ -24,6 +24,20 @@ export interface IUserReview {
     description: string
 }
 
+export interface IUserName{
+    firstLetter: string
+    name: string
+}
+
+export type TUserNameList = IUserNameData[]
+
+export interface IUserNameData {
+  email: string
+  name: string
+  age: number
+  id: number
+}
+
 export interface IUserContext {
     user: IUserData | null
     setUser: React.Dispatch<React.SetStateAction<IUserData | null>>
@@ -33,4 +47,6 @@ export interface IUserContext {
     currentPath: string
     loadingPage: boolean
     setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
+    userNameList: IUserName[]
+    setUserNameList: React.Dispatch<React.SetStateAction<IUserName[]>>
 }
