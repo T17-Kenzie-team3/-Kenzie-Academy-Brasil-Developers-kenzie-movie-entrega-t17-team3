@@ -6,13 +6,14 @@ import { DashReviewList } from "../../components/DashReviewList"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { LoadingPage } from "../../fragments/LoadingPage"
+import{StyledDashboardPage} from "./style"
 
 export const DashboardPage = () => {
 
     const { loadingPage } = useContext(UserContext)
 
     return (
-        <>
+        <StyledDashboardPage>
             <Header />
             {loadingPage ? <LoadingPage /> :
                 <main>
@@ -23,6 +24,6 @@ export const DashboardPage = () => {
                 </main>
             }
             <Footer />
-        </>
+        </StyledDashboardPage>
     )
 }

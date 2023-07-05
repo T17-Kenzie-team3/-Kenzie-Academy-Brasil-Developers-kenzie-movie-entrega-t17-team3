@@ -1,6 +1,8 @@
 import { useContext } from "react"
 import { AiOutlineStar } from "react-icons/ai"
 import { MovieContext } from "../../providers/MovieContext"
+import { StyledStarRating} from "./style"
+import {StyledTitleThree  } from "../../styles/typography/typography"
 
 export const StarRating = () => {
   
@@ -10,9 +12,9 @@ export const StarRating = () => {
   )
 
   return (
-    <div>
+    <StyledStarRating>
       <AiOutlineStar />
-      {averageScore && <p>{averageScore.score}</p>}
-    </div>
+      {averageScore && <StyledTitleThree  className="score">{averageScore.score}</StyledTitleThree>}
+    </StyledStarRating>
   )
 }
