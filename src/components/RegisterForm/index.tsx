@@ -1,9 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { RegisterFormSchema, TRegisterValues } from "./Schema/RegisterFormSchema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { atemptRegister } from "../../services/requests";
 import { toast } from "react-toastify";
+import { StyledErrorZod, StyledParagrOne, StyledTitleOne } from "../../styles/typography/typography";
+import { GoArrowLeft } from 'react-icons/go';
+import { StyledContainerRegisterFormParagraph, StyledContainerRegisterFormButton, StyledRegisterForm, StyledRegisterInputsContainer, StyledTitleRegisteForm, StyledContainerInputUnite } from "./style";
+import { StyledInput } from "../../styles/inputs/input";
+import { StyledBtnRegister } from "../../styles/buttons/button";
+import { StyledLinkYellow } from "../../styles/buttons/link";
 
 export const RegisterForm = () => {
 
@@ -29,28 +35,37 @@ export const RegisterForm = () => {
     }
  
     return (
-        <form onSubmit={handleSubmit(submit)}>
-            <div>
-                <h1>Cadastro</h1>
-                <div>
-                    <img src="" alt="Seta de voltar" />
-                    <Link to="/">Voltar</Link>
-                </div>
-            </div>
-            <p>Preencha os campos para cadastrar-se</p>
-            <div>
-                <input type="text" placeholder="Nome" {...register("name")} />
-                {errors.name ? <p>{errors.name.message}</p> : null}
-                <input type="email" placeholder="E-mail" {...register("email")} />
-                {errors.email ? <p>{errors.email.message}</p> : null}
-            </div>
-            <div>
-                <input type="text" placeholder="Senha" {...register("password")} />
-                {errors.password ? <p>{errors.password.message}</p> : null}
-                <input type="text" placeholder="Confirmar senha" {...register("confirm")} />
-                {errors.confirm ? <p>{errors.confirm.message}</p> : null}
-            </div>
-            <button>Cadastrar-se</button>
-        </form>
+        <StyledRegisterForm onSubmit={handleSubmit(submit)}>
+            <StyledTitleRegisteForm>
+                <StyledTitleOne>Cadastro</StyledTitleOne>
+                <StyledLinkYellow to="/"><GoArrowLeft size="20"/>Voltar</StyledLinkYellow>
+            </StyledTitleRegisteForm>
+            <StyledContainerRegisterFormParagraph>
+                <StyledParagrOne>Preencha os campos para cadastrar-se</StyledParagrOne>
+            </StyledContainerRegisterFormParagraph>
+            <StyledRegisterInputsContainer>
+                <StyledContainerInputUnite>
+                    <StyledInput type="text" placeholder="Nome" {...register("name")} />
+                    {errors.name ? <StyledErrorZod>{errors.name.message}</StyledErrorZod> : null}
+                </StyledContainerInputUnite>
+                <StyledContainerInputUnite>
+                    <StyledInput type="email" placeholder="E-mail" {...register("email")} />
+                    {errors.email ? <StyledErrorZod>{errors.email.message}</StyledErrorZod> : null}
+                </StyledContainerInputUnite>
+            </StyledRegisterInputsContainer>
+            <StyledRegisterInputsContainer>
+                <StyledContainerInputUnite>
+                    <StyledInput type="text" placeholder="Senha" {...register("password")} />
+                    {errors.password ? <StyledErrorZod>{errors.password.message}</StyledErrorZod> : null}
+                </StyledContainerInputUnite>
+                <StyledContainerInputUnite>
+                    <StyledInput type="text" placeholder="Confirmar senha" {...register("confirm")} />
+                    {errors.confirm ? <StyledErrorZod>{errors.confirm.message}</StyledErrorZod> : null}
+                </StyledContainerInputUnite>
+            </StyledRegisterInputsContainer>
+            <StyledContainerRegisterFormButton>
+                <StyledBtnRegister>Cadastrar-se</StyledBtnRegister>
+            </StyledContainerRegisterFormButton>
+        </StyledRegisterForm>
     )
 }
