@@ -15,13 +15,13 @@ export const StyleLink = css`
   border: none;
 `
 
-export const StyledLinkLogin= styled.a`
+export const StyledLinkLogin= styled.p`
  ${StyleLink};
   height: 2.6875rem;
   width: 8.9375rem ;
   padding: 0 0.5rem 0 0.5rem; 
 `
-export const StyledLinkRegister= styled.a`
+export const StyledLinkRegister= styled.p`
   font-family: var(--FPoppins);
   font-size: var(--P17);
   font-weight: var(--W7);
