@@ -39,7 +39,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
                 newUserList.map(userText => {
                     const userTextData:IUserName ={
                         firstLetter: userText.name.charAt(0),
-                        name: userText.name
+                        name: userText.name,
+                        id: userText.id
                     }
                     currentUserList.push(userTextData)
                 })

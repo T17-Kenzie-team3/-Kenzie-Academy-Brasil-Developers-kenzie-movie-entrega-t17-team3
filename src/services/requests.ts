@@ -1,5 +1,5 @@
 import { IMovie, IMovieWithReviews, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
-import { IUser, IUserData, IUserReview, TUserNameList } from "../providers/UserContext/@types"
+import { IUserData, IUserReview, TUserNameList } from "../providers/UserContext/@types"
 import { api } from "./api"
 
 interface IAtemptLoginProp {

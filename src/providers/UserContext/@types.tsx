@@ -27,6 +27,7 @@ export interface IUserReview {
 export interface IUserName{
     firstLetter: string
     name: string
+    id: number
 }
 
 export type TUserNameList = IUserNameData[]
