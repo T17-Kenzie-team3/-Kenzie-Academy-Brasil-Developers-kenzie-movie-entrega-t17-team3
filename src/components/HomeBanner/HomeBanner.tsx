@@ -4,6 +4,7 @@ import { HomeMovieTag } from "../../fragments/HomeTag"
 import { MovieContext } from "../../providers/MovieContext"
 import { getSelectedMovie, removeSpaces } from "../../services/requests"
 import { useNavigate } from "react-router"
+import { StyledHomeBanner} from "./style"
 
 export const HomeBanner = () => {
   
@@ -27,8 +28,8 @@ export const HomeBanner = () => {
   return (
     <>
       {movieList.length > 0 && (
-        <section>
-          <img
+        <StyledHomeBanner>
+          <img className="HomeBannerImg"
             onClick={() => handleSubmit()}
             src={movieList[0].image}
             alt="Display principal com a foto de um filme"
@@ -37,7 +38,7 @@ export const HomeBanner = () => {
             <HomeMovieTag />
             <HomeMovieName />
           </div>
-        </section>
+        </StyledHomeBanner>
       )}
     </>
   )
