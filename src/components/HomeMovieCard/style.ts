@@ -1,70 +1,40 @@
 import styled from "styled-components";
 
 export const StyledHomeMovieCard= styled.li`
- display: flex;
- flex-direction: column;
- max-width: 27rem;
- width: 100%;
+
+>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+> div > :first-child {
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
 
 .HomeCardImg{
-    height: 11.375rem;
     width: 100%;
-    border-radius: 2.5rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+    transform: scale(1.1);
+    min-height: 11.6rem;
+    max-height: 13.7rem;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
-.divGenre{
- display: flex;
- flex-direction: row;
- align-items: flex-end;
- justify-content: space-between;
- max-width: 27rem;
- width: 100%;
- margin: 1.5rem 0 1rem 0;
+.HomeCardImg:hover{
+    transform: scale(1.3);
 }
 
-.divName{
- display: flex;
- flex-direction: row;
- align-items: flex-start;
- justify-content: space-between;
- max-width: 27rem;
- width: 100%;
- margin: 0  0 2.5rem 0;
-}
-
-.name{
-    width:100%;
-    text-align: start;;
-}
-
-h3{
-    width:100%;
-    text-align: end;
-}
-.divRating{
- display: flex;
- flex-direction: row;
- align-items: flex-end;
- height:100%;
- width: 10%;
- justify-content: space-between;
- align-items: center;
-
-}
-
-.score{
-    padding-left: 0.4rem;
-}
-
-@media (min-width:430px) {
-    flex-direction: row;
-    margin-right: 2rem;
-    max-width: 27rem;
-    min-width: 24rem;
+@media (min-width:680px) {
+   
 
     .HomeCardImg{
-    padding: 0;
+   width: 26rem;
 }
 }
  `

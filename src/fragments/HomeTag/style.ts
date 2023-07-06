@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
 export const StyledHomeMovieTag= styled.div`
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: flex-end;
- width:100%;
- margin: 1.5rem  0  0  0;
+display: flex;
+justify-content: space-between;
+align-items: end;
+padding-bottom: 0.5rem;
+
+a {
+    cursor: default;
+}
+
+> p{
+    opacity: 0.5;
+}
 
 @media (min-width:430px) {
-    margin: 2rem  0  0  0;
 
 }
  `

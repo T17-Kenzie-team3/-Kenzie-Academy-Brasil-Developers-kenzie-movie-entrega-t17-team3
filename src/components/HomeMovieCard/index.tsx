@@ -7,6 +7,9 @@ import { useNavigate } from "react-router"
 import { StyledHomeMovieCard } from "./style"
 import { StyledBtnGenre } from "../../styles/tags/tagGenre"
 import { StyledParagrOne, StyledTitleThree } from "../../styles/typography/typography"
+import { StyledHomeMovieTag } from "../../fragments/HomeTag/style"
+import { StyledHomeMovieName } from "../../fragments/HomeMovieName/style"
+import { StyledStarRating } from "../../fragments/StarRating/style"
 
 interface IHomeMovieCardProps {
   movie: IMovie
@@ -36,22 +39,24 @@ export const HomeMovieCard = ({ movie }: IHomeMovieCardProps) => {
       {movie && (
         <StyledHomeMovieCard key={movie.id}>
           <div>
-            <img className="HomeCardImg"
-              onClick={() => handleSubmit(movie.id)}
-              src={movie.image}
-              alt={movie.name}
-            />
-            <div className="divGenre">
+            <div>
+              <img className="HomeCardImg"
+                onClick={() => handleSubmit(movie.id)}
+                src={movie.image}
+                alt={movie.name}
+              />
+            </div>
+            <StyledHomeMovieTag>
               <StyledBtnGenre>{movie.type}</StyledBtnGenre>
               <StyledParagrOne>{movie.duration}m</StyledParagrOne>
-            </div>
-            <div className="divName">
+            </StyledHomeMovieTag>
+            <StyledHomeMovieName>
               <StyledTitleThree className="name">{movie.name}</StyledTitleThree>
-              <div className="divRating">
-                <AiOutlineStar />
+              <StyledStarRating>
+                <AiOutlineStar fill="#FFBB38" size="35px" />
                 {averageScore && <StyledTitleThree className="score">{averageScore.score}</StyledTitleThree>}
-              </div>
-            </div>
+              </StyledStarRating>
+            </StyledHomeMovieName>
           </div>
         </StyledHomeMovieCard>
       )}

@@ -1,28 +1,24 @@
 import styled from "styled-components";
 
 export const StyledHomeBanner= styled.section`
- display: flex;
- display: flex;
- flex-direction: column;
- width: 100%;
- align-content: space-around;
- justify-content: flex-start;
- align-items: stretch;
 
+>:first-child{
+    width: 100%;
+    border-radius: clamp(1rem, 2vw, 2.9rem);
+    height: clamp(11.6rem, 37vw, 33.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
 
 .HomeBannerImg{
-    height: 11.375rem;
-    max-width: 27rem;
-    width: 100%;
-    border-radius: 2.5rem;
+    transform: scale(1.1);
+    height: 100%;
 }
+
 
 @media (min-width:430px) {
-    padding: 0;
-
-    .HomeBannerImg{
-    height: 70%;
-    max-width: 100vw;
-}
 }
  `

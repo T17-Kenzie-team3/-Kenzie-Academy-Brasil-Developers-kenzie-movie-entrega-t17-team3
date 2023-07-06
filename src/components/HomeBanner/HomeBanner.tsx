@@ -29,11 +29,13 @@ export const HomeBanner = () => {
     <>
       {movieList.length > 0 && (
         <StyledHomeBanner>
-          <img className="HomeBannerImg"
-            onClick={() => handleSubmit()}
-            src={movieList[0].image}
-            alt="Display principal com a foto de um filme"
-          />
+          <div>
+            <img className="HomeBannerImg"
+              onClick={() => handleSubmit()}
+              src={movieList[0].image}
+              alt="Display principal com a foto de um filme"
+            />
+          </div>
           <div>
             <HomeMovieTag />
             <HomeMovieName />

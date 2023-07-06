@@ -13,7 +13,7 @@ export const StarRating = () => {
 
   return (
     <StyledStarRating>
-      <AiOutlineStar />
+      <AiOutlineStar fill="#FFBB38" size="35px"/>
       {averageScore && <StyledTitleThree  className="score">{averageScore.score}</StyledTitleThree>}
     </StyledStarRating>
   )
