@@ -18,6 +18,11 @@ export const StyledHomeBanner= styled.section`
     height: 100%;
 }
 
+.HomeBannerImg:hover{
+    cursor: pointer;
+    transition: 0.4s;
+    transform: scale(1,1);
+}
 
 @media (min-width:430px) {
 }
