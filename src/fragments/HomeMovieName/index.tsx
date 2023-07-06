@@ -1,6 +1,8 @@
 import { useContext } from "react"
 import { MovieContext } from "../../providers/MovieContext"
 import { StarRating } from "../StarRating"
+import { StyledHomeMovieName } from "./style"
+import { StyledTitleOne} from "../../styles/typography/typography"
 
 export const HomeMovieName = () => {
 
@@ -9,10 +11,10 @@ export const HomeMovieName = () => {
   return (
     <>
       {movieList && (
-        <div>
-          <h1>{movieList[0].name}</h1>
+        <StyledHomeMovieName className="divName">
+          <StyledTitleOne  className="name">{movieList[0].name}</StyledTitleOne>
           <StarRating />
-        </div>
+        </StyledHomeMovieName>
       )}
     </>
   )
