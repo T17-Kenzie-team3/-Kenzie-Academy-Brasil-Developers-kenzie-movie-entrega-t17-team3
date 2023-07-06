@@ -28,12 +28,12 @@ export const StyledSHomePage= styled.div`
     }
 
 @media (min-width:680px) {
-    >header{
+    max-width: 83rem;
+    >header, > footer{
         max-width: 83rem;
     }
     nav > div > :first-child{
         display: block;
     }
-    max-width: 83rem;
 }
  `
