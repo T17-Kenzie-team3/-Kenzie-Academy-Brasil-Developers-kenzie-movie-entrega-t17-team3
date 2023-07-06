@@ -24,6 +24,7 @@ export const StyledDashBanner= styled.section`
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+    min-height: 27rem;
 }
 
 >div>svg{
@@ -36,6 +37,7 @@ export const StyledDashBanner= styled.section`
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     background: radial-gradient(transparent, #000000);
+    min-height: 27rem;
 }
 
 .DashBannerImg:hover{

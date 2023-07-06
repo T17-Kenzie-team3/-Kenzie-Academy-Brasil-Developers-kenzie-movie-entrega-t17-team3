@@ -10,6 +10,6 @@ height: fit-content;
 @media (min-width:680px) {
     overflow-x: auto;
     flex-direction: row;
-    height: 21.5rem;
+    height: 30.5rem;
 }
  `
