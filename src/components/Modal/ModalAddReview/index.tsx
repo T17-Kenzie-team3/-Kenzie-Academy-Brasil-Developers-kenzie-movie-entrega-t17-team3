@@ -2,7 +2,7 @@ import { AiOutlineStar } from "react-icons/ai"
 import { atemptAddReview } from "../../../services/requests"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 
