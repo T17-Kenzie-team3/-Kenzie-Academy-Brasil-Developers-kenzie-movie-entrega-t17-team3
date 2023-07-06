@@ -22,13 +22,13 @@ export const DashReviewCard = () => {
 
   const filteredReviews = selectedMovie?.reviews.filter(
     (review) => review.userId !== user?.user.id
-  )
+    )
 
   return (
     <>
 
       {filteredReviews?.map((review) => (
-        <StyledDashReviewCard key={review.userId}>
+        <StyledDashReviewCard key={review.id}>
           <StyledEllipseBig>
             <StyledTitleTwo>{getUserProfileImage(review.userId)}</StyledTitleTwo>
           </StyledEllipseBig>
