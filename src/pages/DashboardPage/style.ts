@@ -17,6 +17,7 @@ width:100%;
     left: 0;
     right: 0;
     text-align: center;
+    min-height: 27rem;
 }
 
 .mainHomePage{
@@ -25,7 +26,9 @@ width:100%;
     padding: 0 1rem 0 1rem;
 }
 
-color: var(--white);
+>footer{
+    min-height: 17vh;
+}
 
 @media (min-width:430px) {
 

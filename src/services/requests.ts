@@ -15,7 +15,6 @@ export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
         })
         return data
     } catch (error) {
-        console.log(error)
         return false
     }
 }
