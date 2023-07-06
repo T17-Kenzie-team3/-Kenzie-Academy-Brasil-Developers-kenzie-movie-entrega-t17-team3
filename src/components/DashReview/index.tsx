@@ -48,8 +48,8 @@ export const DashReview = () => {
       setMovieReviews((prevReviews) =>
         prevReviews
           ? prevReviews.map((review) =>
-              review.id === updatedReview.id ? updatedReview : review
-            )
+            review.id === updatedReview.id ? updatedReview : review
+          )
           : null
       )
       closeModal()

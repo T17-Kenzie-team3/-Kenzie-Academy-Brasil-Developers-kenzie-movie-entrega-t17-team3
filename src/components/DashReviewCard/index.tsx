@@ -2,9 +2,9 @@ import { useContext } from "react"
 import { MovieContext } from "../../providers/MovieContext"
 import { UserContext } from "../../providers/UserContext"
 import { AiOutlineStar } from "react-icons/ai"
-import {StyledDashReviewCard } from "./style"
-import { StyledEllipseBig} from "../../styles/tags/ellipse"
-import { StyledTitleTwo, StyledTitleThree,  StyledParagrOne} from "../../styles/typography/typography"
+import { StyledDashReviewCard } from "./style"
+import { StyledEllipseBig } from "../../styles/tags/ellipse"
+import { StyledTitleTwo, StyledTitleThree, StyledParagrOne } from "../../styles/typography/typography"
 
 export const DashReviewCard = () => {
   const { selectedMovie } = useContext(MovieContext)
@@ -29,15 +29,15 @@ export const DashReviewCard = () => {
 
       {filteredReviews?.map((review) => (
         <StyledDashReviewCard key={review.userId}>
-            <StyledEllipseBig>
-          <StyledTitleTwo>{getUserProfileImage(review.userId)}</StyledTitleTwo>
-          </StyledEllipseBig>    
+          <StyledEllipseBig>
+            <StyledTitleTwo>{getUserProfileImage(review.userId)}</StyledTitleTwo>
+          </StyledEllipseBig>
           <div className="divRating">
-            <AiOutlineStar fill="#FFBB38" size="35px"/>
+            <AiOutlineStar fill="#FFBB38" size="35px" />
             <StyledTitleThree>{review.score}</StyledTitleThree>
           </div>
           <div className="divDescription">
-          <StyledParagrOne>{review.description}</StyledParagrOne>
+            <StyledParagrOne>{review.description}</StyledParagrOne>
           </div>
           <StyledTitleThree>{getUserName(review.userId)}</StyledTitleThree>
         </StyledDashReviewCard>
