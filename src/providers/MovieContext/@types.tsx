@@ -33,7 +33,7 @@ export interface IMovieWithReviews {
     duration: number
     synopsis: string
     image: string
-    reviews: IReview[]
+    reviews: IUserReview[]
 }
 
 export interface IReview {
