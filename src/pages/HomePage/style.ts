@@ -66,7 +66,7 @@ export const StyledSHomePage= styled.div`
     }
 
     nav > div > :first-child{
-        display: block;
+        display: flex;
     }
 }
  `
