@@ -16,6 +16,7 @@ export const StyledDashBanner= styled.section`
 }
 
 .DashBannerImg{
+    z-index: -2;
     transform: scale(1.1);
     height: 100%;
     width: 105%;
@@ -23,6 +24,18 @@ export const StyledDashBanner= styled.section`
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+}
+
+>div>svg{
+    z-index: -1;
+    transform: scale(1.1);
+    height: 100%;
+    width: 105%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: radial-gradient(transparent, #000000);
 }
 
 .DashBannerImg:hover{

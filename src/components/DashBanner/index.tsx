@@ -17,7 +17,7 @@ export const DashBanner = () => {
         <>
           <div>
             <img className="DashBannerImg" src={movieList[0].image} alt="Imagem do filme selecionado" />
-
+            <svg></svg>
             <div className="divDescription">
               <HomeMovieTag />
               <HomeMovieName />
