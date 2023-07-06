@@ -1,8 +1,11 @@
+import {StyledDashReviewEmpty} from "./style"
+import { StyledTitleOne} from "../../styles/typography/typography"
+
 export const DashReviewEmpty = () => {
     
     return (
-        <section>
-            <h1>Avaliações</h1>
-        </section>
+        <StyledDashReviewEmpty>
+            <StyledTitleOne>Avaliações</StyledTitleOne>
+        </StyledDashReviewEmpty>
     )
 }

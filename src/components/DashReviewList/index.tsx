@@ -1,10 +1,11 @@
 import { DashReviewCard } from "../DashReviewCard"
+import { StyledDashReviewList} from "./style"
 
 export const DashReviewList = () => {
     
   return (
-    <ul>
+    <StyledDashReviewList>
       <DashReviewCard />
-    </ul>
+    </StyledDashReviewList>
   )
 }
