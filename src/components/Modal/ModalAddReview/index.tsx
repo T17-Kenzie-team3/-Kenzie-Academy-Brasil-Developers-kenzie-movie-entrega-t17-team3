@@ -1,41 +1,46 @@
 import { AiOutlineStar } from "react-icons/ai"
+import { atemptAddReview } from "../../../services/requests"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 
-interface ModalEditProps {
-  onClose: () => void,
-  onSave: (reviewData: IReview) => Promise<void>;
-}
+interface ModalAddProps {
+  onClose: () => void}
 
-export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
+export const ModalAddReview = ({ onClose }: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
 
+  const token = user?.accessToken
+
   const { register, handleSubmit, reset } = useForm<IReview>()
 
-  const onSubmit = (data: IReview) => {
+  const onSubmit = async (data: IReview) => {
     const formData: IReview = {
       ...data,
       userId: user?.user.id ?? 0,
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
+
+    const newReview = await atemptAddReview({
+      token: token ?? "",
+      reviewData: formData,
+    })
     reset()
     onClose()
-    onSave(formData)
   }
 
   return (
     <div>
       <div>
-        <h2>Editar Avaliação</h2>
+        <h2>Avaliação</h2>
         <button onClick={onClose}>X</button>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit) as any}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <select {...register("score")}>
           <option value="">Selecione uma nota</option>
           {[...Array(11)].map((_, index) => (
@@ -51,7 +56,7 @@ export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
         ></textarea>
 
         <button type="submit">
-          <AiOutlineStar /> Atualizar
+          <AiOutlineStar /> Avaliar
         </button>
       </form>
     </div>

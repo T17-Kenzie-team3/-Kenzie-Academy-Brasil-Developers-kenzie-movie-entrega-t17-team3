@@ -81,7 +81,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                     let scoreList:number[] = []
 
                     movie.reviews.map(review => {
-                        scoreList.push(review.score)
+                        if (typeof review.score === "number") {
+                            scoreList.push(review.score)
+                        }
                     })
                     if (scoreList.length > 0) {
                         const average = scoreList.reduce((a, b) => a + b, 0) / scoreList.length

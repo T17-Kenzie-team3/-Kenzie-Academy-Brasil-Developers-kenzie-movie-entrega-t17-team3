@@ -7,7 +7,12 @@ flex-direction: row;
 justify-content: space-between;
 align-items: center;
 margin-bottom: 3%;
-@media (min-width:430px) {
-
+.name{
+font-size: 1.3125rem
+}
+@media (min-width:770px) {
+ .name{
+font-size:  2.75rem;
+}
 }
  `
