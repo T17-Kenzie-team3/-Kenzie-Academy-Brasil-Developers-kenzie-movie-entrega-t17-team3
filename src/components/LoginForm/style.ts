@@ -1,13 +1,19 @@
 import { styled } from "styled-components";
 
 export const StyledFromLoginPage = styled.form`
-    width: 470px;
+    width: 100%;
+    max-width: 470px;
     height: 500px;
     background-color: var(--grey2);
     padding: 3.125rem;
     position: absolute;
     left: 15%;
     top: 15%;
+    @media (max-width: 768px) {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 350px;
+    }
 `
 
 export const ContainerFormLogin = styled.div`

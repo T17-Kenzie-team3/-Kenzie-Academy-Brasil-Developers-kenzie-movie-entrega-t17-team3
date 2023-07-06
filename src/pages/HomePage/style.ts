@@ -45,28 +45,28 @@ export const StyledSHomePage= styled.div`
         height: 2.7rem;
     }
 
-@media (min-width:680px) {
+    @media (min-width:680px) {
 
-    max-width: 83rem;
-    >header, > footer{
         max-width: 83rem;
-    }
+        >header, > footer{
+            max-width: 83rem;
+        }
 
-    >footer {
-        width: clamp(10rem, 90vw, 83rem);
-        position: static;
-    }
+        >footer {
+            width: clamp(10rem, 90vw, 83rem);
+            position: static;
+        }
 
-    >header > img {
-        width: 8.5rem;
-    }
+        >header > img {
+            width: 8.5rem;
+        }
 
-    .divName > h1 {
-        font-size: 2.75rem;
-    }
+        .divName > h1 {
+            font-size: 2.75rem;
+        }
 
-    nav > div > :first-child{
-        display: block;
+        nav > div > :first-child{
+            display: block;
+        }
     }
-}
  `
