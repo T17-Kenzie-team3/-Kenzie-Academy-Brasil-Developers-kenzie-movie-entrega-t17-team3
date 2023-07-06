@@ -5,7 +5,6 @@ import { MovieContext } from "../../providers/MovieContext"
 import { IMovie } from "../../providers/MovieContext/@types"
 
 export const DashBanner = () => {
-  
   const { selectedMovie } = useContext(MovieContext)
   const movieList: IMovie[] = selectedMovie ? [selectedMovie] : []
 

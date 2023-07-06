@@ -5,21 +5,25 @@ import { AiOutlineStar } from "react-icons/ai"
 
 export const DashReviewCard = () => {
   const { selectedMovie } = useContext(MovieContext)
-  const { userNameList } = useContext(UserContext)
+  const { user, userNameList } = useContext(UserContext)
 
   const getUserName = (userId: number) => {
-    const user = userNameList.find((user) => user.id === userId)
-    return user?.name
+    const userFind = userNameList.find((user) => user.id === userId)
+    return userFind?.name
   }
 
   const getUserProfileImage = (userId: number) => {
-    const user = userNameList.find((user) => user.id === userId)
-    return user?.firstLetter
+    const userFind = userNameList.find((user) => user.id === userId)
+    return userFind?.firstLetter
   }
+
+  const filteredReviews = selectedMovie?.reviews.filter(
+    (review) => review.userId !== user?.user.id
+  )
 
   return (
     <>
-      {selectedMovie?.reviews.map((review) => (
+      {filteredReviews?.map((review) => (
         <li key={review.userId}>
           <span>{getUserProfileImage(review.userId)}</span>
           <div>
