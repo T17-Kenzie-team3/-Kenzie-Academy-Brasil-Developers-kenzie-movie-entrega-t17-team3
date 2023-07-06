@@ -4,20 +4,21 @@ import { Footer } from "../../components/Footer"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { LoadingPage } from "../../fragments/LoadingPage"
+import { StyledBodyRegisterPage, StyledMainRegisterPage } from "./style"
 
 export const RegisterPage = () => {
 
     const { loadingPage } = useContext(UserContext)
 
     return (
-        <>
+        <StyledBodyRegisterPage>
             <Header />
             {loadingPage ? <LoadingPage /> :
-                <main>
+                <StyledMainRegisterPage>
                     <RegisterForm />
-                </main>
+                </StyledMainRegisterPage>
             }
             <Footer />
-        </>
+        </StyledBodyRegisterPage>
     )
 }

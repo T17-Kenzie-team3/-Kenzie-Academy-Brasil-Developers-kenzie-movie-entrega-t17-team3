@@ -31,6 +31,7 @@ export const GlobalStyle = createGlobalStyle`
 
   a, button {
     cursor: pointer;
+    text-decoration: none;
   }
 
   :root { 
