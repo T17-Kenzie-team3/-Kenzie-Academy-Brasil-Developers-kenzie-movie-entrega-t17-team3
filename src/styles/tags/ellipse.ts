@@ -12,7 +12,7 @@ export const Ellipse = css`
   background: var(--orange);
 `
 export const StyledEllipseBig= styled.div`
- ${Ellipse};
+${Ellipse};
   height: 5.0625rem;
   width: 5.0625rem;
   font-size: var(--P32);

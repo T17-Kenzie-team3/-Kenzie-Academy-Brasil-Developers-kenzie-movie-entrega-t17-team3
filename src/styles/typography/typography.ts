@@ -48,7 +48,12 @@ export const StyledStyledParagrThree = styled.p`
     font-weight: var(--W7);
     color: var(--white);
 `
-
+export const Styledlabel= styled.label`
+    font-family: var(--FPoppins);
+    font-size: var(--p16);
+    font-weight: var(--W7);
+    color: var(--white);
+`
 export const StyledErrorZod = styled.p`
     font-family: var(--FPoppins);
     font-size: 12px;

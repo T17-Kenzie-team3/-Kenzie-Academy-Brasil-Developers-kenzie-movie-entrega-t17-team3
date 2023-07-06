@@ -6,6 +6,8 @@ import { BsTrashFill } from "react-icons/bs"
 import { IUserReview } from "../../providers/UserContext/@types"
 import { UserContext } from "../../providers/UserContext"
 import { DashReviewEmpty } from "../DashReviewEmpty"
+import { StyledDashReview } from "./style"
+import { StyledTitleOne, Styledlabel } from "../../styles/typography/typography"
 
 export const DashReview = () => {
   const { selectedMovie } = useContext(MovieContext)
@@ -28,11 +30,13 @@ export const DashReview = () => {
 
 
   return (
-    <section>
+    <StyledDashReview>
       {movieReviews && movieReviews.length > 0 ? (
         <>
-          <h1>Avaliações</h1>
-          <label htmlFor="user-review">Sua Avaliação</label>
+          <div className="divEvaluation">
+            <StyledTitleOne >Avaliações</StyledTitleOne>
+            <Styledlabel htmlFor="user-review">Sua Avaliação</Styledlabel>
+          </div>
         </>
       ) : null}
 
@@ -57,8 +61,8 @@ export const DashReview = () => {
       ) : (
         <DashReviewEmpty />
       )}
-      
-    </section>
+
+    </StyledDashReview>
   );
-  
+
 }
