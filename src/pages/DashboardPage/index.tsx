@@ -7,27 +7,24 @@ import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { LoadingPage } from "../../fragments/LoadingPage"
 import { DashReviewEmpty } from "../../components/DashReviewEmpty"
-import {StyledDashboardPage} from "./style"
+import { StyledDashboardPage } from "./style"
 
 export const DashboardPage = () => {
+  const { loadingPage, user } = useContext(UserContext)
 
-    const { loadingPage, user } = useContext(UserContext)
-
-
-    return (
-        <StyledDashboardPage>
-            <Header />
-            {loadingPage ? (
-                <LoadingPage />
-            ) : (
-                <main>
-                    <DashBanner />
-                    {user ? <DashReview /> : <DashReviewEmpty />}
-                    <DashReviewList />
-                </main>
-            )}
-            <Footer />
-        </StyledDashboardPage>
-
-    )
+  return (
+    <StyledDashboardPage>
+      <Header />
+      {loadingPage ? (
+        <LoadingPage />
+      ) : (
+        <main>
+          <DashBanner />
+          {user ? <DashReview /> : <DashReviewEmpty />}
+          <DashReviewList />
+        </main>
+      )}
+      <Footer />
+    </StyledDashboardPage>
+  )
 }
