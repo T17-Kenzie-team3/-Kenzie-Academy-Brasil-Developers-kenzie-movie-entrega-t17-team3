@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginFormSchema, TLoginValues } from "./Schema/LoginFormSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { atemptLogin } from "../../services/requests";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext"
 import { StyledBtnLogin } from "../../styles/buttons/button"
@@ -10,7 +10,6 @@ import { StyledInput } from "../../styles/inputs/input"
 import { StyledErrorZod, StyledParagrOne, StyledTitleOne } from "../../styles/typography/typography"
 import { ContainerFormLogin, ContainerFormRegisterButton, ContainerInputUnite, StyledFromLoginPage } from "./style"
 import { toast } from 'react-toastify';
-import { StyledContainerInputUnite } from "../RegisterForm/style";
 import { StyledLinkYellow } from "../../styles/buttons/link";
 
 
