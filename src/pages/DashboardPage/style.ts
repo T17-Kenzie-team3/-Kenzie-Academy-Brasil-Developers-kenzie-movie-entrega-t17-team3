@@ -17,7 +17,6 @@ width:100%;
     left: 0;
     right: 0;
     text-align: center;
-    min-height: 27rem;
 }
 
 .mainHomePage{
