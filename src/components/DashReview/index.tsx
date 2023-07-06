@@ -10,6 +10,8 @@ import { ModalEdit } from "../Modal/ModalEdit"
 import ReactModal from "react-modal"
 import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
 import { IReview } from "../../providers/MovieContext/@types"
+import { StyledDashReview } from "./style"
+import { StyledTitleOne, Styledlabel } from "../../styles/typography/typography"
 
 export const DashReview = () => {
   const { selectedMovie } = useContext(MovieContext)
@@ -68,11 +70,13 @@ export const DashReview = () => {
   }, [])
 
   return (
-    <section>
+    <StyledDashReview>
       {movieReviews && movieReviews.length > 0 && (
         <>
-          <h1>Avaliações</h1>
-          <label htmlFor="user-review">Sua Avaliação</label>
+          <div className="divEvaluation">
+            <StyledTitleOne >Avaliações</StyledTitleOne>
+            <Styledlabel htmlFor="user-review">Sua Avaliação</Styledlabel>
+          </div>
         </>
       )}
 
@@ -97,7 +101,6 @@ export const DashReview = () => {
       ) : (
         <DashReviewEmpty />
       )}
-
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -106,6 +109,6 @@ export const DashReview = () => {
       >
         <ModalEdit onSave={handleEdit} onClose={closeModal} />
       </ReactModal>
-    </section>
+    </StyledDashReview>
   )
 }

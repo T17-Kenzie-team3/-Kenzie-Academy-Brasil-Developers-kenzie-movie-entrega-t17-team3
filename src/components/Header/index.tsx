@@ -1,4 +1,4 @@
-import { StyledHeader, StyledNavHeader } from "./style"
+import { StyledHeader, StyledNavHeader, StyledNavHeaderLogged } from "./style"
 import { StyledTitleFour, StyledTitleFive } from "../../styles/typography/typography"
 import { StyledEllipseSmall } from "../../styles/tags/ellipse"
 import { StyledLinkLogin, StyledLinkRegister } from "../../styles/buttons/link"
@@ -28,17 +28,17 @@ export const Header = () => {
             <nav>
             {!user ? (
                 <StyledNavHeader>
-                    <Link to="/register"><StyledLinkRegister>Cadastrar-se</StyledLinkRegister></Link>
+                    <Link to="/register" className="linkRegister"><StyledLinkRegister>Cadastrar-se</StyledLinkRegister></Link>
                     <Link  to="/login"><StyledLinkLogin>Entrar</StyledLinkLogin></Link>
                 </StyledNavHeader>
                 ) : (
-                    <div>
+                    <StyledNavHeaderLogged>
                         <StyledEllipseSmall className="ellipse">
                           <StyledTitleFour className="firstLetter">{user.user.name.charAt(0)}</StyledTitleFour>
                         </StyledEllipseSmall>
                         <StyledTitleFive className="name" >{user.user.name}</StyledTitleFive>
-                        <StyledBtnLogout className="logout" onClick={() => Logout()}>Sair</StyledBtnLogout >
-                    </div>
+                        <StyledBtnLogout onClick={() => Logout()}>Sair</StyledBtnLogout >
+                    </StyledNavHeaderLogged>
                 )
             } 
             </nav>

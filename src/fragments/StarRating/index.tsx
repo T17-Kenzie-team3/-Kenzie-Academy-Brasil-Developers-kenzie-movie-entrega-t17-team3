@@ -10,11 +10,10 @@ export const StarRating = () => {
   const averageScore = averageScores.find(
     (score) => score.movieId === movieList[0].id
   )
-
   return (
     <StyledStarRating>
       <AiOutlineStar fill="#FFBB38" size="35px"/>
-      {averageScore && <StyledTitleThree  className="score">{averageScore.score}</StyledTitleThree>}
+      {averageScore && <StyledTitleThree  className="score">{averageScore.score.toFixed(1)}</StyledTitleThree>}
     </StyledStarRating>
   )
 }
