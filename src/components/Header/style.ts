@@ -55,7 +55,7 @@ nav{
 }
 
 .name{
- display: contents;
+     display: contents;
 }
 }
  `
@@ -64,4 +64,9 @@ export const StyledNavHeader = styled.div`
      display: flex;
      align-items: center;
      gap: 50px;
+`
+export const StyledNavHeaderLogged = styled.div`
+     display: flex;
+     align-items: center;
+     gap: 30px;
 `
