@@ -1,17 +1,35 @@
-import { StarRating } from "../../fragments/StarRating"
+import { useContext } from "react"
+import { MovieContext } from "../../providers/MovieContext"
+import { UserContext } from "../../providers/UserContext"
+import { AiOutlineStar } from "react-icons/ai"
 
 export const DashReviewCard = () => {
-    return (
-        <li>
-            <img src="" alt="Foto do perfil" />
-            <StarRating />
-            <p>
-                "At vero eos et accusamus et iusto odio dignissimos
-                ducimus qui blanditiis praesentium voluptatum deleniti atque
-                corrupti quos dolores et quas molestias excepturi sint occaecati
-                cupiditate non provident.
-            </p>
-            <h3>Nome do Usuario</h3>
+  const { selectedMovie } = useContext(MovieContext)
+  const { userNameList } = useContext(UserContext)
+
+  const getUserName = (userId: number) => {
+    const user = userNameList.find((user) => user.id === userId)
+    return user?.name
+  }
+
+  const getUserProfileImage = (userId: number) => {
+    const user = userNameList.find((user) => user.id === userId)
+    return user?.firstLetter
+  }
+
+  return (
+    <>
+      {selectedMovie?.reviews.map((review) => (
+        <li key={review.userId}>
+          <span>{getUserProfileImage(review.userId)}</span>
+          <div>
+            <AiOutlineStar />
+            <p>{review.score}</p>
+          </div>
+          <p>{review.description}</p>
+          <h3>{getUserName(review.userId)}</h3>
         </li>
-    )
+      ))}
+    </>
+  )
 }
