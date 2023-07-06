@@ -5,7 +5,7 @@ import { StyledStarRating} from "./style"
 import {StyledTitleThree  } from "../../styles/typography/typography"
 
 export const StarRating = () => {
-  
+
   const { movieList, averageScores } = useContext(MovieContext)
   const averageScore = averageScores.find(
     (score) => score.movieId === movieList[0].id
