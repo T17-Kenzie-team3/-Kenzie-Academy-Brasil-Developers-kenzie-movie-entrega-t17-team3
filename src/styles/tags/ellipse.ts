@@ -18,8 +18,8 @@ export const StyledEllipseBig= styled.div`
   font-size: var(--P32);
 `
 export const StyledEllipseSmall= styled.div`
- ${Ellipse};
+  ${Ellipse};
   height: 2.6875rem;
-  width: 2.6875rem;
+  width: 3.275rem;
   font-size: var(--P17);
 `
