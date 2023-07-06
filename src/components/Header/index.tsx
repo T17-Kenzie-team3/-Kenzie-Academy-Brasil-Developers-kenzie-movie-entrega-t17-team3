@@ -28,7 +28,7 @@ export const Header = () => {
             <nav>
             {!user ? (
                 <StyledNavHeader>
-                    <Link to="/register"><StyledLinkRegister>Cadastrar-se</StyledLinkRegister></Link>
+                    <Link to="/register" className="linkRegister"><StyledLinkRegister>Cadastrar-se</StyledLinkRegister></Link>
                     <Link  to="/login"><StyledLinkLogin>Entrar</StyledLinkLogin></Link>
                 </StyledNavHeader>
                 ) : (
