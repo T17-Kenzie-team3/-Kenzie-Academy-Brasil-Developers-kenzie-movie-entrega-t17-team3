@@ -63,21 +63,21 @@ export const getUserReviewsByMovieID = async ({ userId, movieId }: IGetUserRevie
 
 export const getMovieList = async () => {
     try {
-        const { data } = await api.get<IMovie[]>("/movies")
+        const { data } = await api.get<IMovie[]>("/movies?_embed=reviews")
         return data
     } catch (error) {
         return false
     }
 }
 
-export const getMovieListWithReviews = async () => {
-    try {
-        const { data } = await api.get<IMovieWithReviews[]>("/movies?_embed=reviews")
-        return data
-    } catch (error) {
-        return false
-    }
-}
+// export const getMovieListWithReviews = async () => {
+//     try {
+//         const { data } = await api.get<IMovieWithReviews[]>("/movies?_embed=reviews")
+//         return data
+//     } catch (error) {
+//         return false
+//     }
+// }
 
 export const getSelectedMovie = async (movieId: number) => {
     try {
