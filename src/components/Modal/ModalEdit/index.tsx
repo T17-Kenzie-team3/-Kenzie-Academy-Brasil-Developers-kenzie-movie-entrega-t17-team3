@@ -1,7 +1,7 @@
 import { AiOutlineStar } from "react-icons/ai"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 import { StyledModalEdit } from "./style"
@@ -24,7 +24,7 @@ export const ModalEdit = ({
   onSave,
   initialReviewData,
 }: ModalEditProps) => {
-  const { setSelectedMovie, selectedMovie } = useContext(MovieContext)
+  const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
   const {
     register,

@@ -1,5 +1,4 @@
 import ReactModal from "react-modal"
-import { ModalAddReview } from "../Modal/ModalAddReview"
 import { useContext, useState } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { StyledDashReviewEmpty } from "./style"
@@ -9,6 +8,7 @@ import { StyledBtnRatingUpdate } from "../../styles/buttons/button"
 import { IReview } from "../../providers/MovieContext/@types"
 import { atemptAddReview } from "../../services/requests"
 import { MovieContext } from "../../providers/MovieContext"
+import { ModalAddReview } from "../Modal/ModalAddReview"
 
 export const DashReviewEmpty = () => {
   const { user } = useContext(UserContext)
