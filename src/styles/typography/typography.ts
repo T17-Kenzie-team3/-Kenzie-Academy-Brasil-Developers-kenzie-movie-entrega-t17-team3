@@ -23,12 +23,14 @@ export const StyledTitleFour = styled.h4`
    font-size: var(--H17);
     font-weight: var(--W7);
     color: var(--white);
+    cursor: default;
 `
 export const StyledTitleFive = styled.h5`
     font-family: var(--FPoppins);
     font-size: var(--H17);
     font-weight: var(--W4);
     color: var(--white);
+    cursor: default;
 `
 export const StyledParagrOne = styled.p`
    font-family: var(--FInter);

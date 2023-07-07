@@ -5,6 +5,9 @@ import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { AddReviewSchema } from "./Schema/AddReviewSchema"
+import { StyledErrorZod } from "../../../styles/typography/typography"
 
 interface ModalAddProps {
   onClose: () => void}
@@ -15,7 +18,9 @@ export const ModalAddReview = ({ onClose }: ModalAddProps) => {
 
   const token = user?.accessToken
 
-  const { register, handleSubmit, reset } = useForm<IReview>()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
+    resolver: zodResolver(AddReviewSchema),
+})
 
   const onSubmit = async (data: IReview) => {
     const formData: IReview = {
@@ -49,12 +54,14 @@ export const ModalAddReview = ({ onClose }: ModalAddProps) => {
             </option>
           ))}
         </select>
+        {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
 
         <textarea
           placeholder="Deixe um comentário"
           {...register("description")}
         ></textarea>
-
+        {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
+        
         <button type="submit">
           <AiOutlineStar /> Avaliar
         </button>
