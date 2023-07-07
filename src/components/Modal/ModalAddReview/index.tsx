@@ -16,9 +16,6 @@ interface ModalAddProps {
 export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
-  const { register, handleSubmit, reset } = useForm<IReview>()
-
-  const token = user?.accessToken
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
     resolver: zodResolver(AddReviewSchema),
