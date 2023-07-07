@@ -1,17 +1,20 @@
-import { IMovie } from "../../providers/MovieContext/@types"
+import { useContext } from "react"
+import { MovieContext } from "../../providers/MovieContext"
+import{StyledBtnGenre} from "../../styles/tags/tagGenre"
+import {StyledParagrOne } from "../../styles/typography/typography"
+import { StyledHomeMovieTag } from "./style"
 
-interface HomeMovieTagProps {
-  movieList: IMovie[]
-}
+export const HomeMovieTag = () => {
+  
+  const { movieList } = useContext(MovieContext)
 
-export const HomeMovieTag = ({ movieList }: HomeMovieTagProps) => {
   return (
     <>
       {movieList && (
-        <div>
-          <button>{movieList[0].type}</button>
-          <span>{movieList[0].duration}</span>
-        </div>
+        <StyledHomeMovieTag>
+          <StyledBtnGenre>{movieList[0].type}</StyledBtnGenre>
+          <StyledParagrOne >{movieList[0].duration}m</StyledParagrOne>
+        </StyledHomeMovieTag>
       )}
     </>
   )

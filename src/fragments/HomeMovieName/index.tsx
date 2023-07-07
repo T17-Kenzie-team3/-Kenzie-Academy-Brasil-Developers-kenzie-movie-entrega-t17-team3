@@ -1,18 +1,20 @@
-import { IMovie } from "../../providers/MovieContext/@types"
+import { useContext } from "react"
+import { MovieContext } from "../../providers/MovieContext"
 import { StarRating } from "../StarRating"
+import { StyledHomeMovieName } from "./style"
+import { StyledTitleOne} from "../../styles/typography/typography"
 
-interface HomeMovieNameProps {
-  movieList: IMovie[]
-}
+export const HomeMovieName = () => {
 
-export const HomeMovieName = ({ movieList }: HomeMovieNameProps) => {
+  const { movieList } = useContext(MovieContext)
+  
   return (
     <>
       {movieList && (
-        <div>
-          <h1>{movieList[0].name}</h1>
+        <StyledHomeMovieName className="divName">
+          <StyledTitleOne  className="name">{movieList[0].name}</StyledTitleOne>
           <StarRating />
-        </div>
+        </StyledHomeMovieName>
       )}
     </>
   )

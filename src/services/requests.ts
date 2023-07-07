@@ -1,5 +1,5 @@
 import { IMovie, IMovieWithReviews, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
-import { IUserData, IUserReview } from "../providers/UserContext/@types"
+import { IUserData, IUserReview, TUserNameList } from "../providers/UserContext/@types"
 import { api } from "./api"
 
 interface IAtemptLoginProp {
@@ -15,7 +15,6 @@ export const atemptLogin = async ({ email, password }: IAtemptLoginProp) => {
         })
         return data
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -35,7 +34,15 @@ export const atemptRegister = async ({ email, password, name }: IAtemptRegisterP
         })
         return data
     } catch (error) {
-        console.log(error)
+        return false
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        const { data } = await api.get<TUserNameList>("/users")
+        return data
+    } catch (error) {
         return false
     }
 }
@@ -107,7 +114,7 @@ interface IAtemptEditReviewProps {
 
 export const atemptEditReview = async ({ token, reviewData, reviewId }: IAtemptEditReviewProps) => {
     try {
-        const { data } = await api.put(`/reviews/${reviewId}`, reviewData, {
+        const { data } = await api.patch(`/reviews/${reviewId}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
