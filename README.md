@@ -47,6 +47,7 @@ Caso aconteça, tente recarregar a página.
 * API pode parar de funcionar ou modificar suas funções no futuro,
 Caso aconteça, preparamos um vídeo de como ela funciona postado logo abaixo:
 
+[https://files.catbox.moe/ossa5f.mp4]
 
 
 # Time 3 Kenzie T17
