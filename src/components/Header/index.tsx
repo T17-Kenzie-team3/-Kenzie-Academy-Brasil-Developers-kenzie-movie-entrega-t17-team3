@@ -24,7 +24,7 @@ export const Header = () => {
 
     return (
         <StyledHeader>
-            <img src={Logo} alt="Kenzie Movies Ícone" />
+            <Link to="/"><img src={Logo} alt="Kenzie Movies Ícone" /></Link>
             <nav>
             {!user ? (
                 <StyledNavHeader>
