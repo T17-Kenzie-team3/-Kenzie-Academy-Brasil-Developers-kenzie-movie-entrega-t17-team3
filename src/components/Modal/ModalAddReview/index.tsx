@@ -55,7 +55,6 @@ export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
             </option>
           ))}
         </StyledSelectModal>
-        </select>
         {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
 
         <StyledTextareaModal 
@@ -64,9 +63,7 @@ export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
         ></StyledTextareaModal>
 
         <StyledBtnRatingUpdate type="submit">
-        ></textarea>
         {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
-        <button type="submit">
           <AiOutlineStar /> Avaliar
         </StyledBtnRatingUpdate>
       </form>
