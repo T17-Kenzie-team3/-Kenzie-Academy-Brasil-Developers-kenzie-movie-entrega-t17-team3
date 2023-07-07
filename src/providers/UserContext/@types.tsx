@@ -50,4 +50,6 @@ export interface IUserContext {
     setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
     userNameList: IUserName[]
     setUserNameList: React.Dispatch<React.SetStateAction<IUserName[]>>
+    setUserReviews: React.Dispatch<React.SetStateAction<IUserReview[] | null>>
+    userReviews: IUserReview[] | null
 }
