@@ -14,25 +14,25 @@ export const StyledBodyLoginPage = styled.main`
     background-color: var(--grey2); 
     @media (min-width:680px) {
 
-    >header, > footer{
-        max-width: 100%;
-    }
+        >header, > footer{
+            max-width: 100%;
+        }
 
-    >footer {
-        width: clamp(10rem, 100vw, 100%);
-        position: static;
-    }
+        >footer {
+            width: clamp(10rem, 100vw, 100%);
+            position: static;
+        }
 
-    >header > img {
-        width: 8.5rem;
-    }
+        >header > img {
+            width: 8.5rem;
+        }
 
-    .divName > h1 {
-        font-size: 2.75rem;
-    }
+        .divName > h1 {
+            font-size: 2.75rem;
+        }
 
-    nav > div > :first-child{
-        display: block;
-    }
+        nav > div > :first-child{
+            display: block;
+        }
     }   
 `

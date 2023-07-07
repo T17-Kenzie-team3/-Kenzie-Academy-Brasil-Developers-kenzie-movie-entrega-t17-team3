@@ -10,6 +10,13 @@ max-width:100%;
 height: fit-content;
 width:100%;
 
+
+.mainHomePage{
+ display: flex;
+ flex-direction: column;
+ padding: 0 1rem 0 1rem;
+ }
+
 >header{
     position: absolute;
     margin-left: auto;
@@ -17,12 +24,6 @@ width:100%;
     left: 0;
     right: 0;
     text-align: center;
-}
-
-.mainHomePage{
-    display: flex;
-    flex-direction: column;
-    padding: 0 1rem 0 1rem;
 }
 
 >footer{
