@@ -36,7 +36,7 @@ Filme: The Road
 https://kenzie-movies-team3.vercel.app/theroad
 
 
-#Considerações
+# Considerações
 
 * App utiliza uma fake API, portanto os dados podem ser periodicamente apagados,
 Caso aconteça cadastre-se novamente.
@@ -49,7 +49,7 @@ Caso aconteça, preparamos um vídeo de como ela funciona postado logo abaixo:
 
 
 
-#Time 3 Kenzie T17
+# Time 3 Kenzie T17
 @svnoliveira
 @vinisilvasn23
 @jonesGladtorres
