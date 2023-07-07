@@ -26,10 +26,14 @@ export const ModalEdit = ({
 }: ModalEditProps) => {
   const { setSelectedMovie, selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IReview>({
     resolver: zodResolver(ReviewSchema),
-})
-
+  })
 
   const onSubmit = (data: IReview) => {
     const formData: IReview = {
@@ -47,7 +51,9 @@ export const ModalEdit = ({
     <StyledModalEdit>
       <div className="modalBox">
         <StyledTitleOne>Editar Avaliação</StyledTitleOne>
-        <button className="modalBtnClose" onClick={onClose}>X</button>
+        <button className="modalBtnClose" onClick={onClose}>
+          X
+        </button>
 
         <form onSubmit={handleSubmit(onSubmit) as any}>
           <StyledSelectModal {...register("score")}>
@@ -58,16 +64,21 @@ export const ModalEdit = ({
               </option>
             ))}
           </StyledSelectModal>
-              {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
-          <StyledTextareaModal 
+          {errors.score ? (
+            <StyledErrorZod>{errors.score.message}</StyledErrorZod>
+          ) : null}
+          <StyledTextareaModal
             placeholder="Deixe um comentário"
             {...register("description")}
           ></StyledTextareaModal>
-          {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
+          {errors.description ? (
+            <StyledErrorZod>{errors.description.message}</StyledErrorZod>
+          ) : null}
           <StyledBtnRatingUpdate type="submit">
             <AiOutlineStar /> Atualizar
           </StyledBtnRatingUpdate>
         </form>
-
       </div>
     </StyledModalEdit>
+  )
+}
