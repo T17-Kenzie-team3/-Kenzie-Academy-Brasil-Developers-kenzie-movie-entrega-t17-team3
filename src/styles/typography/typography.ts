@@ -5,6 +5,7 @@ export const StyledTitleOne = styled.h1`
     font-size: var(--H44);
     font-weight: var(--W7);
     color: var(--white);
+    cursor: default;
 `
 export const StyledTitleTwo = styled.h2`
     font-family: var(--FPoppins);
@@ -17,24 +18,28 @@ export const StyledTitleThree = styled.h3`
    font-size: var(--H21);
     font-weight: var(--W7);
     color: var(--white);
+    cursor: default;
 `
 export const StyledTitleFour = styled.h4`
    font-family: var(--FPoppins);
    font-size: var(--H17);
     font-weight: var(--W7);
     color: var(--white);
+    cursor: default;
 `
 export const StyledTitleFive = styled.h5`
     font-family: var(--FPoppins);
     font-size: var(--H17);
     font-weight: var(--W4);
     color: var(--white);
+    cursor: default;
 `
 export const StyledParagrOne = styled.p`
    font-family: var(--FInter);
    font-size: var(--p18);
     font-weight: var(--W4);
     color: var(--white);
+    cursor: default;
 `
 export const StyledStyledParagrTwo = styled.p`
     font-family: var(--FPoppins);
