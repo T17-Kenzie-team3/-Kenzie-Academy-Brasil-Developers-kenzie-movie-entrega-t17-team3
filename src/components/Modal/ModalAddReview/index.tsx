@@ -5,6 +5,11 @@ import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
+import {StyledModalAddReview}from "./style"
+import { StyledBtnRatingUpdate } from "../../../styles/buttons/button"
+import{StyledSelectModal} from "../../../styles/select/select"
+import {StyledTextareaModal } from "../../../styles/textarea/textarea"
+import { StyledTitleOne } from "../../../styles/typography/typography"
 
 interface ModalAddProps {
   onClose: () => void}
@@ -34,31 +39,32 @@ export const ModalAddReview = ({ onClose }: ModalAddProps) => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Avaliação</h2>
-        <button onClick={onClose}>X</button>
-      </div>
+    <StyledModalAddReview>
+      <div className="modalBox">
+        <StyledTitleOne>Avaliação</StyledTitleOne>
+        <button className="modalBtnClose" onClick={onClose}>X</button>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("score")}>
+        <StyledSelectModal {...register("score")}>
           <option value="">Selecione uma nota</option>
           {[...Array(11)].map((_, index) => (
             <option key={index} value={index}>
               {index}
             </option>
           ))}
-        </select>
+        </StyledSelectModal>
 
-        <textarea
+        <StyledTextareaModal 
           placeholder="Deixe um comentário"
           {...register("description")}
-        ></textarea>
+        ></StyledTextareaModal>
 
-        <button type="submit">
+        <StyledBtnRatingUpdate type="submit">
           <AiOutlineStar /> Avaliar
-        </button>
+        </StyledBtnRatingUpdate>
       </form>
-    </div>
+
+      </div>
+    </StyledModalAddReview>
   )
 }

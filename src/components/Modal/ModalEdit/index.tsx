@@ -4,6 +4,11 @@ import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
+import { StyledModalEdit } from "./style"
+import { StyledBtnRatingUpdate } from "../../../styles/buttons/button"
+import { StyledSelectModal } from "../../../styles/select/select"
+import { StyledTextareaModal } from "../../../styles/textarea/textarea"
+import { StyledTitleOne } from "../../../styles/typography/typography"
 
 interface ModalEditProps {
   onClose: () => void,
@@ -29,31 +34,32 @@ export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Editar Avaliação</h2>
-        <button onClick={onClose}>X</button>
+    <StyledModalEdit>
+      <div className="modalBox">
+        <StyledTitleOne>Editar Avaliação</StyledTitleOne>
+        <button className="modalBtnClose" onClick={onClose}>X</button>
+
+        <form onSubmit={handleSubmit(onSubmit) as any}>
+          <StyledSelectModal {...register("score")}>
+            <option value="">Selecione uma nota</option>
+            {[...Array(11)].map((_, index) => (
+              <option key={index} value={index}>
+                {index}
+              </option>
+            ))}
+          </StyledSelectModal>
+
+          <StyledTextareaModal 
+            placeholder="Deixe um comentário"
+            {...register("description")}
+          ></StyledTextareaModal>
+
+          <StyledBtnRatingUpdate type="submit">
+            <AiOutlineStar /> Atualizar
+          </StyledBtnRatingUpdate>
+        </form>
+
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit) as any}>
-        <select {...register("score")}>
-          <option value="">Selecione uma nota</option>
-          {[...Array(11)].map((_, index) => (
-            <option key={index} value={index}>
-              {index}
-            </option>
-          ))}
-        </select>
-
-        <textarea
-          placeholder="Deixe um comentário"
-          {...register("description")}
-        ></textarea>
-
-        <button type="submit">
-          <AiOutlineStar /> Atualizar
-        </button>
-      </form>
-    </div>
+    </StyledModalEdit>
   )
 }
