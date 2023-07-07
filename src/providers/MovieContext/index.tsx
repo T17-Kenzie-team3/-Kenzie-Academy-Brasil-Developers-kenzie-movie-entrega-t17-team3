@@ -24,6 +24,46 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     }
 
     selectMovieByPathName()
+    
+    const updateAverageScores = () => {
+        
+        let valueList:number[] = []
+    
+        const scoreCount = selectedMovie?.reviews.length
+
+        if (selectedMovie){
+            if (scoreCount){
+    
+                selectedMovie?.reviews.map((review) =>{
+                    if (typeof review.score === "number")
+                    valueList.push(review.score)
+                })
+        
+                const newTotal = valueList.reduce((a, b) => a + b, 0)
+        
+                const newAverage = newTotal / scoreCount
+    
+                const movieScore = {
+                    movieId: selectedMovie.id,
+                    score: newAverage
+                }
+                
+                const newList = averageScores.map((score) => {
+                    if (score.movieId === selectedMovie.id) {
+                        return {
+                            ...score,
+                            movieScore
+                        }
+                    }
+                    return score
+                })
+
+                setAverageScores(newList)
+            }
+
+        }
+
+    }
 
     useEffect(() => {
 
@@ -117,7 +157,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     return (
         <MovieContext.Provider value={{
             movieList, setMovieList, selectedMovie, setSelectedMovie,
-            averageScores, setAverageScores
+            averageScores, setAverageScores, updateAverageScores
         }}>
             {children}
         </MovieContext.Provider>

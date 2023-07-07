@@ -4,6 +4,9 @@ import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
+import { ReviewSchema } from "./Schema/ReviewSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { StyledErrorZod } from "../../../styles/typography/typography"
 
 interface ModalEditProps {
   onClose: () => void
@@ -18,10 +21,10 @@ export const ModalEdit = ({
 }: ModalEditProps) => {
   const { setSelectedMovie, selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
+    resolver: zodResolver(ReviewSchema),
+})
 
-  const { register, handleSubmit, reset } = useForm<IReview>({
-    defaultValues: initialReviewData,
-  })
 
   const onSubmit = (data: IReview) => {
     const formData: IReview = {
@@ -51,11 +54,13 @@ export const ModalEdit = ({
             </option>
           ))}
         </select>
+        {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
 
         <textarea
           placeholder="Deixe um comentário"
           {...register("description")}
         ></textarea>
+        {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
 
         <button type="submit">
           <AiOutlineStar /> Atualizar
