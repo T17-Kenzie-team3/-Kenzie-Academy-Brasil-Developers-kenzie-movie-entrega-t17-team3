@@ -9,17 +9,27 @@ import { StyledBtnRatingUpdate } from "../../../styles/buttons/button"
 import { StyledSelectModal } from "../../../styles/select/select"
 import { StyledTextareaModal } from "../../../styles/textarea/textarea"
 import { StyledTitleOne } from "../../../styles/typography/typography"
+import { ReviewSchema } from "./Schema/ReviewSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { StyledErrorZod } from "../../../styles/typography/typography"
 
 interface ModalEditProps {
-  onClose: () => void,
-  onSave: (reviewData: IReview) => Promise<void>;
+  onClose: () => void
+  onSave: (reviewData: IReview) => Promise<void>
+  initialReviewData: IReview
 }
 
-export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
-  const { selectedMovie } = useContext(MovieContext)
+export const ModalEdit = ({
+  onClose,
+  onSave,
+  initialReviewData,
+}: ModalEditProps) => {
+  const { setSelectedMovie, selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
+    resolver: zodResolver(ReviewSchema),
+})
 
-  const { register, handleSubmit, reset } = useForm<IReview>()
 
   const onSubmit = (data: IReview) => {
     const formData: IReview = {
@@ -48,12 +58,12 @@ export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
               </option>
             ))}
           </StyledSelectModal>
-
+              {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
           <StyledTextareaModal 
             placeholder="Deixe um comentário"
             {...register("description")}
           ></StyledTextareaModal>
-
+          {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
           <StyledBtnRatingUpdate type="submit">
             <AiOutlineStar /> Atualizar
           </StyledBtnRatingUpdate>
@@ -61,5 +71,3 @@ export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
 
       </div>
     </StyledModalEdit>
-  )
-}

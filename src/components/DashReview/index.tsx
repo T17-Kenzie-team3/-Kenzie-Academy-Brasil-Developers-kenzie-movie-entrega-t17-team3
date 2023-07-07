@@ -11,18 +11,34 @@ import ReactModal from "react-modal"
 import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
 import { IReview } from "../../providers/MovieContext/@types"
 import { StyledDashReview } from "./style"
-import { StyledParagrOne, StyledTitleOne, StyledTitleTwo, Styledlabel } from "../../styles/typography/typography"
+import {
+  StyledParagrOne,
+  StyledTitleOne,
+  StyledTitleTwo,
+  Styledlabel,
+} from "../../styles/typography/typography"
 import { StyledStarRating } from "../../fragments/StarRating/style"
 
 export const DashReview = () => {
-  const { selectedMovie } = useContext(MovieContext)
-  const { user } = useContext(UserContext)
-  const [movieReviews, setMovieReviews] = useState<IUserReview[] | null>(null)
+  const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
+  const { user, userReviews, setUserReviews } = useContext(UserContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedReview, setSelectedReview] = useState<IUserReview | null>(null)
+  const [editData, setEditData] = useState<IReview>({
+    score: 0,
+    description: "",
+    userId: 0,
+    movieId: 0,
+  })
 
   const openModal = (review: IUserReview) => {
     setSelectedReview(review)
+    setEditData({
+      score: review.score,
+      description: review.description,
+      userId: review.userId,
+      movieId: review.movieId,
+    })
     setIsModalOpen(true)
   }
 
@@ -34,25 +50,36 @@ export const DashReview = () => {
     if (user?.accessToken) {
       await atemptDeleteReview({ token: user.accessToken, reviewId: id })
       const updatedReviews =
-        movieReviews?.filter((review) => review.id !== id) ?? []
-      setMovieReviews(updatedReviews)
+        userReviews?.filter((review) => review.id !== id) ?? []
+      setUserReviews(updatedReviews)
     }
   }
 
   const handleEdit = async (reviewData: IReview) => {
-    if (user?.accessToken && selectedReview) {
+    if (user?.accessToken && selectedReview && selectedMovie) {
       const updatedReview = await atemptEditReview({
         token: user.accessToken,
         reviewData: reviewData,
         reviewId: selectedReview.id,
       })
-      setMovieReviews((prevReviews) =>
+
+      setUserReviews((prevReviews) =>
         prevReviews
           ? prevReviews.map((review) =>
-            review.id === updatedReview.id ? updatedReview : review
-          )
-          : null
+              review.id === updatedReview.id ? updatedReview : review
+            )
+          : []
       )
+
+      const updatedReviews = selectedMovie.reviews.map((review) =>
+        review.id === updatedReview.id ? updatedReview : review
+      )
+
+      const updatedMovie = {
+        ...selectedMovie,
+        reviews: updatedReviews,
+      }
+      setSelectedMovie(updatedMovie)
       closeModal()
     }
   }
@@ -63,7 +90,7 @@ export const DashReview = () => {
         const reviews = selectedMovie.reviews.filter(
           (review) => review.userId === user?.user.id
         )
-        setMovieReviews(reviews as IUserReview[])
+        setUserReviews(reviews)
       }
     }
 
@@ -72,29 +99,29 @@ export const DashReview = () => {
 
   return (
     <StyledDashReview>
-      {movieReviews && movieReviews.length > 0 && (
+      {userReviews && userReviews.length > 0 && (
         <>
           <div className="divEvaluation">
-            <StyledTitleOne >Avaliações</StyledTitleOne>
+            <StyledTitleOne>Avaliações</StyledTitleOne>
             <Styledlabel htmlFor="user-review">Sua Avaliação</Styledlabel>
           </div>
         </>
       )}
 
-      {movieReviews && movieReviews.length > 0 ? (
-        movieReviews.map((review) => (
+      {userReviews && userReviews.length > 0 ? (
+        userReviews.map((review) => (
           <div key={review.id} className="reviewContainer">
             <StyledParagrOne>{review.description}</StyledParagrOne>
             <div className="reviewButtonsContainer">
               <StyledStarRating>
-                <AiOutlineStar fill="#FFBB38" size="38px"/>
+                <AiOutlineStar fill="#FFBB38" size="38px" />
                 <StyledTitleTwo>{review.score}</StyledTitleTwo>
               </StyledStarRating>
               <button onClick={() => openModal(review)}>
-                <ImPencil fill="#FFBB38" size="38px"/>
+                <ImPencil fill="#FFBB38" size="38px" />
               </button>
               <button onClick={() => handleDelete(review.id)}>
-                <BsTrashFill fill="#FFBB38" size="35px"/>
+                <BsTrashFill fill="#FFBB38" size="35px" />
               </button>
             </div>
           </div>
@@ -108,7 +135,11 @@ export const DashReview = () => {
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalEdit onSave={handleEdit} onClose={closeModal} />
+        <ModalEdit
+          initialReviewData={editData}
+          onSave={handleEdit}
+          onClose={closeModal}
+        />
       </ReactModal>
     </StyledDashReview>
   )
