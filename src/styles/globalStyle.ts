@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     display:flex;
     flex-direction: column;
     align-items: center;
-    background: var(--black);
+    background: var(--grey2);
     background-attachment: fixed;
     color: var(--grey0);
     -webkit-font-smoothing: antialiased;

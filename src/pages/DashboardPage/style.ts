@@ -14,7 +14,6 @@ width:100%;
  display: flex;
  flex-direction: column;
  padding: 0 1rem 0 1rem;
-
 }
 
 color: var(--white);

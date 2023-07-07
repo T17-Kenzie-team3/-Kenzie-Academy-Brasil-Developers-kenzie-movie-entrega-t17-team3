@@ -69,4 +69,5 @@ export const StyledSHomePage= styled.div`
             display: flex;
 
         }
+    }
  `
