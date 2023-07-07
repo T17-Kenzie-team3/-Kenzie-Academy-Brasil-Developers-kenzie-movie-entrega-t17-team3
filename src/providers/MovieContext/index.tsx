@@ -25,7 +25,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     selectMovieByPathName()
     
-    const UpdateAverageScores = () => {
+    const updateAverageScores = () => {
         
         let valueList:number[] = []
     
@@ -64,8 +64,6 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         }
 
     }
-
-    UpdateAverageScores()
 
     useEffect(() => {
 
@@ -159,7 +157,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     return (
         <MovieContext.Provider value={{
             movieList, setMovieList, selectedMovie, setSelectedMovie,
-            averageScores, setAverageScores
+            averageScores, setAverageScores, updateAverageScores
         }}>
             {children}
         </MovieContext.Provider>
