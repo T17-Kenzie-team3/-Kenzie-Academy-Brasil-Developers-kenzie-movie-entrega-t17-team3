@@ -6,15 +6,22 @@ import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 
 interface ModalEditProps {
-  onClose: () => void,
-  onSave: (reviewData: IReview) => Promise<void>;
+  onClose: () => void
+  onSave: (reviewData: IReview) => Promise<void>
+  initialReviewData: IReview
 }
 
-export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
-  const { selectedMovie } = useContext(MovieContext)
+export const ModalEdit = ({
+  onClose,
+  onSave,
+  initialReviewData,
+}: ModalEditProps) => {
+  const { setSelectedMovie, selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
 
-  const { register, handleSubmit, reset } = useForm<IReview>()
+  const { register, handleSubmit, reset } = useForm<IReview>({
+    defaultValues: initialReviewData,
+  })
 
   const onSubmit = (data: IReview) => {
     const formData: IReview = {
@@ -35,7 +42,7 @@ export const ModalEdit = ({ onClose, onSave }: ModalEditProps) => {
         <button onClick={onClose}>X</button>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit) as any}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <select {...register("score")}>
           <option value="">Selecione uma nota</option>
           {[...Array(11)].map((_, index) => (

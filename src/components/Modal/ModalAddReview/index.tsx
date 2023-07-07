@@ -1,5 +1,4 @@
 import { AiOutlineStar } from "react-icons/ai"
-import { atemptAddReview } from "../../../services/requests"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
@@ -7,13 +6,13 @@ import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 
 interface ModalAddProps {
-  onClose: () => void}
+  onUpdate: (reviewData: IReview) => Promise<void>
+  onClose: () => void
+}
 
-export const ModalAddReview = ({ onClose }: ModalAddProps) => {
+export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
-
-  const token = user?.accessToken
 
   const { register, handleSubmit, reset } = useForm<IReview>()
 
@@ -24,11 +23,8 @@ export const ModalAddReview = ({ onClose }: ModalAddProps) => {
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
+    await onUpdate(formData)
 
-    const newReview = await atemptAddReview({
-      token: token ?? "",
-      reviewData: formData,
-    })
     reset()
     onClose()
   }
