@@ -1,5 +1,4 @@
 import { AiOutlineStar } from "react-icons/ai"
-import { atemptAddReview } from "../../../services/requests"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
@@ -10,17 +9,21 @@ import { AddReviewSchema } from "./Schema/AddReviewSchema"
 import { StyledErrorZod } from "../../../styles/typography/typography"
 
 interface ModalAddProps {
-  onClose: () => void}
+  onUpdate: (reviewData: IReview) => Promise<void>
+  onClose: () => void
+}
 
-export const ModalAddReview = ({ onClose }: ModalAddProps) => {
+export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
+  const { register, handleSubmit, reset } = useForm<IReview>()
 
   const token = user?.accessToken
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
     resolver: zodResolver(AddReviewSchema),
 })
+
 
   const onSubmit = async (data: IReview) => {
     const formData: IReview = {
@@ -29,11 +32,8 @@ export const ModalAddReview = ({ onClose }: ModalAddProps) => {
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
+    await onUpdate(formData)
 
-    const newReview = await atemptAddReview({
-      token: token ?? "",
-      reviewData: formData,
-    })
     reset()
     onClose()
   }
