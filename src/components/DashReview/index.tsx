@@ -11,7 +11,8 @@ import ReactModal from "react-modal"
 import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
 import { IReview } from "../../providers/MovieContext/@types"
 import { StyledDashReview } from "./style"
-import { StyledTitleOne, Styledlabel } from "../../styles/typography/typography"
+import { StyledParagrOne, StyledTitleOne, StyledTitleTwo, Styledlabel } from "../../styles/typography/typography"
+import { StyledStarRating } from "../../fragments/StarRating/style"
 
 export const DashReview = () => {
   const { selectedMovie } = useContext(MovieContext)
@@ -82,18 +83,18 @@ export const DashReview = () => {
 
       {movieReviews && movieReviews.length > 0 ? (
         movieReviews.map((review) => (
-          <div key={review.id}>
-            <p>{review.description}</p>
-            <div>
-              <div>
-                <AiOutlineStar />
-                <p>{review.score}</p>
-              </div>
+          <div key={review.id} className="reviewContainer">
+            <StyledParagrOne>{review.description}</StyledParagrOne>
+            <div className="reviewButtonsContainer">
+              <StyledStarRating>
+                <AiOutlineStar fill="#FFBB38" size="38px"/>
+                <StyledTitleTwo>{review.score}</StyledTitleTwo>
+              </StyledStarRating>
               <button onClick={() => openModal(review)}>
-                <ImPencil />
+                <ImPencil fill="#FFBB38" size="38px"/>
               </button>
               <button onClick={() => handleDelete(review.id)}>
-                <BsTrashFill />
+                <BsTrashFill fill="#FFBB38" size="35px"/>
               </button>
             </div>
           </div>
