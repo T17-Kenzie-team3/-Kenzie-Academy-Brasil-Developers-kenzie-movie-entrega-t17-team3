@@ -55,4 +55,5 @@ export interface IMovieContext {
     setSelectedMovie: React.Dispatch<React.SetStateAction<ISelectedMovie | null>>
     averageScores: IAverageScore[]
     setAverageScores: React.Dispatch<React.SetStateAction<IAverageScore[]>>
+    updateAverageScores: () => void
 }
