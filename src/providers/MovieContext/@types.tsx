@@ -1,5 +1,3 @@
-import { IUserReview } from "../UserContext/@types"
-
 export type TMovieScore = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 export type TmovieGenre = "ficção" | "comédia" | "drama"
 
@@ -14,7 +12,7 @@ export interface IMovie {
     duration: number
     synopsis: string
     image: string
-    reviews: IUserReview[]
+    reviews: IReview[]
 }
 
 export interface IReview {
@@ -31,5 +29,6 @@ export interface IMovieContext {
     getAverageScoresByMovieId: any
     selectedMovie: IMovie | null
     setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | null>>
-    reviews: IUserReview[] | undefined
+    reviews: IReview[]
+    setReviews: React.Dispatch<React.SetStateAction<IReview[]>>
 }

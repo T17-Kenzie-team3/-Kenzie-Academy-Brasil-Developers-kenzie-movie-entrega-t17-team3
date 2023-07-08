@@ -100,12 +100,11 @@ export const atemptAddReview = async ({ token, reviewData }: IAtemptAddReviewPro
 interface IAtemptEditReviewProps {
     token: string
     reviewData: IReview
-    reviewId: number
 }
 
-export const atemptEditReview = async ({ token, reviewData, reviewId }: IAtemptEditReviewProps) => {
+export const atemptEditReview = async ({ token, reviewData }: IAtemptEditReviewProps) => {
     try {
-        const { data } = await api.patch(`/reviews/${reviewId}`, reviewData, {
+        const { data } = await api.patch(`/reviews/${reviewData.id}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -116,7 +115,7 @@ export const atemptEditReview = async ({ token, reviewData, reviewId }: IAtemptE
     }
 }
 
-interface IAtemptDeleteReviewProps {
+export interface IAtemptDeleteReviewProps {
     token: string
     reviewId: number
 }

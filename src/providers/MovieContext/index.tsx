@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { IMovieContext, IMovieProviderProps, IMovie } from "./@types"
+import { IMovieContext, IMovieProviderProps, IMovie, IReview } from "./@types"
 import { getMovieList, getSelectedMovie, removeSpaces } from "../../services/requests"
 import { UserContext } from "../UserContext"
 
@@ -9,7 +9,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
     const [movieList, setMovieList] = useState<IMovie[]>([])
     const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null)
-    const reviews = selectedMovie?.reviews
+    const [reviews, setReviews] = useState<IReview[]>([])
+
 
     const { navigate, currentPath, setLoadingPage } = useContext(UserContext)
 
@@ -21,8 +22,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             }
         })
     }
-    
     selectMovieByPathName()
+
+    
     
     const getAverageScoresByMovieId = (movieId:number) => {
 
@@ -62,6 +64,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                 setLoadingPage(false)
                 if (newMovie) {
                     setSelectedMovie(newMovie)
+                    setReviews(newMovie.reviews)
                     if (currentPath === "/dashboard") {
                         const endPoint = removeSpaces(newMovie.name)
                         navigate(`/${endPoint}`)
@@ -87,7 +90,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             selectedMovie, 
             setSelectedMovie,
             getAverageScoresByMovieId, 
-            reviews
+            reviews, setReviews
         }}>
             {children}
         </MovieContext.Provider>

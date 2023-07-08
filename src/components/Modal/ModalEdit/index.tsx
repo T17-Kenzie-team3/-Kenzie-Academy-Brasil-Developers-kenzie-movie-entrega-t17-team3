@@ -16,13 +16,11 @@ import { StyledErrorZod } from "../../../styles/typography/typography"
 interface ModalEditProps {
   onClose: () => void
   onSave: (reviewData: IReview) => Promise<void>
-  initialReviewData: IReview
 }
 
 export const ModalEdit = ({
   onClose,
   onSave,
-  initialReviewData,
 }: ModalEditProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
