@@ -14,14 +14,15 @@ export const StyledHomeBanner= styled.section`
 }
 
 .HomeBannerImg{
-    transform: scale(1.1);
+    transform: scale(1.01);
+    transition: 0.4s;
     height: 100%;
 }
 
 .HomeBannerImg:hover{
     cursor: pointer;
     transition: 0.4s;
-    transform: scale(1,1);
+    transform: scale(1.1);
 }
 
 @media (min-width:430px) {

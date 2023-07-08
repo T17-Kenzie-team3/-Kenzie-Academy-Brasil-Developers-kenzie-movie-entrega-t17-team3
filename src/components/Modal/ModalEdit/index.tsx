@@ -55,7 +55,7 @@ export const ModalEdit = ({
 
         <form onSubmit={handleSubmit(onSubmit) as any}>
           <StyledSelectModal {...register("score")}>
-            <option value="">Selecione uma nota</option>
+            <option value="" hidden>Selecione uma nota</option>
             {[...Array(11)].map((_, index) => (
               <option key={index} value={index}>
                 {index}

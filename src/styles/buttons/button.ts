@@ -13,8 +13,8 @@ export const Button = css`
   background: var(--orange);
   transition: .5s;
   :hover {
-  background: hsl(39, 100%, 50%);  //63% original
-  color:var(--black) ;
+  /* background: hsl(39, 100%, 50%);  //63% original
+  color:var(--black) ; */
  }
  border: none;
 `

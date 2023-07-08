@@ -47,7 +47,7 @@ export const StyledDashReview = styled.section`
     }
 
     .reviewButtonsContainer > button :hover{
-        transform: translate(3px, 2px) rotate(1deg);
+        /* transform: translate(3px, 2px) rotate(1deg); */
     }
 
     @media (min-width:770px) {
