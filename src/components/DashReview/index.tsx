@@ -21,7 +21,7 @@ import { StyledStarRating } from "../../fragments/StarRating/style"
 
 export const DashReview = () => {
   const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
-  const { user, userReviews, setUserReviews } = useContext(UserContext)
+  const { user, userReviews, setUserDataReviews } = useContext(UserContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedReview, setSelectedReview] = useState<IUserReview | null>(null)
   const [editData, setEditData] = useState<IReview>({
@@ -51,7 +51,7 @@ export const DashReview = () => {
       await atemptDeleteReview({ token: user.accessToken, reviewId: id })
       const updatedReviews =
         userReviews?.filter((review) => review.id !== id) ?? []
-      setUserReviews(updatedReviews)
+      setUserDataReviews(updatedReviews)
     }
   }
 
@@ -63,7 +63,7 @@ export const DashReview = () => {
         reviewId: selectedReview.id,
       })
 
-      setUserReviews((prevReviews) =>
+      setUserDataReviews((prevReviews) =>
         prevReviews
           ? prevReviews.map((review) =>
               review.id === updatedReview.id ? updatedReview : review
@@ -90,7 +90,7 @@ export const DashReview = () => {
         const reviews = selectedMovie.reviews.filter(
           (review) => review.userId === user?.user.id
         )
-        setUserReviews(reviews)
+        setUserDataReviews(reviews)
       }
     }
 

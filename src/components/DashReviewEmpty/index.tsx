@@ -14,7 +14,7 @@ export const DashReviewEmpty = () => {
   const { user } = useContext(UserContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
-  const { setUserReviews } = useContext(UserContext)
+  const { setUserDataReviews } = useContext(UserContext)
   const openModal = () => {
     setIsModalOpen(true)
   }
@@ -30,7 +30,7 @@ export const DashReviewEmpty = () => {
         reviewData: reviewData,
       })
 
-      setUserReviews((prevReviews) => {
+      setUserDataReviews((prevReviews) => {
         const updatedReviews = prevReviews
           ? prevReviews.filter((review) => review.id !== updatedReview.id)
           : []

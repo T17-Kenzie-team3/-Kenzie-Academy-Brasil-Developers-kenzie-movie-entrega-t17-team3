@@ -1,5 +1,5 @@
-import { IMovie, IMovieWithReviews, IReview, ISelectedMovie } from "../providers/MovieContext/@types"
-import { IUserData, IUserReview, TUserNameList } from "../providers/UserContext/@types"
+import { IMovie, IReview } from "../providers/MovieContext/@types"
+import { IUser, IUserData } from "../providers/UserContext/@types"
 import { api } from "./api"
 
 interface IAtemptLoginProp {
@@ -40,7 +40,7 @@ export const atemptRegister = async ({ email, password, name }: IAtemptRegisterP
 
 export const getAllUsers = async () => {
     try {
-        const { data } = await api.get<TUserNameList>("/users")
+        const { data } = await api.get<IUser[]>("/users")
         return data
     } catch (error) {
         return false
@@ -54,7 +54,7 @@ interface IGetUserReviewsByMovieIDProps {
 
 export const getUserReviewsByMovieID = async ({ userId, movieId }: IGetUserReviewsByMovieIDProps) => {
     try {
-        const { data } = await api.get<IUserReview[]>(`/movies/${movieId}/reviews?userId=${userId}`)
+        const { data } = await api.get<IReview[]>(`/movies/${movieId}/reviews?userId=${userId}`)
         return data
     } catch (error) {
         return false
@@ -70,18 +70,9 @@ export const getMovieList = async () => {
     }
 }
 
-// export const getMovieListWithReviews = async () => {
-//     try {
-//         const { data } = await api.get<IMovieWithReviews[]>("/movies?_embed=reviews")
-//         return data
-//     } catch (error) {
-//         return false
-//     }
-// }
-
 export const getSelectedMovie = async (movieId: number) => {
     try {
-        const { data } = await api.get<ISelectedMovie>(`/movies/${movieId}?_embed=reviews`)
+        const { data } = await api.get<IMovie>(`/movies/${movieId}?_embed=reviews`)
         return data
     } catch (error) {
         return false

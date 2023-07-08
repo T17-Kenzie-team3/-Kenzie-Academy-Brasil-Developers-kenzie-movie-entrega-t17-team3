@@ -14,11 +14,11 @@ import { Link, useNavigate } from "react-router-dom"
 export const Header = () => {
 
     const navigate = useNavigate()
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUserData } = useContext(UserContext)
 
     const Logout = () => {
         localStorage.removeItem("@KM: User")
-        setUser(null)
+        setUserData(null)
         navigate("/")
       };
 
@@ -34,9 +34,9 @@ export const Header = () => {
                 ) : (
                     <StyledNavHeaderLogged>
                         <StyledEllipseSmall className="ellipse">
-                          <StyledTitleFour className="firstLetter">{user.user.name.charAt(0)}</StyledTitleFour>
+                          <StyledTitleFour className="firstLetter">{user.name.charAt(0)}</StyledTitleFour>
                         </StyledEllipseSmall>
-                        <StyledTitleFive className="name" >{user.user.name}</StyledTitleFive>
+                        <StyledTitleFive className="name" >{user.name}</StyledTitleFive>
                         <StyledBtnLogout onClick={() => Logout()}>Sair</StyledBtnLogout >
                     </StyledNavHeaderLogged>
                 )

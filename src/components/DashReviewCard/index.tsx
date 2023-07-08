@@ -8,15 +8,15 @@ import { StyledTitleTwo, StyledTitleThree, StyledParagrOne } from "../../styles/
 
 export const DashReviewCard = () => {
   const { selectedMovie } = useContext(MovieContext)
-  const { user, userNameList } = useContext(UserContext)
+  const { user, userList } = useContext(UserContext)
 
   const getUserName = (userId: number) => {
-    const userFind = userNameList.find((user) => user.id === userId)
+    const userFind = userList.find((user) => user.id === userId)
     return userFind?.name
   }
 
   const getUserProfileImage = (userId: number) => {
-    const userFind = userNameList.find((user) => user.id === userId)
+    const userFind = userList.find((user) => user.id === userId)
     return userFind?.firstLetter
   }
 
