@@ -111,7 +111,7 @@ interface IAtemptEditReviewProps {
 
 export const atemptEditReview = async ({ token, reviewData }: IAtemptEditReviewProps) => {
     try {
-        const { data } = await api.patch(`/reviews/${reviewData.id}`, reviewData, {
+        const { data } = await api.put(`/reviews/${reviewData.movieId}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

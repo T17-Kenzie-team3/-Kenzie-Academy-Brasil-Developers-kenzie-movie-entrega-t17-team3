@@ -3,22 +3,25 @@ import { UserContext } from "../../providers/UserContext"
 import { AiOutlineStar } from "react-icons/ai"
 import { StyledDashReviewCard } from "./style"
 import { StyledEllipseBig } from "../../styles/tags/ellipse"
-import { StyledTitleTwo, StyledTitleThree, StyledParagrOne } from "../../styles/typography/typography"
+import {
+  StyledTitleTwo,
+  StyledTitleThree,
+  StyledParagrOne,
+} from "../../styles/typography/typography"
 import { IReview } from "../../providers/MovieContext/@types"
 
-interface DashReviewCard{
-  cardReview:IReview
+interface DashReviewCard {
+  cardReview: IReview
 }
 
-export const DashReviewCard = ({cardReview}:DashReviewCard) => {
-
+export const DashReviewCard = ({ cardReview }: DashReviewCard) => {
   const { userList } = useContext(UserContext)
-  
+
   const cardUser = userList.find((user) => user.id === cardReview.userId)
-  
+
   return (
     <>
-      <StyledDashReviewCard >
+      <StyledDashReviewCard>
         <StyledEllipseBig>
           <StyledTitleTwo>{cardUser?.name.charAt(0)}</StyledTitleTwo>
         </StyledEllipseBig>

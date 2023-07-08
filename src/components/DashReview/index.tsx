@@ -20,39 +20,49 @@ import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { reviews, setReviews, movieList, selectedMovie } = useContext(MovieContext)
+  const { reviews, setReviews, selectedMovie } =
+    useContext(MovieContext)
   const { user, userData } = useContext(UserContext)
 
   const handleDelete = async (reviewId: number) => {
     if (userData) {
-      await atemptDeleteReview({ 
-        token: userData.accessToken, 
-        reviewId: reviewId 
+      await atemptDeleteReview({
+        token: userData.accessToken,
+        reviewId: reviewId,
       })
-      const filteredReviews = reviews.filter(review => review.id !== reviewId)
+      const filteredReviews = reviews.filter((review) => review.id !== reviewId)
       setReviews(filteredReviews)
     }
   }
 
-  const handleEdit = async (reviewData:IReview) => {
-    if(userData){
-      const newReview = await atemptEditReview({ token: userData.accessToken, reviewData: reviewData })
+  const handleEdit = async (reviewData: IReview) => {
+    if (userData) {
+      const newReview = await atemptEditReview({
+        token: userData.accessToken,
+        reviewData: reviewData,
+      })
       try {
-        setReviews((reviews) => reviews.map(review => {
-          if(review.id === newReview.id){
-            return { ...review, score: newReview.id, description: newReview.description
+        setReviews((reviews) =>
+          reviews.map((review) => {
+            if (review.id === newReview.id) {
+              return {
+                ...review,
+                score: newReview.id,
+                description: newReview.description,
+              }
+            } else {
+              return review
             }
-          } else {
-            return review;
-          }
-        }))
-      } catch (error) {
-      }
+          })
+        )
+      } catch (error) {}
     }
   }
 
-  const userReview = selectedMovie?.reviews.find((review) => review.userId === user?.id )
-  
+  const userReview = selectedMovie?.reviews.find(
+    (review) => review.userId === user?.id
+  )
+
   return (
     <StyledDashReview>
       {userReview && (
@@ -65,22 +75,22 @@ export const DashReview = () => {
       )}
 
       {userReview ? (
-          <div className="reviewContainer">
-            <StyledParagrOne>{userReview.description}</StyledParagrOne>
-            <div className="reviewButtonsContainer">
-              <StyledStarRating>
-                <AiOutlineStar fill="#FFBB38" size="38px" />
-                <StyledTitleTwo>{userReview.score}</StyledTitleTwo>
-              </StyledStarRating>
-              <button onClick={() => setIsModalOpen(true)}>
-                <ImPencil fill="#FFBB38" size="38px" />
-              </button>
-              <button onClick={() => handleDelete(userReview.id)}>
-                <BsTrashFill fill="#FFBB38" size="35px" />
-              </button>
-            </div>
+        <div className="reviewContainer">
+          <StyledParagrOne>{userReview.description}</StyledParagrOne>
+          <div className="reviewButtonsContainer">
+            <StyledStarRating>
+              <AiOutlineStar fill="#FFBB38" size="38px" />
+              <StyledTitleTwo>{userReview.score}</StyledTitleTwo>
+            </StyledStarRating>
+            <button onClick={() => setIsModalOpen(true)}>
+              <ImPencil fill="#FFBB38" size="38px" />
+            </button>
+            <button onClick={() => handleDelete(userReview.id)}>
+              <BsTrashFill fill="#FFBB38" size="35px" />
+            </button>
           </div>
-        ) : (
+        </div>
+      ) : (
         <DashReviewEmpty />
       )}
       <ReactModal
@@ -89,10 +99,7 @@ export const DashReview = () => {
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalEdit
-          onSave={handleEdit}
-          onClose={() => setIsModalOpen(false)}
-        />
+        <ModalEdit onSave={handleEdit} onClose={() => setIsModalOpen(false)} />
       </ReactModal>
     </StyledDashReview>
   )

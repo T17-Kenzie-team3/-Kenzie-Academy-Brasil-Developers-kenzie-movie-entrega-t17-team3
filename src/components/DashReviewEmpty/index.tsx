@@ -11,11 +11,9 @@ import { ModalAddReview } from "../Modal/ModalAddReview"
 import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReviewEmpty = () => {
-  
   const { setReviews } = useContext(MovieContext)
   const { user, userData } = useContext(UserContext)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
-
   const handleAddACard = async (reviewData: IReview) => {
     if (userData) {
       const data = await atemptAddReview({
@@ -43,8 +41,10 @@ export const DashReviewEmpty = () => {
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalAddReview onUpdate={handleAddACard} 
-        onClose={() => setIsAddModalOpen(true)} />
+        <ModalAddReview
+          onUpdate={handleAddACard}
+          onClose={() => setIsAddModalOpen(true)}
+        />
       </ReactModal>
     </StyledDashReviewEmpty>
   )
