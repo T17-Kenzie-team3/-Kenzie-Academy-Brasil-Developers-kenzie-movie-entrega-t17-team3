@@ -17,11 +17,11 @@ import {
 } from "../../styles/typography/typography"
 import { StyledStarRating } from "../../fragments/StarRating/style"
 import { IReview } from "../../providers/MovieContext/@types"
+import { toast } from "react-toastify"
 
 export const DashReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { reviews, setReviews, selectedMovie } =
-    useContext(MovieContext)
+  const { reviews, setReviews, selectedMovie } = useContext(MovieContext)
   const { user, userData } = useContext(UserContext)
 
   const handleDelete = async (reviewId: number) => {
@@ -33,6 +33,7 @@ export const DashReview = () => {
       const filteredReviews = reviews.filter((review) => review.id !== reviewId)
       setReviews(filteredReviews)
     }
+    toast.success("Avalição removida com sucesso!")
   }
 
   const handleEdit = async (reviewData: IReview) => {
@@ -43,13 +44,14 @@ export const DashReview = () => {
       })
       try {
         setReviews((reviews) =>
-          reviews.map((review) => {
-            if (review.id === newReview.id) {
-              return {
-                ...review,
-                score: newReview.id,
-                description: newReview.description,
-              }
+        reviews.map((review) => {
+          if (review.id === newReview.id) {
+            toast.success("Avalição editada com sucesso!")
+            return {
+              ...review,
+              score: newReview.id,
+              description: newReview.description,
+            }
             } else {
               return review
             }

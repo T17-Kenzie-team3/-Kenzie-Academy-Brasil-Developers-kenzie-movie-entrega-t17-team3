@@ -9,6 +9,7 @@ import { atemptAddReview } from "../../services/requests"
 import { MovieContext } from "../../providers/MovieContext"
 import { ModalAddReview } from "../Modal/ModalAddReview"
 import { IReview } from "../../providers/MovieContext/@types"
+import { toast } from "react-toastify"
 
 export const DashReviewEmpty = () => {
   const { setReviews } = useContext(MovieContext)
@@ -22,6 +23,7 @@ export const DashReviewEmpty = () => {
       })
       setReviews((reviews) => [...reviews, data])
       setIsAddModalOpen(false)
+      toast.success("Avalição adicionada com sucesso!")
     }
   }
 

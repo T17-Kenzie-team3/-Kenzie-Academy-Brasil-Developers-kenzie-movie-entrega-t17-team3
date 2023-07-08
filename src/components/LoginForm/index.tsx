@@ -24,21 +24,23 @@ export const LoginForm = () => {
   } = useForm<TLoginValues>({
     resolver: zodResolver(LoginFormSchema),
   })
-
-  const { setUserData } = useContext(UserContext)
+   
+  const { setUserData, setLoadingPage } = useContext(UserContext)
 
   const submit: SubmitHandler<TLoginValues> = async (formData) => {
+    setLoadingPage(true)
     const newUser = await atemptLogin(formData)
     if (newUser) {
       setTimeout(() => {
         setUserData(newUser)
         localStorage.setItem("@KM: User", JSON.stringify(newUser))
         navigate("/register");
-      }, 2500);
-
+        setLoadingPage(false)
+      }, 2000);
       toast.success("Login efetuado com sucesso!");
     } else {
       toast.error("Erro! Verifique seu email e/ou senha");
+      setLoadingPage(false)
     }
   }
 
