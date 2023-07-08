@@ -11,7 +11,6 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null)
     const [reviews, setReviews] = useState<IReview[]>([])
 
-
     const { navigate, currentPath, setLoadingPage } = useContext(UserContext)
 
     const selectMovieByPathName = () => {
@@ -28,8 +27,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     
     const getAverageScoresByMovieId = (movieId:number) => {
 
-        const movie = movieList.find((movie) => movie.id === movieId)
-        const reviewList = movie?.reviews
+        const reviewList = movieList.find((movie) => movieId === movie.id)?.reviews
+
         if(reviewList){
            const score = reviewList.length > 0 ? reviewList.reduce((prevValue, review) => {
                 if(review.score){
@@ -38,8 +37,8 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                   return prevValue
                 }  
             }, 0) : 0
-
-            return score
+            
+            return Number(score) / reviewList.length
         }
     }
 

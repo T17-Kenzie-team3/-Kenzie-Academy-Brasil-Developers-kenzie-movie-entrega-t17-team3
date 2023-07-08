@@ -81,7 +81,14 @@ export const getSelectedMovie = async (movieId: number) => {
 
 interface IAtemptAddReviewProps {
     token: string
-    reviewData: IReview
+    reviewData: IReviewData
+}
+
+export interface IReviewData{
+    movieId: number
+    userId: number
+    score: number
+    description: string
 }
 
 export const atemptAddReview = async ({ token, reviewData }: IAtemptAddReviewProps) => {

@@ -10,10 +10,9 @@ export const DashReviewCard = () => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
 
-
   const filteredReviews = selectedMovie?.reviews.filter(
     (review) => review.userId !== user?.id
-    )
+  )
 
   return (
     <>

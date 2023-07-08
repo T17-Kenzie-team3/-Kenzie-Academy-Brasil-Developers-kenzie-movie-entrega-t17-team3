@@ -1,55 +1,35 @@
 import ReactModal from "react-modal"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { StyledDashReviewEmpty } from "./style"
 import { StyledTitleOne } from "../../styles/typography/typography"
 import { AiOutlineStar } from "react-icons/ai"
 import { StyledBtnRatingUpdate } from "../../styles/buttons/button"
-import { IReview } from "../../providers/MovieContext/@types"
 import { atemptAddReview } from "../../services/requests"
 import { MovieContext } from "../../providers/MovieContext"
 import { ModalAddReview } from "../Modal/ModalAddReview"
+import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReviewEmpty = () => {
-  const { user } = useContext(UserContext)
   
-  const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
-  const { isModalOpen, setIsModalOpen } = useContext(UserContext)
+  const { setReviews } = useContext(MovieContext)
+  const { user, userData,  isModalOpen, setIsModalOpen } = useContext(UserContext)
   
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
 
   const handleUpdate = async (reviewData: IReview) => {
-    if (user?.accessToken) {
-      const updatedReview = await atemptAddReview({
-        token: user.accessToken,
+    if (userData) {
+      const data = await atemptAddReview({
+        token: userData.accessToken,
         reviewData: reviewData,
       })
-
-      setUserDataReviews((prevReviews) => {
-        const updatedReviews = prevReviews
-          ? prevReviews.filter((review) => review.id !== updatedReview.id)
-          : []
-        return [...updatedReviews, updatedReview]
-      })
-      if (selectedMovie) {
-        const updatedReviews = selectedMovie.reviews.map((review) =>
-          review.id === updatedReview.id ? updatedReview : review
-        )
-
-        const updatedMovie = {
-          ...selectedMovie,
-          reviews: updatedReviews,
+      setReviews((reviews) => reviews.map(review => {
+        if(review.id === data.id){
+          return { ...review, score: data.score};
+        } else {
+          return review;
         }
-
-        setSelectedMovie(updatedMovie)
-      }
-      closeModal()
+      }))
+      setIsModalOpen(false)
     }
   }
 
@@ -57,7 +37,7 @@ export const DashReviewEmpty = () => {
     <StyledDashReviewEmpty>
       <StyledTitleOne>Avaliações</StyledTitleOne>
       {user ? (
-        <StyledBtnRatingUpdate onClick={openModal}>
+        <StyledBtnRatingUpdate onClick={() => setIsModalOpen(true)}>
           <AiOutlineStar fill="#000" size="35px" />
           <span>Avaliar</span>
         </StyledBtnRatingUpdate>
@@ -65,11 +45,12 @@ export const DashReviewEmpty = () => {
 
       <ReactModal
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
+        onRequestClose={() => setIsModalOpen(false)}
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalAddReview onUpdate={handleUpdate} onClose={closeModal} />
+        <ModalAddReview onUpdate={handleUpdate} 
+        onClose={() => setIsModalOpen(true)} />
       </ReactModal>
     </StyledDashReviewEmpty>
   )

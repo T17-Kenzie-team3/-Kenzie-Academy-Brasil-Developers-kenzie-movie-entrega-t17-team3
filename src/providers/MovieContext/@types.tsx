@@ -16,6 +16,8 @@ export interface IMovie {
 }
 
 export interface IReview {
+    reduce(arg0: (prevValue: any, review: any) => any, arg1: number): unknown
+    length: number
     id: number
     movieId: number
     userId: number

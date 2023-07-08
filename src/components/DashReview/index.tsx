@@ -8,7 +8,6 @@ import { DashReviewEmpty } from "../DashReviewEmpty"
 import { ModalEdit } from "../Modal/ModalEdit"
 import ReactModal from "react-modal"
 import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
-import { IReview } from "../../providers/MovieContext/@types"
 import { StyledDashReview } from "./style"
 import {
   StyledParagrOne,
@@ -17,6 +16,7 @@ import {
   Styledlabel,
 } from "../../styles/typography/typography"
 import { StyledStarRating } from "../../fragments/StarRating/style"
+import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReview = () => {
   const { reviews, setReviews } = useContext(MovieContext)
@@ -24,17 +24,20 @@ export const DashReview = () => {
 
   const handleDelete = async (reviewId: number) => {
     if (userData) {
-      await atemptDeleteReview({ token: userData.accessToken, reviewId: reviewId })
+      await atemptDeleteReview({ 
+        token: userData.accessToken, 
+        reviewId: reviewId 
+      })
       setReviews((reviews) => reviews.filter(review => review.id !== reviewId))
     }
   }
 
   const handleEdit = async (reviewData:IReview) => {
     if(userData){
-      await atemptEditReview({ token: userData.accessToken, reviewData: reviewData })
+      const newReview = await atemptEditReview({ token: userData.accessToken, reviewData: reviewData })
       setReviews((reviews) => reviews.map(review => {
-        if (review.id === reviewData.id) {
-          return { ...review, score: reviewData.score }
+        if (review.userId === newReview.userID) {
+          return { ...review, score: newReview.score }
         } else {
           return review
         }
