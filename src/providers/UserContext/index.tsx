@@ -16,6 +16,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [loadingPage, setLoadingPage] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+
   const navigate = useNavigate()
   const user = userData?.user
   

@@ -11,6 +11,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null)
     const [reviews, setReviews] = useState<IReview[]>([])
 
+
     const { navigate, currentPath, setLoadingPage } = useContext(UserContext)
 
     const selectMovieByPathName = () => {
@@ -37,7 +38,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
                   return prevValue
                 }  
             }, 0) : 0
-            
+
             return Number(score) / reviewList.length
         }
     }

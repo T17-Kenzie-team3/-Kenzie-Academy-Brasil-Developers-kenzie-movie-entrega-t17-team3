@@ -1,5 +1,5 @@
 import ReactModal from "react-modal"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../../providers/UserContext"
 import { StyledDashReviewEmpty } from "./style"
 import { StyledTitleOne } from "../../styles/typography/typography"
@@ -12,9 +12,9 @@ import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReviewEmpty = () => {
   
-  const { setReviews } = useContext(MovieContext)
-  const { user, userData,  isModalOpen, setIsModalOpen } = useContext(UserContext)
-  
+  const { setReviews, reviews } = useContext(MovieContext)
+  const { user, userData } = useContext(UserContext)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
 
   const handleAddACard = async (reviewData: IReview) => {
     if (userData) {
@@ -29,7 +29,7 @@ export const DashReviewEmpty = () => {
           return review;
         }
       }))
-      setIsModalOpen(false)
+      setIsAddModalOpen(false)
     }
   }
 
@@ -37,20 +37,20 @@ export const DashReviewEmpty = () => {
     <StyledDashReviewEmpty>
       <StyledTitleOne>Avaliações</StyledTitleOne>
       {user ? (
-        <StyledBtnRatingUpdate onClick={() => setIsModalOpen(true)}>
+        <StyledBtnRatingUpdate onClick={() => setIsAddModalOpen(true)}>
           <AiOutlineStar fill="#000" size="35px" />
           <span>Avaliar</span>
         </StyledBtnRatingUpdate>
       ) : null}
 
       <ReactModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        isOpen={isAddModalOpen}
+        onRequestClose={() => setIsAddModalOpen(false)}
         className="modal__content"
         overlayClassName="custom-overlay"
       >
         <ModalAddReview onUpdate={handleAddACard} 
-        onClose={() => setIsModalOpen(true)} />
+        onClose={() => setIsAddModalOpen(true)} />
       </ReactModal>
     </StyledDashReviewEmpty>
   )
