@@ -20,6 +20,6 @@ ${Ellipse};
 export const StyledEllipseSmall= styled.div`
   ${Ellipse};
   height: 2.6875rem;
-  width: 3.275rem;
+  width: 2.6875rem;
   font-size: var(--P17);
 `

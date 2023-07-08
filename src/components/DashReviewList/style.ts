@@ -13,8 +13,9 @@ height: 32rem;
 list-style: none;
 
 @media (min-width:680px) {
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow-x: auto;
     padding: 0 12% 0 12%;
+    flex-wrap: wrap;
 }
  `

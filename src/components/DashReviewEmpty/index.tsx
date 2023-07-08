@@ -30,7 +30,7 @@ export const DashReviewEmpty = () => {
       <StyledTitleOne>Avaliações</StyledTitleOne>
       {user ? (
         <StyledBtnRatingUpdate onClick={() => setIsAddModalOpen(true)}>
-          <AiOutlineStar fill="#000" size="35px" />
+          <AiOutlineStar fill="#171717" size="35px" />
           <span>Avaliar</span>
         </StyledBtnRatingUpdate>
       ) : null}

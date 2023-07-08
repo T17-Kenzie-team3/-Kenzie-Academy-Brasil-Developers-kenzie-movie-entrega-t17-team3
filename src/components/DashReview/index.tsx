@@ -83,10 +83,10 @@ export const DashReview = () => {
               <StyledTitleTwo>{userReview.score}</StyledTitleTwo>
             </StyledStarRating>
             <button onClick={() => setIsModalOpen(true)}>
-              <ImPencil fill="#FFBB38" size="38px" />
+              <ImPencil fill="#FFBB38" size="25px" />
             </button>
             <button onClick={() => handleDelete(userReview.id)}>
-              <BsTrashFill fill="#FFBB38" size="35px" />
+              <BsTrashFill fill="#FFBB38" size="25px" />
             </button>
           </div>
         </div>

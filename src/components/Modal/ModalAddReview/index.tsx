@@ -53,7 +53,7 @@ export const ModalAddReview = ({
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledSelectModal {...register("score")}>
-          <option value="">Selecione uma nota</option>
+          <option value="" hidden>Selecione uma nota</option>
           {[...Array(11)].map((_, index) => (
             <option key={index} value={index}>
               {index}
@@ -69,7 +69,7 @@ export const ModalAddReview = ({
 
         <StyledBtnRatingUpdate type="submit">
         {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
-          <AiOutlineStar /> Avaliar
+          <AiOutlineStar size={35}/> Avaliar
         </StyledBtnRatingUpdate>
       </form>
 
