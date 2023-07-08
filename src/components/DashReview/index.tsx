@@ -3,7 +3,6 @@ import { AiOutlineStar } from "react-icons/ai"
 import { MovieContext } from "../../providers/MovieContext"
 import { ImPencil } from "react-icons/im"
 import { BsTrashFill } from "react-icons/bs"
-import { IUserReview } from "../../providers/UserContext/@types"
 import { UserContext } from "../../providers/UserContext"
 import { DashReviewEmpty } from "../DashReviewEmpty"
 import { ModalEdit } from "../Modal/ModalEdit"
@@ -21,30 +20,7 @@ import { StyledStarRating } from "../../fragments/StarRating/style"
 
 export const DashReview = () => {
   const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
-  const { user, userReviews, setUserDataReviews } = useContext(UserContext)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedReview, setSelectedReview] = useState<IUserReview | null>(null)
-  const [editData, setEditData] = useState<IReview>({
-    score: 0,
-    description: "",
-    userId: 0,
-    movieId: 0,
-  })
-
-  const openModal = (review: IUserReview) => {
-    setSelectedReview(review)
-    setEditData({
-      score: review.score,
-      description: review.description,
-      userId: review.userId,
-      movieId: review.movieId,
-    })
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+  const { user, isModalOpen, setIsModalOpen } = useContext(UserContext)
 
   const handleDelete = async (id: number) => {
     if (user?.accessToken) {

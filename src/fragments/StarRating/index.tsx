@@ -6,10 +6,8 @@ import {StyledTitleThree  } from "../../styles/typography/typography"
 
 export const StarRating = () => {
 
-  const { movieList, averageScores } = useContext(MovieContext)
-  const averageScore = averageScores.find(
-    (score) => score.movieId === movieList[0].id
-  )
+  const { movieList, getAverageScoresByMovieId } = useContext(MovieContext)
+  const averageScore = getAverageScoresByMovieId(movieList[0].id)
   return (
     <StyledStarRating>
       <AiOutlineStar fill="#FFBB38" size="35px"/>

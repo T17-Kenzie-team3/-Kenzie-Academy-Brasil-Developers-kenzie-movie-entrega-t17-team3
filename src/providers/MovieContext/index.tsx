@@ -21,6 +21,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             }
         })
     }
+    
     selectMovieByPathName()
     
     const getAverageScoresByMovieId = (movieId:number) => {
@@ -28,13 +29,15 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         const movie = movieList.find((movie) => movie.id === movieId)
         const reviewList = movie?.reviews
         if(reviewList){
-            reviewList.length > 0 ? reviewList.reduce((prevValue, review) => {
+           const score = reviewList.length > 0 ? reviewList.reduce((prevValue, review) => {
                 if(review.score){
                   return prevValue + Number(review.score)
                 } else {
                   return prevValue
                 }  
-            }, 0) : 0;
+            }, 0) : 0
+
+            return score
         }
     }
 

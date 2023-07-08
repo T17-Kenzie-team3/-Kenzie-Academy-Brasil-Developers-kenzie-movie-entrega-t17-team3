@@ -1,6 +1,6 @@
 import { IMovie } from "../../providers/MovieContext/@types"
 import { AiOutlineStar } from "react-icons/ai"
-import { getSelectedMovie, removeSpaces } from "../../services/requests"
+import { removeSpaces } from "../../services/requests"
 import { useContext } from "react"
 import { MovieContext } from "../../providers/MovieContext"
 import { useNavigate } from "react-router"
@@ -17,12 +17,12 @@ interface IHomeMovieCardProps {
 
 export const HomeMovieCard = ({ movie }: IHomeMovieCardProps) => {
 
-  const { averageScores, setSelectedMovie } = useContext(MovieContext)
-  const averageScore = averageScores.find((score) => score.movieId === movie.id)
+  const { movieList, getAverageScoresByMovieId, setSelectedMovie } = useContext(MovieContext)
+  const averageScore = getAverageScoresByMovieId(movie.id)
   const navigate = useNavigate()
 
   const handleSubmit = async (id: number) => {
-    const movieClicked = await getSelectedMovie(id)
+    const movieClicked = movieList.find((movie) => movie.id === id)
     if (movieClicked) {
       localStorage.setItem(
         "@KM: selectedMovieId",

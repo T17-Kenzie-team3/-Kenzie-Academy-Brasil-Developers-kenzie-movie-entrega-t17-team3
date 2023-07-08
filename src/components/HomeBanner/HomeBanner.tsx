@@ -2,27 +2,25 @@ import { useContext } from "react"
 import { HomeMovieName } from "../../fragments/HomeMovieName"
 import { HomeMovieTag } from "../../fragments/HomeTag"
 import { MovieContext } from "../../providers/MovieContext"
-import { getSelectedMovie, removeSpaces } from "../../services/requests"
+import { removeSpaces } from "../../services/requests"
 import { useNavigate } from "react-router"
-import { StyledHomeBanner} from "./style"
+import { StyledHomeBanner } from "./style"
 
 export const HomeBanner = () => {
-  
+
   const { movieList, setSelectedMovie } = useContext(MovieContext)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    const movieClicked = await getSelectedMovie(movieList[0].id)
-    if (movieClicked) {
-      localStorage.setItem(
-        "@KM: selectedMovieId",
-        JSON.stringify(movieClicked.id)
-      )
-      setSelectedMovie(movieClicked)
-      setSelectedMovie(movieClicked)
-      const movieName = removeSpaces(movieClicked.name)
-      navigate(`${movieName}`)
-    }
+
+
+    localStorage.setItem(
+      "@KM: selectedMovieId",
+      JSON.stringify(movieList[0])
+    )
+    setSelectedMovie(movieList[0])
+    const movieName = removeSpaces(movieList[0].name)
+    navigate(`${movieName}`)
   }
 
   return (

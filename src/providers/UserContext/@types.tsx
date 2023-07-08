@@ -34,4 +34,6 @@ export interface IUserContext {
     userList: IUser[]
     setUserDataList: React.Dispatch<React.SetStateAction<IUser[]>>
     setUserData: React.Dispatch<React.SetStateAction<IUserData | null>>
+    isModalOpen: boolean
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }

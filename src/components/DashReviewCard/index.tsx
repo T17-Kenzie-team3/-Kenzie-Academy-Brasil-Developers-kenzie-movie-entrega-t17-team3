@@ -8,20 +8,11 @@ import { StyledTitleTwo, StyledTitleThree, StyledParagrOne } from "../../styles/
 
 export const DashReviewCard = () => {
   const { selectedMovie } = useContext(MovieContext)
-  const { user, userList } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
-  const getUserName = (userId: number) => {
-    const userFind = userList.find((user) => user.id === userId)
-    return userFind?.name
-  }
-
-  const getUserProfileImage = (userId: number) => {
-    const userFind = userList.find((user) => user.id === userId)
-    return userFind?.firstLetter
-  }
 
   const filteredReviews = selectedMovie?.reviews.filter(
-    (review) => review.userId !== user?.user.id
+    (review) => review.userId !== user?.id
     )
 
   return (
@@ -30,7 +21,7 @@ export const DashReviewCard = () => {
       {filteredReviews?.map((review) => (
         <StyledDashReviewCard key={review.id}>
           <StyledEllipseBig>
-            <StyledTitleTwo>{getUserProfileImage(review.userId)}</StyledTitleTwo>
+            <StyledTitleTwo>{user?.name.charAt(0)}</StyledTitleTwo>
           </StyledEllipseBig>
           <div className="divRating">
             <AiOutlineStar fill="#FFBB38" size="35px" />
@@ -39,7 +30,7 @@ export const DashReviewCard = () => {
           <div className="divDescription">
             <StyledParagrOne>{review.description}</StyledParagrOne>
           </div>
-          <StyledTitleThree>{getUserName(review.userId)}</StyledTitleThree>
+          <StyledTitleThree>{user?.name}</StyledTitleThree>
         </StyledDashReviewCard>
       ))}
     </>

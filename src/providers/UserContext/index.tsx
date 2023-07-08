@@ -14,6 +14,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [userData, setUserData] = useState<IUserData | null>(null)
   const [userList, setUserDataList] = useState<IUser[]>([])
   const [loadingPage, setLoadingPage] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const navigate = useNavigate()
   const user = userData?.user
   
@@ -55,6 +57,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setLoadingPage,
         userList,
         setUserDataList,
+        isModalOpen, 
+        setIsModalOpen
       }}
     >
       {children}

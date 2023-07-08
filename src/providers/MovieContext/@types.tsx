@@ -28,7 +28,7 @@ export interface IReview {
 export interface IMovieContext {
     movieList: IMovie[]
     setMovieList: React.Dispatch<React.SetStateAction<IMovie[]>>
-    getAverageScoresByMovieId: (movieId: number) => void
+    getAverageScoresByMovieId: any
     selectedMovie: IMovie | null
     setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | null>>
     reviews: IUserReview[] | undefined

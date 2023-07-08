@@ -12,9 +12,10 @@ import { ModalAddReview } from "../Modal/ModalAddReview"
 
 export const DashReviewEmpty = () => {
   const { user } = useContext(UserContext)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  
   const { selectedMovie, setSelectedMovie } = useContext(MovieContext)
-  const { setUserDataReviews } = useContext(UserContext)
+  const { isModalOpen, setIsModalOpen } = useContext(UserContext)
+  
   const openModal = () => {
     setIsModalOpen(true)
   }
