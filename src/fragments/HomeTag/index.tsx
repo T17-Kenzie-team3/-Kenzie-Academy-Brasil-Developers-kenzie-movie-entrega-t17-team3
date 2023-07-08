@@ -6,14 +6,14 @@ import { StyledHomeMovieTag } from "./style"
 
 export const HomeMovieTag = () => {
   
-  const { movieList } = useContext(MovieContext)
+  const { movieList, selectedMovie } = useContext(MovieContext)
 
   return (
     <>
       {movieList && (
         <StyledHomeMovieTag>
-          <StyledBtnGenre>{movieList[0].type}</StyledBtnGenre>
-          <StyledParagrOne >{movieList[0].duration}m</StyledParagrOne>
+          <StyledBtnGenre>{selectedMovie? selectedMovie.type : movieList[0].type}</StyledBtnGenre>
+          <StyledParagrOne >{selectedMovie? selectedMovie.duration : movieList[0].duration}m</StyledParagrOne>
         </StyledHomeMovieTag>
       )}
     </>

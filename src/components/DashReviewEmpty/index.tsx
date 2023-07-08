@@ -12,7 +12,7 @@ import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReviewEmpty = () => {
   
-  const { setReviews, reviews } = useContext(MovieContext)
+  const { setReviews } = useContext(MovieContext)
   const { user, userData } = useContext(UserContext)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
 
@@ -22,13 +22,7 @@ export const DashReviewEmpty = () => {
         token: userData.accessToken,
         reviewData: reviewData,
       })
-      setReviews((reviews) => reviews.map(review => {
-        if(review.id === data.id){
-          return { ...review, score: data.score};
-        } else {
-          return review;
-        }
-      }))
+      setReviews((reviews) => [...reviews, data])
       setIsAddModalOpen(false)
     }
   }

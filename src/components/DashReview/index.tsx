@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AiOutlineStar } from "react-icons/ai"
 import { MovieContext } from "../../providers/MovieContext"
 import { ImPencil } from "react-icons/im"
@@ -19,8 +19,9 @@ import { StyledStarRating } from "../../fragments/StarRating/style"
 import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReview = () => {
-  const { reviews, setReviews } = useContext(MovieContext)
-  const { user, userData, isModalOpen, setIsModalOpen } = useContext(UserContext)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { reviews, setReviews, movieList, selectedMovie } = useContext(MovieContext)
+  const { user, userData } = useContext(UserContext)
 
   const handleDelete = async (reviewId: number) => {
     if (userData) {
@@ -28,25 +29,30 @@ export const DashReview = () => {
         token: userData.accessToken, 
         reviewId: reviewId 
       })
-      setReviews((reviews) => reviews.filter(review => review.id !== reviewId))
+      const filteredReviews = reviews.filter(review => review.id !== reviewId)
+      setReviews(filteredReviews)
     }
   }
 
   const handleEdit = async (reviewData:IReview) => {
     if(userData){
       const newReview = await atemptEditReview({ token: userData.accessToken, reviewData: reviewData })
-      setReviews((reviews) => reviews.map(review => {
-        if (review.userId === newReview.userID) {
-          return { ...review, score: newReview.score }
-        } else {
-          return review
-        }
-      }))
+      try {
+        setReviews((reviews) => reviews.map(review => {
+          if(review.id === newReview.id){
+            return { ...review, score: newReview.id, description: newReview.description
+            }
+          } else {
+            return review;
+          }
+        }))
+      } catch (error) {
+      }
     }
   }
 
-  const userReview = reviews.find((review) => review.userId === user?.id)
-
+  const userReview = selectedMovie?.reviews.find((review) => review.userId === user?.id )
+  
   return (
     <StyledDashReview>
       {userReview && (
