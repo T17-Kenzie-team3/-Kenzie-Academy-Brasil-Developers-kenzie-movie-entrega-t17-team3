@@ -30,7 +30,7 @@ export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
   const onSubmit = async (data: IReview) => {
     const formData: IReview = {
       ...data,
-      userId: user?.user.id ?? 0,
+      userId: user?.id ?? 0,
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
@@ -39,6 +39,7 @@ export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
     reset()
     onClose()
   }
+  
 
   return (
     <StyledModalAddReview>

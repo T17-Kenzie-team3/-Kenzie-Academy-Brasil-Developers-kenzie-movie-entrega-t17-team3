@@ -16,7 +16,7 @@ export const DashReviewEmpty = () => {
   const { user, userData,  isModalOpen, setIsModalOpen } = useContext(UserContext)
   
 
-  const handleUpdate = async (reviewData: IReview) => {
+  const handleAddACard = async (reviewData: IReview) => {
     if (userData) {
       const data = await atemptAddReview({
         token: userData.accessToken,
@@ -49,7 +49,7 @@ export const DashReviewEmpty = () => {
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalAddReview onUpdate={handleUpdate} 
+        <ModalAddReview onUpdate={handleAddACard} 
         onClose={() => setIsModalOpen(true)} />
       </ReactModal>
     </StyledDashReviewEmpty>

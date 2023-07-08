@@ -1,7 +1,7 @@
 import { AiOutlineStar } from "react-icons/ai"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
 import { StyledModalEdit } from "./style"
@@ -36,7 +36,7 @@ export const ModalEdit = ({
   const onSubmit = (data: IReview) => {
     const formData: IReview = {
       ...data,
-      userId: user?.user.id ?? 0,
+      userId: user?.id ?? 0,
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
