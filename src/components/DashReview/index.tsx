@@ -1,113 +1,105 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { AiOutlineStar } from "react-icons/ai"
 import { MovieContext } from "../../providers/MovieContext"
 import { ImPencil } from "react-icons/im"
 import { BsTrashFill } from "react-icons/bs"
-import { IUserReview } from "../../providers/UserContext/@types"
 import { UserContext } from "../../providers/UserContext"
 import { DashReviewEmpty } from "../DashReviewEmpty"
 import { ModalEdit } from "../Modal/ModalEdit"
 import ReactModal from "react-modal"
 import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
-import { IReview } from "../../providers/MovieContext/@types"
 import { StyledDashReview } from "./style"
-import { StyledTitleOne, Styledlabel } from "../../styles/typography/typography"
+import {
+  StyledParagrOne,
+  StyledTitleOne,
+  StyledTitleTwo,
+  Styledlabel,
+} from "../../styles/typography/typography"
+import { StyledStarRating } from "../../fragments/StarRating/style"
+import { IReview } from "../../providers/MovieContext/@types"
 
 export const DashReview = () => {
-  const { selectedMovie } = useContext(MovieContext)
-  const { user } = useContext(UserContext)
-  const [movieReviews, setMovieReviews] = useState<IUserReview[] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedReview, setSelectedReview] = useState<IUserReview | null>(null)
+  const { reviews, setReviews, selectedMovie } =
+    useContext(MovieContext)
+  const { user, userData } = useContext(UserContext)
 
-  const openModal = (review: IUserReview) => {
-    setSelectedReview(review)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
-
-  const handleDelete = async (id: number) => {
-    if (user?.accessToken) {
-      await atemptDeleteReview({ token: user.accessToken, reviewId: id })
-      const updatedReviews =
-        movieReviews?.filter((review) => review.id !== id) ?? []
-      setMovieReviews(updatedReviews)
+  const handleDelete = async (reviewId: number) => {
+    if (userData) {
+      await atemptDeleteReview({
+        token: userData.accessToken,
+        reviewId: reviewId,
+      })
+      const filteredReviews = reviews.filter((review) => review.id !== reviewId)
+      setReviews(filteredReviews)
     }
   }
 
   const handleEdit = async (reviewData: IReview) => {
-    if (user?.accessToken && selectedReview) {
-      const updatedReview = await atemptEditReview({
-        token: user.accessToken,
+    if (userData) {
+      const newReview = await atemptEditReview({
+        token: userData.accessToken,
         reviewData: reviewData,
-        reviewId: selectedReview.id,
       })
-      setMovieReviews((prevReviews) =>
-        prevReviews
-          ? prevReviews.map((review) =>
-            review.id === updatedReview.id ? updatedReview : review
-          )
-          : null
-      )
-      closeModal()
+      try {
+        setReviews((reviews) =>
+          reviews.map((review) => {
+            if (review.id === newReview.id) {
+              return {
+                ...review,
+                score: newReview.id,
+                description: newReview.description,
+              }
+            } else {
+              return review
+            }
+          })
+        )
+      } catch (error) {}
     }
   }
 
-  useEffect(() => {
-    const getMovieReviews = () => {
-      if (selectedMovie) {
-        const reviews = selectedMovie.reviews.filter(
-          (review) => review.userId === user?.user.id
-        )
-        setMovieReviews(reviews as IUserReview[])
-      }
-    }
-
-    getMovieReviews()
-  }, [])
+  const userReview = selectedMovie?.reviews.find(
+    (review) => review.userId === user?.id
+  )
 
   return (
     <StyledDashReview>
-      {movieReviews && movieReviews.length > 0 && (
+      {userReview && (
         <>
           <div className="divEvaluation">
-            <StyledTitleOne >Avaliações</StyledTitleOne>
+            <StyledTitleOne>Avaliações</StyledTitleOne>
             <Styledlabel htmlFor="user-review">Sua Avaliação</Styledlabel>
           </div>
         </>
       )}
 
-      {movieReviews && movieReviews.length > 0 ? (
-        movieReviews.map((review) => (
-          <div key={review.id}>
-            <p>{review.description}</p>
-            <div>
-              <div>
-                <AiOutlineStar />
-                <p>{review.score}</p>
-              </div>
-              <button onClick={() => openModal(review)}>
-                <ImPencil />
-              </button>
-              <button onClick={() => handleDelete(review.id)}>
-                <BsTrashFill />
-              </button>
-            </div>
+      {userReview ? (
+        <div className="reviewContainer">
+          <StyledParagrOne>{userReview.description}</StyledParagrOne>
+          <div className="reviewButtonsContainer">
+            <StyledStarRating>
+              <AiOutlineStar fill="#FFBB38" size="38px" />
+              <StyledTitleTwo>{userReview.score}</StyledTitleTwo>
+            </StyledStarRating>
+            <button onClick={() => setIsModalOpen(true)}>
+              <ImPencil fill="#FFBB38" size="25px" />
+            </button>
+            <button onClick={() => handleDelete(userReview.id)}>
+              <BsTrashFill fill="#FFBB38" size="25px" />
+            </button>
           </div>
-        ))
+        </div>
       ) : (
         <DashReviewEmpty />
       )}
       <ReactModal
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
+        onRequestClose={() => setIsModalOpen(false)}
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalEdit onSave={handleEdit} onClose={closeModal} />
+        <ModalEdit onSave={handleEdit} onClose={() => setIsModalOpen(false)} />
       </ReactModal>
     </StyledDashReview>
   )

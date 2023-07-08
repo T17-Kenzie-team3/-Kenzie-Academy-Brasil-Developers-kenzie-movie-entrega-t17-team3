@@ -1,47 +1,39 @@
 import { useContext } from "react"
-import { MovieContext } from "../../providers/MovieContext"
 import { UserContext } from "../../providers/UserContext"
 import { AiOutlineStar } from "react-icons/ai"
 import { StyledDashReviewCard } from "./style"
 import { StyledEllipseBig } from "../../styles/tags/ellipse"
-import { StyledTitleTwo, StyledTitleThree, StyledParagrOne } from "../../styles/typography/typography"
+import {
+  StyledTitleTwo,
+  StyledTitleThree,
+  StyledParagrOne,
+} from "../../styles/typography/typography"
+import { IReview } from "../../providers/MovieContext/@types"
 
-export const DashReviewCard = () => {
-  const { selectedMovie } = useContext(MovieContext)
-  const { user, userNameList } = useContext(UserContext)
+interface DashReviewCard {
+  cardReview: IReview
+}
 
-  const getUserName = (userId: number) => {
-    const userFind = userNameList.find((user) => user.id === userId)
-    return userFind?.name
-  }
+export const DashReviewCard = ({ cardReview }: DashReviewCard) => {
+  const { userList } = useContext(UserContext)
 
-  const getUserProfileImage = (userId: number) => {
-    const userFind = userNameList.find((user) => user.id === userId)
-    return userFind?.firstLetter
-  }
-
-  const filteredReviews = selectedMovie?.reviews.filter(
-    (review) => review.userId !== user?.user.id
-    )
+  const cardUser = userList.find((user) => user.id === cardReview.userId)
 
   return (
     <>
-
-      {filteredReviews?.map((review) => (
-        <StyledDashReviewCard key={review.id}>
-          <StyledEllipseBig>
-            <StyledTitleTwo>{getUserProfileImage(review.userId)}</StyledTitleTwo>
-          </StyledEllipseBig>
-          <div className="divRating">
-            <AiOutlineStar fill="#FFBB38" size="35px" />
-            <StyledTitleThree>{review.score}</StyledTitleThree>
-          </div>
-          <div className="divDescription">
-            <StyledParagrOne>{review.description}</StyledParagrOne>
-          </div>
-          <StyledTitleThree>{getUserName(review.userId)}</StyledTitleThree>
-        </StyledDashReviewCard>
-      ))}
+      <StyledDashReviewCard>
+        <StyledEllipseBig>
+          <StyledTitleTwo>{cardUser?.name.charAt(0)}</StyledTitleTwo>
+        </StyledEllipseBig>
+        <div className="divRating">
+          <AiOutlineStar fill="#FFBB38" size="35px" />
+          <StyledTitleThree>{cardReview.score}</StyledTitleThree>
+        </div>
+        <div className="divDescription">
+          <StyledParagrOne>{cardReview.description}</StyledParagrOne>
+        </div>
+        <StyledTitleThree>{cardUser?.name}</StyledTitleThree>
+      </StyledDashReviewCard>
     </>
   )
 }

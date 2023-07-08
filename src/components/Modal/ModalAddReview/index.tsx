@@ -1,64 +1,79 @@
 import { AiOutlineStar } from "react-icons/ai"
-import { atemptAddReview } from "../../../services/requests"
 import { useForm } from "react-hook-form"
 import { MovieContext } from "../../../providers/MovieContext"
 import { useContext } from "react"
 import { UserContext } from "../../../providers/UserContext"
 import { IReview, TMovieScore } from "../../../providers/MovieContext/@types"
+import {StyledModalAddReview}from "./style"
+import { StyledBtnRatingUpdate } from "../../../styles/buttons/button"
+import{StyledSelectModal} from "../../../styles/select/select"
+import {StyledTextareaModal } from "../../../styles/textarea/textarea"
+import { StyledTitleOne } from "../../../styles/typography/typography"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { AddReviewSchema } from "./Schema/AddReviewSchema"
+import { StyledErrorZod } from "../../../styles/typography/typography"
 
 interface ModalAddProps {
-  onClose: () => void}
+  onUpdate: (reviewData: IReview) => Promise<void>
+  onClose: () => void
+}
 
-export const ModalAddReview = ({ onClose }: ModalAddProps) => {
+export const ModalAddReview = ({ 
+  onUpdate, 
+  onClose, 
+}: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
-
-  const token = user?.accessToken
-
-  const { register, handleSubmit, reset } = useForm<IReview>()
+  const { register, 
+    handleSubmit, 
+    reset, formState: { errors }, 
+  } = useForm<IReview>({
+    resolver: zodResolver(AddReviewSchema),
+})
 
   const onSubmit = async (data: IReview) => {
     const formData: IReview = {
       ...data,
-      userId: user?.user.id ?? 0,
+      userId: user?.id ?? 0,
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
-
-    const newReview = await atemptAddReview({
-      token: token ?? "",
-      reviewData: formData,
-    })
+    
+    onUpdate(formData)
     reset()
     onClose()
   }
+  
 
   return (
-    <div>
-      <div>
-        <h2>Avaliação</h2>
-        <button onClick={onClose}>X</button>
-      </div>
+    <StyledModalAddReview>
+      <div className="modalBox">
+        <StyledTitleOne>Avaliação</StyledTitleOne>
+        <button className="modalBtnClose" onClick={onClose}>X</button>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("score")}>
-          <option value="">Selecione uma nota</option>
+        <StyledSelectModal {...register("score")}>
+          <option value="" hidden>Selecione uma nota</option>
           {[...Array(11)].map((_, index) => (
             <option key={index} value={index}>
               {index}
             </option>
           ))}
-        </select>
+        </StyledSelectModal>
+        {errors.score ? <StyledErrorZod>{errors.score.message}</StyledErrorZod> : null}
 
-        <textarea
+        <StyledTextareaModal 
           placeholder="Deixe um comentário"
           {...register("description")}
-        ></textarea>
+        ></StyledTextareaModal>
 
-        <button type="submit">
-          <AiOutlineStar /> Avaliar
-        </button>
+        <StyledBtnRatingUpdate type="submit">
+        {errors.description ? <StyledErrorZod>{errors.description.message}</StyledErrorZod> : null}
+          <AiOutlineStar size={35}/> Avaliar
+        </StyledBtnRatingUpdate>
       </form>
-    </div>
+
+      </div>
+    </StyledModalAddReview>
   )
 }

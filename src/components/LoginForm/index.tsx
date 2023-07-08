@@ -25,13 +25,13 @@ export const LoginForm = () => {
     resolver: zodResolver(LoginFormSchema),
   })
 
-  const { setUser } = useContext(UserContext)
+  const { setUserData } = useContext(UserContext)
 
   const submit: SubmitHandler<TLoginValues> = async (formData) => {
     const newUser = await atemptLogin(formData)
     if (newUser) {
       setTimeout(() => {
-        setUser(newUser)
+        setUserData(newUser)
         localStorage.setItem("@KM: User", JSON.stringify(newUser))
         navigate("/register");
       }, 2500);
