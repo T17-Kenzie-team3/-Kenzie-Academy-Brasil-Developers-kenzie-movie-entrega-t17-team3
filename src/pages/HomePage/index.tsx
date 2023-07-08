@@ -7,6 +7,7 @@ import { UserContext } from "../../providers/UserContext"
 import { LoadingPage } from "../../fragments/LoadingPage"
 import{StyledSHomePage} from "./style"
 
+
 export const HomePage = () => {
     
   const { loadingPage } = useContext(UserContext)

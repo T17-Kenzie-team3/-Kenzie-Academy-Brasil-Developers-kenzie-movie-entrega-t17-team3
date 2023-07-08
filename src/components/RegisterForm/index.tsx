@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom"
 import { RegisterFormSchema, TRegisterValues } from "./Schema/RegisterFormSchema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { atemptRegister } from "../../services/requests";
@@ -10,10 +9,12 @@ import { StyledContainerRegisterFormParagraph, StyledContainerRegisterFormButton
 import { StyledInput } from "../../styles/inputs/input";
 import { StyledBtnRegister } from "../../styles/buttons/button";
 import { StyledLinkYellow } from "../../styles/buttons/link";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const RegisterForm = () => {
 
-    const navigate = useNavigate()
+    const {navigate} = useContext(UserContext)
     const {
         register,
         handleSubmit,

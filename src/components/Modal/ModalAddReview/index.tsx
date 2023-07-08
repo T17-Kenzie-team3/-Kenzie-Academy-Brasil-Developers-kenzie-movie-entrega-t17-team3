@@ -18,27 +18,32 @@ interface ModalAddProps {
   onClose: () => void
 }
 
-export const ModalAddReview = ({ onUpdate, onClose }: ModalAddProps) => {
+export const ModalAddReview = ({ 
+  onUpdate, 
+  onClose, 
+}: ModalAddProps) => {
   const { selectedMovie } = useContext(MovieContext)
   const { user } = useContext(UserContext)
-
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<IReview>({
+  const { register, 
+    handleSubmit, 
+    reset, formState: { errors }, 
+  } = useForm<IReview>({
     resolver: zodResolver(AddReviewSchema),
 })
-
 
   const onSubmit = async (data: IReview) => {
     const formData: IReview = {
       ...data,
-      userId: user?.user.id ?? 0,
+      userId: user?.id ?? 0,
       movieId: selectedMovie?.id ?? 0,
       score: Number(data.score) as TMovieScore,
     }
-    await onUpdate(formData)
-
+    
+    onUpdate(formData)
     reset()
     onClose()
   }
+  
 
   return (
     <StyledModalAddReview>

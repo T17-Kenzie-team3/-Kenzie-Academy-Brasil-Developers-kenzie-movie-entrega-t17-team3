@@ -3,8 +3,7 @@ import {
   IUserContext,
   IUserProviderProps,
   IUserData,
-  IUserReview,
-  IUserName,
+  IUser,
 } from "./@types"
 import { useNavigate } from "react-router-dom"
 import { getAllUsers } from "../../services/requests"
@@ -12,12 +11,15 @@ import { getAllUsers } from "../../services/requests"
 export const UserContext = createContext({} as IUserContext)
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
-  const [user, setUser] = useState<IUserData | null>(null)
-  const [userReview, setUserReview] = useState<IUserReview | null>(null)
+  const [userData, setUserData] = useState<IUserData | null>(null)
+  const [userList, setUserDataList] = useState<IUser[]>([])
   const [loadingPage, setLoadingPage] = useState(false)
-  const [userNameList, setUserNameList] = useState<IUserName[]>([])
-  const [userReviews, setUserReviews] = useState<IUserReview[] | null>(null)
+  
+
+
   const navigate = useNavigate()
+  const user = userData?.user
+  
   const currentPath = window.location.pathname
 
   useEffect(() => {
@@ -27,8 +29,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       if (storedUser === null) {
         return null
       } else {
-        const userData = JSON.parse(storedUser)
-        setUser(userData)
+        const user = JSON.parse(storedUser)
+        setUserData(user)
         navigate(currentPath)
       }
     }
@@ -36,19 +38,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     const userList = async () => {
       const newUserList = await getAllUsers()
-      let currentUserList: IUserName[] = []
-      if (newUserList) {
-        newUserList.map((userText) => {
-          const userTextData: IUserName = {
-            firstLetter: userText.name.charAt(0),
-            name: userText.name,
-            id: userText.id,
-          }
-          currentUserList.push(userTextData)
-        })
+      if(newUserList){
+        setUserDataList(newUserList)
       }
-      setUserNameList(currentUserList)
     }
+
     userList()
   }, [])
 
@@ -56,17 +50,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     <UserContext.Provider
       value={{
         user,
-        setUser,
-        userReview,
-        setUserReview,
+        userData,
+        setUserData,
         navigate,
         currentPath,
         loadingPage,
         setLoadingPage,
-        userNameList,
-        setUserNameList,
-        setUserReviews,
-        userReviews,
+        userList,
+        setUserDataList,
       }}
     >
       {children}
