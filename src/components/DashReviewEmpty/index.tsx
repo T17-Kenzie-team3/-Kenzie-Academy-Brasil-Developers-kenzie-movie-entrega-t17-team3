@@ -46,7 +46,7 @@ export const DashReviewEmpty = () => {
       >
         <ModalAddReview
           onUpdate={handleAddACard}
-          onClose={() => setIsAddModalOpen(true)}
+          onClose={() => setIsAddModalOpen(false)}
         />
       </ReactModal>
     </StyledDashReviewEmpty>

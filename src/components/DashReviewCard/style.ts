@@ -11,6 +11,10 @@ export const StyledDashReviewCard= styled.li`
      margin: 0.5rem 0 1rem 0;
      text-align: center;
 
+     > :first-child {
+         display: flex;
+     }
+     
      .divEvaluation{
         display: flex;
         flex-direction: column;
@@ -24,17 +28,20 @@ export const StyledDashReviewCard= styled.li`
         width:100%;
         gap: 0.3rem;
         margin: 1rem 0 2rem 0;
-     }
+      }
 
      .divDescription{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     height: 10rem ;
-     width: 100%;
-     }
+        display: flex;
+         flex-direction: column;
+         align-items: center;
+         height: fit-content;;
+         width: 100%;
+      }
 
 @media (min-width:770px) {
-   
+   .divDescription{
+     height: 10rem ;
+     margin-bottom: 2rem;
+   }
 }
- `
+`

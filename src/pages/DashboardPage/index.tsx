@@ -9,7 +9,7 @@ import { StyledDashboardPage } from "./style"
 import { DashReview } from "../../components/DashReview"
 
 export const DashboardPage = () => {
-  const { loadingPage } = useContext(UserContext)
+  const { loadingPage, user } = useContext(UserContext)
 
   return (
     <StyledDashboardPage>
@@ -19,7 +19,7 @@ export const DashboardPage = () => {
       ) : (
         <main>
           <DashBanner />
-          <DashReview />
+          {user? <DashReview /> : null}
           <DashReviewList />
         </main>
       )}

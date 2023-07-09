@@ -1,4 +1,4 @@
-export type TMovieScore = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+export type TMovieScore = number
 export type TmovieGenre = "ficção" | "comédia" | "drama"
 
 export interface IMovieProviderProps {
