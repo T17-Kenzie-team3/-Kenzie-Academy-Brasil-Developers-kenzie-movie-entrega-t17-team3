@@ -63,6 +63,9 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
   useEffect(() => {
     const movieId = localStorage.getItem("@KM: selectedMovieId")
+    if (!movieId){
+      localStorage.setItem("@KM: selectedMovieId", "1")
+    }
 
     const setupSelectedMovie = async () => {
       if (movieId) {
