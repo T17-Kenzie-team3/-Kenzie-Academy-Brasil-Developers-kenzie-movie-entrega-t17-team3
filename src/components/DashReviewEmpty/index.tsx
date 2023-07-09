@@ -12,7 +12,7 @@ import { IReview } from "../../providers/MovieContext/@types"
 import { toast } from "react-toastify"
 
 export const DashReviewEmpty = () => {
-  const { setReviews, userHaveAReview } = useContext(MovieContext)
+  const { setReviews } = useContext(MovieContext)
   const { userData } = useContext(UserContext)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const handleAddACard = async (reviewData: IReview) => {
