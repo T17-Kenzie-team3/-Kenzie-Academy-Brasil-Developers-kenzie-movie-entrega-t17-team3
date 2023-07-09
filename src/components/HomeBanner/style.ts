@@ -17,7 +17,7 @@ export const StyledHomeBanner= styled.section`
     transform: scale(1.01);
     transition: 0.4s;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .HomeBannerImg:hover{
@@ -26,6 +26,8 @@ export const StyledHomeBanner= styled.section`
     transform: scale(1.1);
 }
 
-@media (min-width:430px) {
+@media (min-width:830px) {
+    object-fit: contain;
 }
+
  `

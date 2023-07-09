@@ -25,7 +25,7 @@ export const StyledDashBanner= styled.section`
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     min-height: 27rem;
-    object-fit: contain;
+    
 }
 
 >div>svg{
@@ -62,11 +62,16 @@ text-align: left;
 padding: 0 1rem 0 1rem;
 @media (min-width: 800px){
     text-align: justify;
+    .DashBannerImg{
+        object-fit: cover;
+    }
 }
 
 }
 
 @media (min-width:770px) {
+    
+
     .divDescription{
     position: absolute;
     bottom:  -1.6rem;
