@@ -32,12 +32,11 @@ export const DashReviewEmpty = () => {
   return (
     <StyledDashReviewEmpty>
       <StyledTitleOne>Avaliações</StyledTitleOne>
-      {userHaveAReview() ? (
         <StyledBtnRatingUpdate onClick={() => setIsAddModalOpen(true)}>
           <AiOutlineStar fill="#171717" size="35px" />
           <span>Avaliar</span>
         </StyledBtnRatingUpdate>
-      ) : null}
+      
 
       <ReactModal
         isOpen={isAddModalOpen}

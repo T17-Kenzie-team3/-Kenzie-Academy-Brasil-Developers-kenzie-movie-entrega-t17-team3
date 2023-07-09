@@ -61,7 +61,7 @@ export const DashReview = () => {
     }
   }
 
-  const userReview = userHaveAReview()? userHaveAReview() : null
+  const userReview = userHaveAReview()? userHaveAReview() : undefined
 
   return (
     <StyledDashReview>

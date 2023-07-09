@@ -57,6 +57,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
       const userReview = reviews.find((review)=> review.movieId === selectedMovie?.id && review.userId === user.id)
       console.log(user)
       console.log(reviews)
+      console.log (userReview)
       return userReview
      }
     }
