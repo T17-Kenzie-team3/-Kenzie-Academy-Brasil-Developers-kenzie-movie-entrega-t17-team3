@@ -11,6 +11,7 @@ padding: 0 1rem 0 1rem;
 gap: 2rem;
 height: 32rem;
 list-style: none;
+overflow-y: auto;
 
 @media (min-width:680px) {
     justify-content: flex-start;

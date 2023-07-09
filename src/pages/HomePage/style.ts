@@ -40,11 +40,6 @@ export const StyledSHomePage= styled.div`
         display: none;
     }
 
-    nav > div > :last-child > p{
-        width: 7.1rem;
-        height: 2.7rem;
-    }
-
     @media (min-width:680px) {
 
         max-width: 83rem;

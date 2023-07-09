@@ -17,9 +17,9 @@ export const StyleLink = css`
 
 export const StyledLinkLogin= styled.p`
  ${StyleLink};
-  height: 2.6875rem;
-  width: 8.9375rem ;
-  padding: 0 0.5rem 0 0.5rem; 
+  height: clamp(1.6875rem, 20vw, 2.6875rem);
+  width: clamp(4.9375rem, 20vw, 8.9375rem);
+  padding: 0 0.5rem 0 0.5rem;
 `
 export const StyledLinkRegister= styled.p`
   font-family: var(--FPoppins);
