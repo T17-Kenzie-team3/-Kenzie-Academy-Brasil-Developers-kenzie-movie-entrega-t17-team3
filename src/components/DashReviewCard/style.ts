@@ -4,7 +4,7 @@ export const StyledDashReviewCard= styled.li`
      display: flex;
      flex-direction: column;
      align-items: center;
-     height: 25rem;
+     height: fit-content;
      max-width: 20rem;
      width: 100%;
      padding: 1rem  0.5rem;
@@ -39,6 +39,8 @@ export const StyledDashReviewCard= styled.li`
       }
 
 @media (min-width:770px) {
+   height: 25rem;
+
    .divDescription{
      height: 10rem ;
      margin-bottom: 2rem;
