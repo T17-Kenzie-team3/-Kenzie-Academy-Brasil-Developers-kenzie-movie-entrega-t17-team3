@@ -49,14 +49,19 @@ nav{
      height: 1.0625rem ; 
      width: 8.5rem ;
 }
-  
-.linkRegister{
+
+@media (min-width: 680px){
+
+     .linkRegister{
+          display: contents;
+     }
+          .name{
      display: contents;
+
+     }
 }
 
-.name{
-     display: contents;
-}
+
 }
  `
 
