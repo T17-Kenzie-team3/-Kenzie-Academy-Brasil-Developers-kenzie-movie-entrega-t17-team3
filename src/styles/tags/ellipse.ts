@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Ellipse = css`
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -10,6 +10,10 @@ export const Ellipse = css`
   font-weight: var(--w7);
   color:var(--white) ;
   background: var(--orange);
+  
+  @media (min-width: 700px){
+    display: flex;
+  }
 `
 export const StyledEllipseBig= styled.div`
 ${Ellipse};

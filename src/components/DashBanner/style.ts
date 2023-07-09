@@ -4,7 +4,7 @@ export const StyledDashBanner= styled.section`
 
 >:first-child{
     width: 100%;
-    height: clamp(11.6rem, 37vw, 33.5rem);
+    height: clamp(17.6rem, 37vw, 33.5rem);
     width: 100%;
     display: flex;
     align-items: center;
@@ -25,6 +25,7 @@ export const StyledDashBanner= styled.section`
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     min-height: 27rem;
+    object-fit: contain;
 }
 
 >div>svg{
@@ -56,9 +57,13 @@ export const StyledDashBanner= styled.section`
 
 .divSynopsis{
 height: fit-content;
-width: clamp(18.75rem, 100%, 80rem);
-text-align: justify;
+width: clamp(14.75rem, 100%, 80rem);
+text-align: left;
 padding: 0 1rem 0 1rem;
+@media (min-width: 800px){
+    text-align: justify;
+}
+
 }
 
 @media (min-width:770px) {

@@ -15,7 +15,7 @@ export const tagGenre = css`
 `
 export const StyledBtnGenre= styled.a`
  ${tagGenre};
-  height: 2.6875rem;
+  height: clamp(1.6875rem, 20vw, 2.6875rem);
   width: fit-content;
-  padding: 0.5rem 2rem 0.5rem  2rem; 
+  padding: 0.5rem clamp(0.2rem, 5vw, 2rem); 
 `

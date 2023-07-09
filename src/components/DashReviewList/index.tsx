@@ -11,12 +11,17 @@ export const DashReviewList = () => {
     
     (review) => review.userId !== user?.id
     )
+    const review = reviews[1]
 
   return (
     <StyledDashReviewList>
       {filteredReviews?.map((review) => (
         <DashReviewCard key={review.id} cardReview={review} />
       ))}
+      <DashReviewCard key={review.id} cardReview={review} />
+      <DashReviewCard key={review.id} cardReview={review} />
+      <DashReviewCard key={review.id} cardReview={review} />
+      <DashReviewCard key={review.id} cardReview={review} />
     </StyledDashReviewList>
   )
 }

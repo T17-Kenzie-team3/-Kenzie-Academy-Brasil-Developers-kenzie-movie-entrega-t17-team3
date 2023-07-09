@@ -5,7 +5,7 @@ export const StyledHomeBanner= styled.section`
 >:first-child{
     width: 100%;
     border-radius: clamp(1rem, 2vw, 2.9rem);
-    height: clamp(11.6rem, 37vw, 33.5rem);
+    height: clamp(17.6rem, 37vw, 33.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@ export const StyledHomeBanner= styled.section`
     transform: scale(1.01);
     transition: 0.4s;
     height: 100%;
+    object-fit: contain;
 }
 
 .HomeBannerImg:hover{
