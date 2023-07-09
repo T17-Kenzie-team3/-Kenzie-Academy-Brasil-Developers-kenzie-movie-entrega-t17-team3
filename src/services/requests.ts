@@ -85,6 +85,7 @@ interface IAtemptAddReviewProps {
 }
 
 export interface IReviewData{
+    id: number
     movieId: number
     userId: number
     score: number
@@ -106,12 +107,12 @@ export const atemptAddReview = async ({ token, reviewData }: IAtemptAddReviewPro
 
 interface IAtemptEditReviewProps {
     token: string
-    reviewData: IReview
+    reviewData: IReviewData
 }
 
 export const atemptEditReview = async ({ token, reviewData }: IAtemptEditReviewProps) => {
     try {
-        const { data } = await api.put(`/reviews/${reviewData.movieId}`, reviewData, {
+        const { data } = await api.put(`/reviews/${reviewData.id}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

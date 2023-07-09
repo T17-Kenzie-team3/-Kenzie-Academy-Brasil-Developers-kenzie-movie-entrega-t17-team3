@@ -7,7 +7,7 @@ import { UserContext } from "../../providers/UserContext"
 import { DashReviewEmpty } from "../DashReviewEmpty"
 import { ModalEdit } from "../Modal/ModalEdit"
 import ReactModal from "react-modal"
-import { atemptDeleteReview, atemptEditReview } from "../../services/requests"
+import { IReviewData, atemptDeleteReview, atemptEditReview } from "../../services/requests"
 import { StyledDashReview } from "./style"
 import {
   StyledParagrOne,
@@ -16,7 +16,6 @@ import {
   Styledlabel,
 } from "../../styles/typography/typography"
 import { StyledStarRating } from "../../fragments/StarRating/style"
-import { IReview } from "../../providers/MovieContext/@types"
 import { toast } from "react-toastify"
 
 export const DashReview = () => {
@@ -33,31 +32,41 @@ export const DashReview = () => {
       const filteredReviews = reviews.filter((review) => review.id !== reviewId)
       setReviews(filteredReviews)
     }
+    setIsModalOpen(false)
     toast.success("Avalição removida com sucesso!")
   }
 
-  const handleEdit = async (reviewData: IReview) => {
+  
+
+  const handleEdit = async (reviewData: IReviewData) => {
     if (userData) {
       const newReview = await atemptEditReview({
         token: userData.accessToken,
-        reviewData: reviewData,
+        reviewData: { 
+          id: reviewData.id,
+          description: reviewData.description, 
+          movieId: reviewData.movieId,    
+          score: reviewData.score, 
+          userId: reviewData.userId}
       })
       try {
         setReviews((reviews) =>
         reviews.map((review) => {
           if (review.id === newReview.id) {
-            toast.success("Avalição editada com sucesso!")
             return {
               ...review,
               score: newReview.score,
               description: newReview.description,
             }
-            } else {
-              return review
-            }
-          })
+          } else {
+            return review
+          }
+        })
         )
-      } catch (error) {}
+        toast.success("Avalição editada com sucesso!")
+      } catch (error) {
+        toast.error("Erro na Avaliação")
+      }
     }
   }
 
@@ -99,7 +108,8 @@ export const DashReview = () => {
         className="modal__content"
         overlayClassName="custom-overlay"
       >
-        <ModalEdit onSave={handleEdit} onClose={() => setIsModalOpen(false)} />
+        <ModalEdit onSave={handleEdit} 
+        onClose={() => setIsModalOpen(false)} />
       </ReactModal>
     </StyledDashReview>
   )

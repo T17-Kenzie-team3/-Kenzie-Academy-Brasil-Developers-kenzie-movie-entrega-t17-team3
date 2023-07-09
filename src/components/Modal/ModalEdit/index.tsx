@@ -12,17 +12,18 @@ import { StyledTitleOne } from "../../../styles/typography/typography"
 import { ReviewSchema } from "./Schema/ReviewSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { StyledErrorZod } from "../../../styles/typography/typography"
+import { IReviewData } from "../../../services/requests"
 
 interface ModalEditProps {
   onClose: () => void
-  onSave: (reviewData: IReview) => Promise<void>
+  onSave: (reviewData: IReviewData) => Promise<void>
 }
 
 export const ModalEdit = ({
   onClose,
   onSave,
 }: ModalEditProps) => {
-  const { selectedMovie } = useContext(MovieContext)
+  const { selectedMovie, userHaveAReview } = useContext(MovieContext)
   const { user } = useContext(UserContext)
   const {
     register,
@@ -33,16 +34,26 @@ export const ModalEdit = ({
     resolver: zodResolver(ReviewSchema),
   })
 
-  const onSubmit = (data: IReview) => {
-    const formData: IReview = {
-      ...data,
-      userId: user?.id ?? 0,
-      movieId: selectedMovie?.id ?? 0,
-      score: Number(data.score) as TMovieScore,
-    }
-    reset()
-    onClose()
-    onSave(formData)
+  
+
+ const onEditSubmit = async (data: IReviewData) => {
+      console.log(data)
+      const currentReview = userHaveAReview()
+      console.log(currentReview)
+      if(currentReview){
+        const formData: IReviewData = {
+          id: currentReview.id,
+          description: data.description,
+          userId: user?.id ?? 0,
+          movieId: selectedMovie?.id ?? 0,
+          score: Number(data.score) as TMovieScore,
+        }
+        onSave(formData)
+        reset()
+        onClose()
+        console.log(formData)
+      }
+    
   }
 
   return (
@@ -53,7 +64,7 @@ export const ModalEdit = ({
           X
         </button>
 
-        <form onSubmit={handleSubmit(onSubmit) as any}>
+        <form onSubmit={handleSubmit(onEditSubmit)}>
           <StyledSelectModal {...register("score")}>
             <option value="" hidden>Selecione uma nota</option>
             {[...Array(11)].map((_, index) => (
