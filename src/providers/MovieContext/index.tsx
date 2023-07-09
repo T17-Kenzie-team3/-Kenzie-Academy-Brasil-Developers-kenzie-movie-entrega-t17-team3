@@ -31,6 +31,7 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
 
   const getAverageScoresByMovieId = (movieId: number | undefined) => {
     const data = movieList.find((movie) => movie.id === movieId)
+
     const newList = data?.reviews
 
     if (newList) {
@@ -45,21 +46,13 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
             }, 0)
           : 0
 
-      return score / newList.length
+      const scoreMovie = score / newList.length
+      return scoreMovie.toFixed(1)
     }
   }
 
   useEffect(() => {
     const movieId = localStorage.getItem("@KM: selectedMovieId")
-
-    const setupMovieList = async () => {
-      setLoadingPage(true)
-      const newList = await getMovieList()
-      setLoadingPage(false)
-      if (newList) {
-        setMovieList(newList)
-      }
-    }
 
     const setupSelectedMovie = async () => {
       if (movieId) {
@@ -80,7 +73,6 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
     }
 
     const loadLists = async () => {
-      await setupMovieList()
       await setupSelectedMovie()
     }
 
@@ -93,9 +85,16 @@ export const MovieProvider = ({ children }: IMovieProviderProps) => {
         ...prevMovie!,
         reviews: reviews,
       }))
-    }
 
-    getAverageScoresByMovieId(selectedMovie?.id)
+      const setupMovieList = async () => {
+        const newList = await getMovieList()
+        if (newList) {
+          setMovieList(newList)
+        }
+      }
+
+      setupMovieList()
+    }
   }, [reviews])
 
   return (
