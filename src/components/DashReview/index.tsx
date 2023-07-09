@@ -49,7 +49,7 @@ export const DashReview = () => {
             toast.success("Avalição editada com sucesso!")
             return {
               ...review,
-              score: newReview.id,
+              score: newReview.score,
               description: newReview.description,
             }
             } else {
