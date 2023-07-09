@@ -12,8 +12,8 @@ import { IReview } from "../../providers/MovieContext/@types"
 import { toast } from "react-toastify"
 
 export const DashReviewEmpty = () => {
-  const { setReviews } = useContext(MovieContext)
-  const { user, userData } = useContext(UserContext)
+  const { setReviews, userHaveAReview } = useContext(MovieContext)
+  const { userData } = useContext(UserContext)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const handleAddACard = async (reviewData: IReview) => {
     if (userData) {
@@ -27,10 +27,12 @@ export const DashReviewEmpty = () => {
     }
   }
 
+  
+
   return (
     <StyledDashReviewEmpty>
       <StyledTitleOne>Avaliações</StyledTitleOne>
-      {user ? (
+      {userHaveAReview() ? (
         <StyledBtnRatingUpdate onClick={() => setIsAddModalOpen(true)}>
           <AiOutlineStar fill="#171717" size="35px" />
           <span>Avaliar</span>

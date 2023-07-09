@@ -11,7 +11,9 @@ import { StyledStarRating } from "../StarRating/style"
 export const HomeMovieName = () => {
   const { movieList, selectedMovie, getAverageScoresByMovieId } =
     useContext(MovieContext)
-
+    const score = getAverageScoresByMovieId(
+      (selectedMovie ? selectedMovie.id : movieList[0].id)
+    )
   return (
     <>
       {movieList && (
@@ -22,9 +24,7 @@ export const HomeMovieName = () => {
           <StyledStarRating>
             <AiOutlineStar fill="#FFBB38" size="35px" />
             <StyledTitleThree className="score">
-              {getAverageScoresByMovieId(
-                selectedMovie ? selectedMovie.id : null
-              )}
+              {+score | 0}
             </StyledTitleThree>
           </StyledStarRating>
         </StyledHomeMovieName>

@@ -33,4 +33,5 @@ export interface IMovieContext {
     setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | null>>
     reviews: IReview[]
     setReviews: React.Dispatch<React.SetStateAction<IReview[]>>
+    userHaveAReview: () => false | IReview | undefined
 }

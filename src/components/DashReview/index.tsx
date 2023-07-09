@@ -21,8 +21,8 @@ import { toast } from "react-toastify"
 
 export const DashReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { reviews, setReviews, selectedMovie } = useContext(MovieContext)
-  const { user, userData } = useContext(UserContext)
+  const { reviews, setReviews, userHaveAReview } = useContext(MovieContext)
+  const { userData } = useContext(UserContext)
 
   const handleDelete = async (reviewId: number) => {
     if (userData) {
@@ -61,9 +61,7 @@ export const DashReview = () => {
     }
   }
 
-  const userReview = selectedMovie?.reviews.find(
-    (review) => review.userId === user?.id
-  )
+  const userReview = userHaveAReview()? userHaveAReview() : null
 
   return (
     <StyledDashReview>
