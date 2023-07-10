@@ -8,10 +8,10 @@ import { StyledHomeBanner } from "./style"
 
 export const HomeBanner = () => {
 
-  const { movieList, setSelectedMovie } = useContext(MovieContext)
+  const { movieList, setSelectedMovie, setReviews } = useContext(MovieContext)
   const navigate = useNavigate()
 
-  const handleSubmit = async () => {
+  const handleClick = async () => {
 
 
     localStorage.setItem(
@@ -19,6 +19,7 @@ export const HomeBanner = () => {
       JSON.stringify(movieList[0])
     )
     setSelectedMovie(movieList[0])
+    setReviews(movieList[0].reviews)
     const movieName = removeSpaces(movieList[0].name)
     navigate(`${movieName}`)
   }
@@ -29,7 +30,7 @@ export const HomeBanner = () => {
         <StyledHomeBanner>
           <div>
             <img className="HomeBannerImg"
-              onClick={() => handleSubmit()}
+              onClick={() => handleClick()}
               src={movieList[0].image}
               alt="Display principal com a foto de um filme"
             />

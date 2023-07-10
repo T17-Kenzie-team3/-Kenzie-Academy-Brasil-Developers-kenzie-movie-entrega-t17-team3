@@ -17,7 +17,7 @@ interface IHomeMovieCardProps {
 
 export const HomeMovieCard = ({ movie }: IHomeMovieCardProps) => {
 
-  const { movieList, getAverageScoresByMovieId, setSelectedMovie, reviews, selectedMovie } = useContext(MovieContext)
+  const { movieList, getAverageScoresByMovieId, setSelectedMovie, setReviews } = useContext(MovieContext)
   const { navigate } = useContext(UserContext)
 
   const averageScore = getAverageScoresByMovieId(movie.id) | 0
@@ -26,23 +26,14 @@ export const HomeMovieCard = ({ movie }: IHomeMovieCardProps) => {
   const handleClick = async (MovieId: number) => {
     if (movieList) {
       const movieClicked = movieList.find((movie) => movie.id === MovieId)
-
-
-      if (movieClicked) {
-        localStorage.setItem(
-          "@KM: selectedMovieId",
-          JSON.stringify(movieClicked.id)
-        )
-        setSelectedMovie(movieClicked)
-        if (selectedMovie) {
-          setSelectedMovie((selectedMovie) => ({
-            ...selectedMovie!,
-            reviews: reviews,
-          }))
-          const movieName = removeSpaces(movieClicked.name)
-          navigate(`${movieName}`)
-        }
-      }
+      localStorage.setItem(
+        "@KM: selectedMovieId",
+        JSON.stringify(movieClicked!.id)
+      )
+      setSelectedMovie(() => movieClicked!)
+      setReviews(() => movieClicked!.reviews)
+      const movieName = removeSpaces(movieClicked!.name)
+      navigate(`${movieName}`)
     }
   }
 
