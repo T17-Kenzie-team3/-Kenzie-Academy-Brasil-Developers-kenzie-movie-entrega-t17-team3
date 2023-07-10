@@ -40,21 +40,19 @@ export const GlobalStyle = createGlobalStyle`
 --grey2: #171717;
 --grey1: #3D3D3D; 
 --white: #FFFFFF;
-//fontfamily
+
 --FInter: 'Inter', sans-serif;
 --FPoppins: 'Poppins', sans-serif;
-//fontsize
---H44: 2.75rem;    //poppins w7 H1
---H32: 2rem;   //poppins w7 H1mobile
---H26: 1.625rem;   //poppins w7 H2
---H21: 1.3125rem;    //poppins w7 H3
---H17:  1.0625rem; //poppins w7 H4
-                              //poppins w4 H5
---P18: 1.125rem;   //inter w4 H4   P1
---P17:  1.0625rem;    //poppins w7    P2
---P16:  1rem;    //poppins w7   P3
-//font weigth 
+
+--H44: 2.75rem;
+--H32: 2rem;
+--H26: 1.625rem;
+--H21: 1.3125rem;
+--H17:  1.0625rem;
+--P18: 1.125rem;
+--P17:  1.0625rem;
+--P16:  1rem;
 --W7: 700;
 --W4: 400;
-  }
+}
 `

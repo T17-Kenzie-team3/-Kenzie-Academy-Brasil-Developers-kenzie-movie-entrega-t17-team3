@@ -1,8 +1,5 @@
 import styled, { css } from "styled-components";
 
-// interface InputDefaultStyles{
-//     error: { }
-// };
 
 const InputDefaultStyles = css`
  display: flex;
@@ -19,16 +16,6 @@ const InputDefaultStyles = css`
  color: var(--white);
  background-color:  var(--grey1);
 `
-
-// Estas linhas foram retirada do InputDefaultStyles para aguardar a finalização da parte logica.
-//  ${({ error }) => {
-//         if (error) {
-//             return css`
-//                 border: 1px solid var(--orange);
-//             `
-//         }
-//     }}
-
 
 export const StyledInput= styled.input`
  ${InputDefaultStyles};
