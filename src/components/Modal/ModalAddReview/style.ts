@@ -12,11 +12,11 @@ export const StyledModalAddReview = styled.div`
   background-color: rgba(0, 0, 0, .5);
 
   .modalBox{
-    height: 38,12rem;
-    width: 100%;
+    height: 38.12rem;
+    width: 90%;
     max-width: 48rem;
     background-color:var(--grey2);
-    
+    top: 13%;
     padding: 1.4rem 1rem 1rem 1rem; 
     position: relative;
 }
