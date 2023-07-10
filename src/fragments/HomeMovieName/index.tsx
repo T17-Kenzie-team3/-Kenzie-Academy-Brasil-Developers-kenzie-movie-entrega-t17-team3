@@ -26,7 +26,7 @@ export const HomeMovieName = () => {
           <StyledStarRating>
             <AiOutlineStar fill="#FFBB38" size="35px" />
             <StyledTitleThree className="score">
-              {+score | 0}
+              {(+score | 0).toFixed(1)}
             </StyledTitleThree>
           </StyledStarRating>
         </StyledHomeMovieName>
